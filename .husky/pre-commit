@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm test
+npx lint-staged
+# run tests if src/ has changed
+git diff --quiet HEAD $REF -- src || npm test

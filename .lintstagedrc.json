@@ -1,0 +1,7 @@
+{
+  "*.{js,jsx,ts,tsx}": [
+    "eslint --max-warnings=0 --fix --ignore-path .gitignore -c .eslintrc",
+    "prettier -w --ignore-path .gitignore --config .prettierrc"
+  ],
+  "*.{json,css,scss,md,yaml,yml}": ["prettier -w --ignore-path .gitignore --config .prettierrc"]
+}

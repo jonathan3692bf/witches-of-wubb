@@ -1,6 +1,6 @@
 {
-  "name": "vite-react-ts-tailwind-template",
-  "description": "Boilerplate to quick-start development in TypeScript and TailwindCSS for React applications.",
+  "name": "witches-of-wubb-front-end",
+  "description": "Fronten of T3 witches of wubb.",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "test-filter": "vitest --reporter verbose --testNamePattern",
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext .ts,.tsx",
-    "prettier-format": "prettier --config .prettierrc --write src/**/*.ts src/**/*.tsx spec/**/*.ts",
+    "prettier-format": "prettier --config .prettierrc --write --ignore-path .gitignore .",
     "prettier-watch": "onchange src/**/*.ts src/**/*.tsx spec/**/*.ts -- prettier --write {{changed}}",
     "dev": "vite",
     "build": "tsc && vite build",
@@ -18,9 +18,11 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "socket.io-client": "^4.6.1"
   },
   "devDependencies": {
+    "@headlessui/react": "^1.7.14",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
@@ -34,6 +36,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "tailwindcss": "^3.2.6",
