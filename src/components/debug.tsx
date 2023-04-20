@@ -37,18 +37,17 @@ export default function DebugModal() {
   useEffect(() => {
     if (socket.connected) {
       // socket.on('clip_list', (clips: Array<Array<string | null>>) => {
-      //   // console.log('clip_list fired:', clips)
+      //   console.log('clip_list fired:', clips)
       //   setClips(clips);
       // });
       // socket.on('track_names', (tracks: Array<string | null>) => {
-      //   // console.log('track_names fired:', tracks)
+      //   console.log('track_names fired:', tracks)
       //   setTracks(tracks);
       // });
 
       socket.on('clip_is_queued', ({ clip, track }: { clip: string; track: string }) => {
         console.log('clip_triggered fired:', clip);
         setTriggeredClips((triggered) => ({ ...triggered, [track]: clip }));
-        // setTtr(15);
         resetCountdown();
       });
 
