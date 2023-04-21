@@ -8,7 +8,7 @@ export default function SocketioProvider({ children }: { children: ReactNode }) 
   const [socket, setSocket] = useState<Socket>({} as Socket);
   useEffect(() => {
     if (!socket.connected) {
-      const sock = io('localhost:3000');
+      const sock = io('localhost:3335');
 
       sock.on('connect', () => {
         setSocket(sock);
