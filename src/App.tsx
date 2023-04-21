@@ -1,7 +1,7 @@
 import CurrentlyPlayingList from './components/currently-playing-list';
 import DebugModal from './components/debug';
 
-function App() {
+export default function App() {
   return (
     <div>
       <CurrentlyPlayingList />
@@ -10,5 +10,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
