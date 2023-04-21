@@ -2,9 +2,9 @@
 
 ## Setup
 
-1. Run `npm install` to install all of the project's dependencies
-2. Build the project for production: `npm run build`
-3. Run the local development server: `npm run dev`
+1. Run `yarn install` to install all of the project's dependencies
+2. Build the project for production: `yarn build`
+3. Run the local development server: `yarn dev`
 
 ### Dev Loop
 

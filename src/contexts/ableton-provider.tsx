@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable no-console */
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { SocketioContext } from '../contexts/socketio-provider';
 import { LoggerContext } from './logger-provider';
@@ -20,14 +18,22 @@ export function getTrackName(track: number) {
 }
 
 export const AbletonContext = createContext({
-  getTracksAndClips: () => {},
+  getTracksAndClips: () => null,
   isLoading: false,
   tracks: [],
   allClips: [],
   queuedClips: {},
   playingClips: {},
   stoppingClips: {},
-} as { getTracksAndClips: () => void; isLoading: boolean; tracks: TrackType; allClips: ClipsType; queuedClips: ClipMap; playingClips: ClipMap; stoppingClips: ClipMap });
+} as {
+  getTracksAndClips: () => void;
+  isLoading: boolean;
+  tracks: TrackType;
+  allClips: ClipsType;
+  queuedClips: ClipMap;
+  playingClips: ClipMap;
+  stoppingClips: ClipMap;
+});
 
 export default function AbletonProvider({ children }: { children: ReactNode }) {
   const socket = useContext(SocketioContext);
@@ -54,7 +60,15 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
 
       socket.on(
         'clip_is_queued',
-        ({ clip, track, clipSlotIndex }: { clip: string; track: number; clipSlotIndex: number }) => {
+        ({
+          clip,
+          track,
+          clipSlotIndex,
+        }: {
+          clip: string;
+          track: number;
+          clipSlotIndex: number;
+        }) => {
           const trackName = getTrackName(track);
           logger.debug('clip_is_queued fired:', clip, trackName, clipSlotIndex);
           setQueuedClips((queuedClips) => ({ ...queuedClips, [trackName]: clip }));
@@ -68,7 +82,15 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
 
       socket.on(
         'clip_is_playing',
-        ({ clip, track, clipSlotIndex }: { clip: string; track: number; clipSlotIndex: number }) => {
+        ({
+          clip,
+          track,
+          clipSlotIndex,
+        }: {
+          clip: string;
+          track: number;
+          clipSlotIndex: number;
+        }) => {
           const trackName = getTrackName(track);
           logger.debug('clip_is_playing fired:', clip, trackName, clipSlotIndex);
           setQueuedClips((queuedClips) => {
@@ -91,6 +113,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         setStoppingClips((stopping) => ({ ...stopping, [trackName]: null }));
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
 
   function getTracksAndClips() {
@@ -111,7 +134,15 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
 
   return (
     <AbletonContext.Provider
-      value={{ getTracksAndClips, isLoading, tracks, allClips, queuedClips, playingClips, stoppingClips }}
+      value={{
+        getTracksAndClips,
+        isLoading,
+        tracks,
+        allClips,
+        queuedClips,
+        playingClips,
+        stoppingClips,
+      }}
     >
       {children}
     </AbletonContext.Provider>
