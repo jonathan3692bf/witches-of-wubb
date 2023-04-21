@@ -130,6 +130,14 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
       setTracks(tracks);
       if (allClips?.length) setLoading(false);
     });
+    socket.emit('get_playing_clips', null, (playingClips: ClipMap) => {
+      logger.debug('get_playing_clips returned:', playingClips);
+      setPlayingClips(playingClips);
+    });
+    socket.emit('get_queued_clips', null, (queuedClips: ClipMap) => {
+      logger.debug('get_queued_clips returned:', queuedClips);
+      setQueuedClips(queuedClips);
+    });
   }
 
   return (

@@ -1,9 +1,9 @@
 import { Fragment, useState, useContext, useEffect } from 'react';
 
-import { AbletonContext } from '../contexts/ableton-provider';
-import useCountdown from '../hooks/use-countdown';
-import { SocketioContext } from '../contexts/socketio-provider';
-import { LoggerContext } from '../contexts/logger-provider';
+import { AbletonContext } from '~/contexts/ableton-provider';
+import useCountdown from '~/hooks/use-countdown';
+import { SocketioContext } from '~/contexts/socketio-provider';
+import { LoggerContext } from '~/contexts/logger-provider';
 
 import { Dialog, Transition, Switch } from '@headlessui/react';
 import classNames from 'classnames';
@@ -12,7 +12,8 @@ export default function DebugModal() {
   const socket = useContext(SocketioContext);
   const { enableDebug, disableDebug } = useContext(LoggerContext);
   const { countdown } = useCountdown();
-  const { isLoading, tracks, allClips, playingClips, queuedClips, stoppingClips } = useContext(AbletonContext);
+  const { isLoading, tracks, allClips, playingClips, queuedClips, stoppingClips } =
+    useContext(AbletonContext);
   const [isOpen, setIsOpen] = useState(false);
   const socketStatus = socket?.connected ? 'connected' : 'not connected';
 
@@ -37,59 +38,65 @@ export default function DebugModal() {
       enableDebug();
       return disableDebug;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (
     <>
-      <div className="absolute bottom-0 left-0 flex items-center justify-center">
+      <div className='absolute bottom-0 left-0 flex items-center justify-center'>
         <button
-          type="button"
+          type='button'
           onClick={openModal}
-          className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          className='rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
         >
           Open debug
         </button>
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as='div' className='relative z-10' onClose={closeModal}>
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
           </Transition.Child>
 
-          <div className="fixed inset-0 ">
-            <div className="flex w-full h-full max-h-screen items-center justify-center">
+          <div className='fixed inset-0 '>
+            <div className='flex w-full h-full max-h-screen items-center justify-center'>
               <Transition.Child
                 as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
               >
-                <Dialog.Panel className="w-screen max-w-xxl transform rounded-md bg-white text-black text-left align-middle shadow-xl transition-all">
-                  <div className="flex flex-row gap-8 my-4 px-6">
-                    <p className="text-xl">Socket: {socketStatus}</p>
-                    <p className="text-xl">
-                      Clips: {isLoading ? 'loading' : tracks?.length && allClips?.length ? 'loaded' : 'not loaded'}
+                <Dialog.Panel className='w-screen max-w-xxl transform rounded-md bg-white text-black text-left align-middle shadow-xl transition-all'>
+                  <div className='flex flex-row gap-8 my-4 px-6'>
+                    <p className='text-xl'>Socket: {socketStatus}</p>
+                    <p className='text-xl'>
+                      Clips:{' '}
+                      {isLoading
+                        ? 'loading'
+                        : tracks?.length && allClips?.length
+                        ? 'loaded'
+                        : 'not loaded'}
                     </p>
-                    <p className="text-xl">Reset timer: {countdown}s</p>
+                    <p className='text-xl'>Reset timer: {countdown}s</p>
                   </div>
 
-                  <div className="grid grid-flow-col gap-8 auto-cols-max px-6 w-full max-w-screen max-h-[calc(100vh-8rem)] overflow-scroll">
+                  <div className='grid grid-flow-col gap-8 auto-cols-max px-6 w-full max-w-screen max-h-[calc(100vh-8rem)] overflow-scroll'>
                     {tracks?.slice(0, 6).map((track, column) => (
-                      <div key={track} className="grid grid-flow-row auto-rows-max">
+                      <div key={track} className='grid grid-flow-row auto-rows-max'>
                         <div>{track}</div>
-                        <div key={track} className="grid">
+                        <div key={track} className='grid'>
                           {allClips?.[column]
                             ?.filter((name) => name)
                             .map((name, index, filteredClipBoard) => {
@@ -98,7 +105,8 @@ export default function DebugModal() {
                               let queued = queuedClips[track] === name;
                               let playing = playingClips[track] === name;
                               let unicodeSymbol = '';
-                              const previousClipName = index > 0 ? filteredClipBoard[index - 1].replace(/^\*/, '') : '';
+                              const previousClipName =
+                                index > 0 ? filteredClipBoard[index - 1].replace(/^\*/, '') : '';
                               const nextClipName =
                                 index < filteredClipBoard.length - 1
                                   ? filteredClipBoard[index + 1].replace(/^\*/, '')
@@ -107,11 +115,15 @@ export default function DebugModal() {
                               if (loopLeader && name.replace(/^\*/, '') === nextClipName) {
                                 playing = playingClips[track]?.replace(/^\*/, '') === nextClipName;
                                 queued = queuedClips[track]?.replace(/^\*/, '') === nextClipName;
-                                stopping = stoppingClips[track]?.replace(/^\*/, '') === nextClipName;
+                                stopping =
+                                  stoppingClips[track]?.replace(/^\*/, '') === nextClipName;
                               } else if (name.replace(/^\*/, '') === previousClipName) {
-                                queued = queuedClips[track]?.replace(/^\*/, '') === previousClipName;
-                                playing = playingClips[track]?.replace(/^\*/, '') === previousClipName;
-                                stopping = stoppingClips[track]?.replace(/^\*/, '') === previousClipName;
+                                queued =
+                                  queuedClips[track]?.replace(/^\*/, '') === previousClipName;
+                                playing =
+                                  playingClips[track]?.replace(/^\*/, '') === previousClipName;
+                                stopping =
+                                  stoppingClips[track]?.replace(/^\*/, '') === previousClipName;
 
                                 if (previousClipName === name && name === nextClipName) {
                                   unicodeSymbol = '\u2523';
@@ -138,13 +150,14 @@ export default function DebugModal() {
                                       <Switch
                                         checked={playing || queued}
                                         onChange={(state) => toggleSong(name, state)}
-                                        className="relative inline-flex h-6 w-11 items-center rounded-full ui-checked:bg-green-600 ui-not-checked:bg-gray-200"
+                                        className='relative inline-flex h-6 w-11 items-center rounded-full ui-checked:bg-green-600 ui-not-checked:bg-gray-200'
                                       >
-                                        <span className="sr-only">Play clip</span>
+                                        <span className='sr-only'>Play clip</span>
                                         <span
                                           className={`${
                                             playing || queued ? 'translate-x-6' : 'translate-x-1'
-                                          } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                                          } 
+                                          inline-block h-4 w-4 transform rounded-full bg-white transition`}
                                         />
                                       </Switch>
 
@@ -159,10 +172,10 @@ export default function DebugModal() {
                     ))}
                   </div>
 
-                  <div className="p-6">
+                  <div className='p-6'>
                     <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      type='button'
+                      className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
                       onClick={closeModal}
                     >
                       Exit

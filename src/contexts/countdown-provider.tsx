@@ -20,11 +20,15 @@ export default function CountdownProvider({ children }: { children: ReactNode })
     return () => {
       clearInterval(timer);
     };
-  });
+  }, [ttr, setTtr]);
 
   function resetCountdown() {
     setTtr(15);
   }
 
-  return <CountdownContext.Provider value={{ countdown: ttr, resetCountdown }}>{children}</CountdownContext.Provider>;
+  return (
+    <CountdownContext.Provider value={{ countdown: ttr, resetCountdown }}>
+      {children}
+    </CountdownContext.Provider>
+  );
 }
