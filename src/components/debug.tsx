@@ -1,64 +1,20 @@
-/* eslint-disable no-console */
 import { Fragment, useState, useContext, useEffect } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
 
-import { SocketioContext } from '../contexts/socketio-provider';
+import { AbletonContext } from '../contexts/ableton-provider';
 import useCountdown from '../hooks/use-countdown';
+import { SocketioContext } from '../contexts/socketio-provider';
+import { LoggerContext } from '../contexts/logger-provider';
+
+import { Dialog, Transition, Switch } from '@headlessui/react';
+import classNames from 'classnames';
 
 export default function DebugModal() {
   const socket = useContext(SocketioContext);
-  const { countdown, resetCountdown } = useCountdown();
-  const [tracks, setTracks] = useState<Array<string | null>>();
-  const [clips, setClips] = useState<Array<Array<string | null>>>();
-  const [triggeredClips, setTriggeredClips] = useState<Record<number, string>>({});
-  const [playingClips, setPlayingClips] = useState<Record<number, string>>({});
-
+  const { enableDebug, disableDebug } = useContext(LoggerContext);
+  const { countdown } = useCountdown();
+  const { isLoading, tracks, allClips, playingClips, queuedClips, stoppingClips } = useContext(AbletonContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
   const socketStatus = socket?.connected ? 'connected' : 'not connected';
-
-  useEffect(() => {
-    if (socket.connected && isOpen) {
-      setIsRefreshing(true);
-      setClips([]);
-      setTracks([]);
-      socket.emit('get_clip_list', null, (clips: Array<Array<string | null>>) => {
-        setClips(clips);
-        if (tracks?.length) setIsRefreshing(false);
-      });
-      socket.emit('get_track_names', null, (tracks: Array<string | null>) => {
-        setTracks(tracks);
-        if (clips?.length) setIsRefreshing(false);
-      });
-    }
-  }, [socket, isOpen]);
-
-  useEffect(() => {
-    if (socket.connected) {
-      // socket.on('clip_list', (clips: Array<Array<string | null>>) => {
-      //   console.log('clip_list fired:', clips)
-      //   setClips(clips);
-      // });
-      // socket.on('track_names', (tracks: Array<string | null>) => {
-      //   console.log('track_names fired:', tracks)
-      //   setTracks(tracks);
-      // });
-
-      socket.on('clip_is_queued', ({ clip, track }: { clip: string; track: string }) => {
-        console.log('clip_triggered fired:', clip);
-        setTriggeredClips((triggered) => ({ ...triggered, [track]: clip }));
-        resetCountdown();
-      });
-
-      socket.on('clip_is_playing', ({ clip, track }: { clip: string; track: string }) => {
-        console.log('clip_is_playing fired:', clip);
-        setTriggeredClips((triggered) => ({ ...triggered, [track]: null }));
-        setPlayingClips((playing) => ({ ...playing, [track]: clip }));
-        resetCountdown();
-      });
-    }
-  }, [socket]);
 
   function closeModal() {
     setIsOpen(false);
@@ -68,13 +24,28 @@ export default function DebugModal() {
     setIsOpen(true);
   }
 
+  function toggleSong(name: string, playing: boolean) {
+    if (playing) {
+      socket.emit('/new/tag', { clipName: name });
+    } else {
+      socket.emit('/departed/tag', { clipName: name });
+    }
+  }
+
+  useEffect(() => {
+    if (isOpen) {
+      enableDebug();
+      return disableDebug;
+    }
+  }, [isOpen]);
+
   return (
     <>
       <div className="absolute bottom-0 left-0 flex items-center justify-center">
         <button
           type="button"
           onClick={openModal}
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          className="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
           Open debug
         </button>
@@ -94,8 +65,8 @@ export default function DebugModal() {
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-auto">
-            <div className="flex min-h-full items-center justify-center p-4">
+          <div className="fixed inset-0 ">
+            <div className="flex w-full h-full max-h-screen items-center justify-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -105,41 +76,96 @@ export default function DebugModal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-xxl transform overflow-scroll rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <div className="flex flex-row gap-8 mb-5 sticky left-0">
+                <Dialog.Panel className="w-screen max-w-xxl transform rounded-md bg-white text-black text-left align-middle shadow-xl transition-all">
+                  <div className="flex flex-row gap-8 my-4 px-6">
                     <p className="text-xl">Socket: {socketStatus}</p>
                     <p className="text-xl">
-                      Clips: {isRefreshing ? 'loading' : tracks?.length && clips?.length ? 'loaded' : 'not loaded'}
+                      Clips: {isLoading ? 'loading' : tracks?.length && allClips?.length ? 'loaded' : 'not loaded'}
                     </p>
                     <p className="text-xl">Reset timer: {countdown}s</p>
                   </div>
 
-                  <div className="grid grid-flow-col gap-8 auto-cols-max">
+                  <div className="grid grid-flow-col gap-8 auto-cols-max px-6 w-full max-w-screen max-h-[calc(100vh-8rem)] overflow-scroll">
                     {tracks?.slice(0, 6).map((track, column) => (
                       <div key={track} className="grid grid-flow-row auto-rows-max">
                         <div>{track}</div>
-                        {clips?.[column]
-                          ?.filter((name) => name)
-                          .map((name, index) => {
-                            const queued = triggeredClips[column ?? ''] === name;
-                            const playing = playingClips[column ?? ''] === name;
-                            return (
-                              <div key={`${name} - ${index}`} className={playing ? 'active' : queued ? 'queued' : ''}>
-                                {name}
-                              </div>
-                            );
-                          })}
+                        <div key={track} className="grid">
+                          {allClips?.[column]
+                            ?.filter((name) => name)
+                            .map((name, index, filteredClipBoard) => {
+                              const loopLeader = /^\*/.test(name);
+                              let stopping = stoppingClips[track] === name;
+                              let queued = queuedClips[track] === name;
+                              let playing = playingClips[track] === name;
+                              let unicodeSymbol = '';
+                              const previousClipName = index > 0 ? filteredClipBoard[index - 1].replace(/^\*/, '') : '';
+                              const nextClipName =
+                                index < filteredClipBoard.length - 1
+                                  ? filteredClipBoard[index + 1].replace(/^\*/, '')
+                                  : '';
+
+                              if (loopLeader && name.replace(/^\*/, '') === nextClipName) {
+                                playing = playingClips[track]?.replace(/^\*/, '') === nextClipName;
+                                queued = queuedClips[track]?.replace(/^\*/, '') === nextClipName;
+                                stopping = stoppingClips[track]?.replace(/^\*/, '') === nextClipName;
+                              } else if (name.replace(/^\*/, '') === previousClipName) {
+                                queued = queuedClips[track]?.replace(/^\*/, '') === previousClipName;
+                                playing = playingClips[track]?.replace(/^\*/, '') === previousClipName;
+                                stopping = stoppingClips[track]?.replace(/^\*/, '') === previousClipName;
+
+                                if (previousClipName === name && name === nextClipName) {
+                                  unicodeSymbol = '\u2523';
+                                } else if (previousClipName === name && nextClipName !== name) {
+                                  unicodeSymbol = '\u2517';
+                                }
+                              }
+
+                              const classes = classNames({
+                                'text-red-600 animate-pulse': stopping,
+                                'text-green-600': playing && !stopping,
+                                'text-green-500 animate-pulse': queued,
+                                'text-sm': !loopLeader,
+                                'flex gap-3 mt-2': loopLeader,
+                              });
+                              return (
+                                <div key={`${name} - ${index}`} className={classes}>
+                                  {!loopLeader ? (
+                                    <span>
+                                      {unicodeSymbol} {name}
+                                    </span>
+                                  ) : (
+                                    <>
+                                      <Switch
+                                        checked={playing || queued}
+                                        onChange={(state) => toggleSong(name, state)}
+                                        className="relative inline-flex h-6 w-11 items-center rounded-full ui-checked:bg-green-600 ui-not-checked:bg-gray-200"
+                                      >
+                                        <span className="sr-only">Play clip</span>
+                                        <span
+                                          className={`${
+                                            playing || queued ? 'translate-x-6' : 'translate-x-1'
+                                          } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+                                        />
+                                      </Switch>
+
+                                      <div>{name}</div>
+                                    </>
+                                  )}
+                                </div>
+                              );
+                            })}
+                        </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-4 sticky left-0">
+                  <div className="p-6">
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
-                      Got it, thanks!
+                      Exit
                     </button>
                   </div>
                 </Dialog.Panel>

@@ -1,10 +1,10 @@
-/* eslint-disable no-console */
-import { createContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useEffect, useState, ReactNode, useContext } from 'react';
 import { io, Socket } from 'socket.io-client';
-
+import { LoggerContext } from './logger-provider';
 export const SocketioContext = createContext({} as Socket);
 
 export default function SocketioProvider({ children }: { children: ReactNode }) {
+  const { logger } = useContext(LoggerContext);
   const [socket, setSocket] = useState<Socket>({} as Socket);
   useEffect(() => {
     if (!socket.connected) {
@@ -12,7 +12,7 @@ export default function SocketioProvider({ children }: { children: ReactNode }) 
 
       sock.on('connect', () => {
         setSocket(sock);
-        console.log('Connected to socket.io server');
+        logger.debug('Connected to socket.io server');
       });
     }
   }, [socket]);
