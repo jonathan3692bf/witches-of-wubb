@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AbletonContext } from '../contexts/ableton-provider';
+// import VolumeSlider from './volume-slider';
 // import { LoggerContext } from '../contexts/logger-provider';
 
 export default function CurrentlyPlayingList() {
@@ -33,6 +34,7 @@ export default function CurrentlyPlayingList() {
                 <div className="w-full h-full object-cover rounded-md border border-1"></div>
               )} */}
             </div>
+            {/* {index === 0 ? <VolumeSlider track={track} /> : null} */}
           </div>
         );
       })}

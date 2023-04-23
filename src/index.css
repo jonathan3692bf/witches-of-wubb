@@ -5,3 +5,8 @@
 body {
   @apply bg-black text-white;
 }
+
+input[type='range'][orient='vertical'] {
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* Chromium */
+}

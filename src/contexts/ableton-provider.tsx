@@ -5,6 +5,7 @@ import { LoggerContext } from './logger-provider';
 export type TrackType = string[];
 export type ClipsType = string[][];
 export type ClipMap = Record<string, string | null>;
+export type TrackVolumeMap = Record<string, number | null>;
 export enum TrackNames {
   Vocals,
   Melody1,
@@ -20,9 +21,11 @@ export function getTrackName(track: number) {
 export const AbletonContext = createContext({
   getTracksAndClips: () => null,
   changeTempo: (_) => null,
+  changeTrackVolume: (_, __) => null,
   isLoading: false,
   tempo: 120,
   tracks: [],
+  trackVolume: {},
   allClips: [],
   queuedClips: {},
   playingClips: {},
@@ -30,9 +33,11 @@ export const AbletonContext = createContext({
 } as {
   getTracksAndClips: () => void;
   changeTempo: (x: number) => void;
+  changeTrackVolume: (track: string, volume: number) => void;
   isLoading: boolean;
   tempo: number;
   tracks: TrackType;
+  trackVolume: TrackVolumeMap;
   allClips: ClipsType;
   queuedClips: ClipMap;
   playingClips: ClipMap;
@@ -45,6 +50,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
   const [isLoading, setLoading] = useState(false);
   const [tempo, setTempo] = useState(120);
   const [tracks, setTracks] = useState<TrackType>([]);
+  const [trackVolume, setTrackVolume] = useState<TrackVolumeMap>({});
   const [allClips, setAllClips] = useState<ClipsType>([]);
   const [queuedClips, setQueuedClips] = useState<ClipMap>({});
   const [playingClips, setPlayingClips] = useState<ClipMap>({});
@@ -121,6 +127,10 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         logger.debug('tempo_changed fired:', tempo);
         setTempo(tempo);
       });
+      socket.on('volume_changed', (track: string, volume: number) => {
+        logger.debug('volume_changed fired:', track, volume);
+        setTrackVolume((trackVolume) => ({ ...trackVolume, [track]: volume }));
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
@@ -138,6 +148,10 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
       logger.debug('get_track_names returned:', tracks);
       setTracks(tracks);
       if (allClips?.length) setLoading(false);
+    });
+    socket.emit('get_track_volumes', null, (volumes: TrackVolumeMap) => {
+      logger.debug('get_track_volumes returned:', volumes);
+      setTrackVolume(volumes);
     });
     socket.emit('get_playing_clips', null, (playingClips: ClipMap) => {
       logger.debug('get_playing_clips returned:', playingClips);
@@ -159,6 +173,16 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
       setTempo(tempo);
     });
   }
+  function changeTrackVolume(track: string, volume: number) {
+    socket.emit(
+      'set_track_volume',
+      { track, volume },
+      (resp: { track: string; volume: number }) => {
+        logger.debug('set_track_volume returned:', resp);
+        setTrackVolume((tv) => ({ ...tv, [resp.track]: resp.volume }));
+      },
+    );
+  }
 
   return (
     <AbletonContext.Provider
@@ -168,6 +192,8 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         isLoading,
         tempo,
         tracks,
+        trackVolume,
+        changeTrackVolume,
         allClips,
         queuedClips,
         playingClips,

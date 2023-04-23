@@ -15,13 +15,13 @@ export default function TempoSlider() {
 
   return (
     <div className='w-full text-center flex flex-col'>
-      <label htmlFor='default-range' className='block mb-2 text-sm font-medium '>
+      <label htmlFor='tempo-slider' className='block mb-2 text-sm font-medium '>
         Adjust tempo
       </label>
       <div className='flex items-center gap-8 text-lg mx-auto'>
         <span className=' text-gray-500 dark:text-gray-400'>{MIN_VALUE}</span>
         <input
-          id='default-range'
+          id='tempo-slider'
           type='range'
           min={MIN_VALUE}
           max={MAX_VALUE}

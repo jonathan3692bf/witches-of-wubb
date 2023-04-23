@@ -4,8 +4,8 @@ import Logger from 'js-logger';
 // eslint-disable-next-line react-hooks/rules-of-hooks
 Logger.useDefaults();
 const logger = Logger.get('App');
-logger.setLevel(Logger.INFO);
-// logger.setLevel(Logger.DEBUG);
+// logger.setLevel(Logger.INFO);
+logger.setLevel(Logger.DEBUG);
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const LoggerContext = createContext({
   logger,
