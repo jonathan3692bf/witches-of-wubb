@@ -21,6 +21,7 @@ export const AbletonContext = createContext({
   getTracksAndClips: () => null,
   changeTempo: (_) => null,
   isLoading: false,
+  tempo: 120,
   tracks: [],
   allClips: [],
   queuedClips: {},
@@ -30,6 +31,7 @@ export const AbletonContext = createContext({
   getTracksAndClips: () => void;
   changeTempo: (x: number) => void;
   isLoading: boolean;
+  tempo: number;
   tracks: TrackType;
   allClips: ClipsType;
   queuedClips: ClipMap;
@@ -41,6 +43,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
   const socket = useContext(SocketioContext);
   const { logger } = useContext(LoggerContext);
   const [isLoading, setLoading] = useState(false);
+  const [tempo, setTempo] = useState(120);
   const [tracks, setTracks] = useState<TrackType>([]);
   const [allClips, setAllClips] = useState<ClipsType>([]);
   const [queuedClips, setQueuedClips] = useState<ClipMap>({});
@@ -114,6 +117,10 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         setPlayingClips((playing) => ({ ...playing, [trackName]: null }));
         setStoppingClips((stopping) => ({ ...stopping, [trackName]: null }));
       });
+      socket.on('tempo_changed', (tempo: number) => {
+        logger.debug('tempo_changed fired:', tempo);
+        setTempo(tempo);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
@@ -140,11 +147,16 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
       logger.debug('get_queued_clips returned:', queuedClips);
       setQueuedClips(queuedClips);
     });
+    socket.emit('get_tempo', null, (tempo: number) => {
+      logger.debug('get_tempo returned:', tempo);
+      setTempo(tempo);
+    });
   }
 
   function changeTempo(tempo: number) {
-    socket.emit('change_tempo', tempo, (tempo: number) => {
+    socket.emit('set_tempo', tempo, (tempo: number) => {
       logger.debug('change_tempo returned:', tempo);
+      setTempo(tempo);
     });
   }
 
@@ -154,6 +166,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         getTracksAndClips,
         changeTempo,
         isLoading,
+        tempo,
         tracks,
         allClips,
         queuedClips,

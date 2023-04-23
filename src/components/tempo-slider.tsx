@@ -1,17 +1,15 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AbletonContext } from '../contexts/ableton-provider';
 // import { LoggerContext } from '../contexts/logger-provider';
 
 const MIN_VALUE = 75;
 const MAX_VALUE = 155;
 export default function TempoSlider() {
-  const { changeTempo } = useContext(AbletonContext);
-  const [tempo, setTempo] = useState(120);
+  const { changeTempo, tempo } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newTempo = parseInt(e.target.value);
-    setTempo(newTempo);
     changeTempo(newTempo);
   }
 
