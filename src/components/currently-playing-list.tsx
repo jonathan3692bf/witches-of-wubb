@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useContext } from 'react';
 import { AbletonContext } from '../contexts/ableton-provider';
 // import { LoggerContext } from '../contexts/logger-provider';

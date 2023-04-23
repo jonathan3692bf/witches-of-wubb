@@ -19,6 +19,7 @@ export function getTrackName(track: number) {
 
 export const AbletonContext = createContext({
   getTracksAndClips: () => null,
+  changeTempo: (_) => null,
   isLoading: false,
   tracks: [],
   allClips: [],
@@ -27,6 +28,7 @@ export const AbletonContext = createContext({
   stoppingClips: {},
 } as {
   getTracksAndClips: () => void;
+  changeTempo: (x: number) => void;
   isLoading: boolean;
   tracks: TrackType;
   allClips: ClipsType;
@@ -140,10 +142,17 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
     });
   }
 
+  function changeTempo(tempo: number) {
+    socket.emit('change_tempo', tempo, (tempo: number) => {
+      logger.debug('change_tempo returned:', tempo);
+    });
+  }
+
   return (
     <AbletonContext.Provider
       value={{
         getTracksAndClips,
+        changeTempo,
         isLoading,
         tracks,
         allClips,
