@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AbletonContext } from '../contexts/ableton-provider';
-// import VolumeSlider from './volume-slider';
+import VolumeSlider from './volume-slider';
 // import { LoggerContext } from '../contexts/logger-provider';
 
 export default function CurrentlyPlayingList() {
@@ -16,7 +16,7 @@ export default function CurrentlyPlayingList() {
         return (
           <div className='w-[15%]' key={index}>
             {track}
-            <div className='h-[200px]'>
+            <div className='h-[200px] mb-4'>
               <div
                 className={`w-full h-full flex items-center text-center rounded-md border border-1 ${
                   queued && 'opacity-40 animate-pulse'
@@ -34,7 +34,7 @@ export default function CurrentlyPlayingList() {
                 <div className="w-full h-full object-cover rounded-md border border-1"></div>
               )} */}
             </div>
-            {/* {index === 0 ? <VolumeSlider track={track} /> : null} */}
+            <VolumeSlider track={track} />
           </div>
         );
       })}
