@@ -5,6 +5,7 @@ import { LoggerContext } from './logger-provider';
 export type TrackType = string[];
 export type ClipsType = string[][];
 export type ClipMap = Record<string, string | null>;
+export type ClipTempo = Record<string, number | null>;
 export type TrackVolumeMap = Record<string, number | null>;
 export enum TrackNames {
   Vocals,
@@ -30,6 +31,7 @@ export const AbletonContext = createContext({
   queuedClips: {},
   playingClips: {},
   stoppingClips: {},
+  clipTempo: {},
 } as {
   getTracksAndClips: () => void;
   changeTempo: (x: number) => void;
@@ -42,6 +44,7 @@ export const AbletonContext = createContext({
   queuedClips: ClipMap;
   playingClips: ClipMap;
   stoppingClips: ClipMap;
+  clipTempo: ClipTempo;
 });
 
 export default function AbletonProvider({ children }: { children: ReactNode }) {
@@ -55,6 +58,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
   const [queuedClips, setQueuedClips] = useState<ClipMap>({});
   const [playingClips, setPlayingClips] = useState<ClipMap>({});
   const [stoppingClips, setStoppingClips] = useState<ClipMap>({});
+  const [clipTempo, setClipTempo] = useState<ClipTempo>({});
 
   useEffect(() => {
     if (socket.connected) {
@@ -93,22 +97,15 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
 
       socket.on(
         'clip_is_playing',
-        ({
-          clip,
-          track,
-          clipSlotIndex,
-        }: {
-          clip: string;
-          track: number;
-          clipSlotIndex: number;
-        }) => {
+        ({ clip, track, bpm }: { clip: string; track: number; bpm: number }) => {
           const trackName = getTrackName(track);
-          logger.debug('clip_is_playing fired:', clip, trackName, clipSlotIndex);
+          logger.debug('clip_is_playing fired:', clip, trackName, bpm);
           setQueuedClips((queuedClips) => {
             if (queuedClips[trackName] === clip) return { ...queuedClips, [trackName]: null };
             return queuedClips;
           });
           setPlayingClips((playing) => ({ ...playing, [trackName]: clip }));
+          setClipTempo((tempo) => ({ ...tempo, [trackName]: bpm }));
         },
       );
 
@@ -122,6 +119,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         logger.debug('track_stopped fired:', trackName);
         setPlayingClips((playing) => ({ ...playing, [trackName]: null }));
         setStoppingClips((stopping) => ({ ...stopping, [trackName]: null }));
+        setClipTempo((tempo) => ({ ...tempo, [trackName]: null }));
       });
       socket.on('tempo_changed', (tempo: number) => {
         logger.debug('tempo_changed fired:', tempo);
@@ -198,6 +196,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         queuedClips,
         playingClips,
         stoppingClips,
+        clipTempo,
       }}
     >
       {children}
