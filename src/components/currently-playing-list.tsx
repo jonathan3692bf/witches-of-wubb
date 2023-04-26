@@ -6,7 +6,7 @@ import csv from "~/assets/BSS 23 Master Spreadsheet Budget, Inventory, Schedule,
 const ClipNameAssetMap: Record<string, string> = {};
 
 csv.reduce((acc: typeof ClipNameAssetMap, curr: any) => {
-  const clipName = curr['Clip Name'].replace(/^\*\s?/, '');
+  const clipName = curr['Clip Name'].replace(/^\*/, '').trimStart();
   const assetName = curr['Icon / Asset Name'];
 
   if (clipName && assetName) {
@@ -24,7 +24,7 @@ export default function CurrentlyPlayingList() {
       {tracks?.map((track, index) => {
         const playing = playingClips[track];
         const queued = queuedClips[track];
-        const clipName = (queued ?? playing ?? '').replace(/^\*\s?/, '');
+        const clipName = (queued ?? playing ?? '').replace(/^\*/, '').trimStart();
 
         return (
           <div className='w-[15%]' key={index}>
