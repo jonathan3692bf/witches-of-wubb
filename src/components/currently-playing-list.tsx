@@ -1,7 +1,19 @@
 import { useContext } from 'react';
-import { AbletonContext } from '../contexts/ableton-provider';
+import { AbletonContext } from '~/contexts/ableton-provider';
 import VolumeSlider from './volume-slider';
-// import { LoggerContext } from '../contexts/logger-provider';
+// import { LoggerContext } from '~/contexts/logger-provider';
+import csv from "~/assets/BSS 23 Master Spreadsheet Budget, Inventory, Schedule, ETC - RFID's.csv";
+const ClipNameAssetMap: Record<string, string> = {};
+
+csv.reduce((acc: typeof ClipNameAssetMap, curr: any) => {
+  const clipName = curr['Clip Name'].replace(/^\*\s?/, '');
+  const assetName = curr['Icon / Asset Name'];
+
+  if (clipName && assetName) {
+    acc[clipName] = assetName;
+  }
+  return acc;
+}, ClipNameAssetMap);
 
 export default function CurrentlyPlayingList() {
   const { tracks, queuedClips, playingClips } = useContext(AbletonContext);
@@ -12,6 +24,7 @@ export default function CurrentlyPlayingList() {
       {tracks?.map((track, index) => {
         const playing = playingClips[track];
         const queued = queuedClips[track];
+        const clipName = (queued ?? playing ?? '').replace(/^\*\s?/, '');
 
         return (
           <div className='w-[15%]' key={index}>
@@ -22,14 +35,15 @@ export default function CurrentlyPlayingList() {
                   queued && 'opacity-40 animate-pulse'
                 }`}
               >
-                {playing || queued}
+                <img
+                  src={`icons/${ClipNameAssetMap[clipName]}`}
+                  alt={(queued || playing) ?? 'icon'}
+                  className={`w-full h-full object-cover rounded-md ${
+                    queued && 'opacity-40 animate-pulse'
+                  }`}
+                />
               </div>
               {/* {playing || queued ? (
-                <img
-                  src={`/images/${track}.jpeg`}
-                  alt="Track icon"
-                  className={`w-full h-full object-cover rounded-md ${queued && 'opacity-40 animate-pulse'}`}
-                />
               ) : (
                 <div className="w-full h-full object-cover rounded-md border border-1"></div>
               )} */}
