@@ -245,7 +245,7 @@ export const GetTracksAndClips = async () => {
     });
 
     allAbletonClips.push([]);
-    for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.slice(0, 300).length; clipSlotIndex++) {
+    for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.length; clipSlotIndex++) {
       const cs = clipSlots[clipSlotIndex];
       const clip = await cs.get('clip');
       allAbletonClips[pillar].push(clip);
@@ -259,7 +259,7 @@ export const GetTracksAndClips = async () => {
 export async function GetTrackVolumes() {
   logger.info('Getting track volumes');
   trackVolumes = [];
-  for (const track of tracks) {
+  for (const track of tracks.slice(0, 4)) {
     const mixerDevice = await track.get('mixer_device');
     const deviceParameter = await mixerDevice.sendCommand('get_volume');
     logger.debug(
