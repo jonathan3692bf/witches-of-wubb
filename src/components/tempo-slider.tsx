@@ -5,7 +5,7 @@ import { AbletonContext } from '../contexts/ableton-provider';
 const MIN_VALUE = 75;
 const MAX_VALUE = 155;
 export default function TempoSlider() {
-  const { changeTempo, tempo, clipTempo, tracks } = useContext(AbletonContext);
+  const { changeTempo, tempo, clipTempo } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -34,15 +34,16 @@ export default function TempoSlider() {
       </div>
       <div className='text-xl'>{Math.ceil(tempo)}</div>
       <div className='flex gap-8 mx-auto'>
-        {tracks?.map((track, index) => {
+        {[0, 1, 2, 3].map((pillar) => {
           return (
             <button
-              disabled={!clipTempo[track]}
-              key={index}
-              onClick={() => clipTempo[track] && changeTempo(clipTempo[track] as number)}
-              className='bg-white hover:bg-gray-100 disabled:bg-gray-500 text-gray-800 font-semibold px-1 w-min border border-gray-400 rounded shadow mx-auto mt-4'
+              disabled={!clipTempo[pillar]}
+              key={pillar}
+              onClick={() => clipTempo[pillar] && changeTempo(clipTempo[pillar] as number)}
+              className='bg-white hover:bg-gray-100 disabled:bg-gray-500 text-gray-800 font-semibold px-2 py-1 border border-gray-400 rounded shadow mx-auto mt-4'
             >
-              {clipTempo[track] ? `${track} (${Math.ceil(clipTempo[track] as number)})` : track}
+              <div>Pillar {pillar + 1}</div>
+              <div>{clipTempo[pillar] ? ` (${Math.ceil(clipTempo[pillar] as number)})` : ``}</div>
             </button>
           );
         })}

@@ -14,9 +14,11 @@ export default function SocketioProvider({ children }: { children: ReactNode }) 
         setSocket(sock);
         logger.debug('Connected to socket.io server');
       });
+      sock.onAny((event, ...args) => {
+        logger.debug(`${event} received with:`, args);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket]);
-
+  }, [socket.connected]);
   return <SocketioContext.Provider value={socket}>{children}</SocketioContext.Provider>;
 }

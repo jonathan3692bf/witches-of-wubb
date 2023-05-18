@@ -2,53 +2,44 @@ import { useContext } from 'react';
 import { AbletonContext } from '~/contexts/ableton-provider';
 import VolumeSlider from './volume-slider';
 // import { LoggerContext } from '~/contexts/logger-provider';
-import csv from "~/assets/BSS 23 Master Spreadsheet Budget, Inventory, Schedule, ETC - RFID's.csv";
-const ClipNameAssetMap: Record<string, string> = {};
-
-csv.reduce((acc: typeof ClipNameAssetMap, curr: any) => {
-  const clipName = curr['Clip Name'].replace(/^\*/, '').trimStart();
-  const assetName = curr['Icon / Asset Name'];
-
-  if (clipName && assetName) {
-    acc[clipName] = assetName;
-  }
-  return acc;
-}, ClipNameAssetMap);
 
 export default function CurrentlyPlayingList() {
-  const { tracks, queuedClips, playingClips } = useContext(AbletonContext);
+  const { queuedClips, playingClips, stoppingClips } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
 
   return (
     <div className='flex flex-row justify-between'>
-      {tracks?.map((track, index) => {
-        const playing = playingClips[track];
-        const queued = queuedClips[track];
-        const clipName = (queued ?? playing ?? '').replace(/^\*/, '').trimStart();
+      {[1, 2, 3, 4]?.map((pillar, index) => {
+        const playing = playingClips[index];
+        const queued = queuedClips[index];
+        const stopping = stoppingClips[index];
+        const info = queued ?? playing ?? stopping;
+        const clipName = info?.clipName?.replace(/^\*/, '').trimStart() ?? '';
 
         return (
-          <div className='w-[15%]' key={index}>
-            {track}
+          <div className='w-[15%]' key={pillar}>
+            Pillar {pillar}
             <div className='h-[200px] mb-4'>
               <div
                 className={`w-full h-full flex items-center text-center rounded-md border border-1 ${
-                  queued && 'opacity-40 animate-pulse'
+                  (queued || stopping) && 'opacity-40 animate-pulse'
                 }`}
               >
-                <img
+                {/* <img
                   src={`icons/${ClipNameAssetMap[clipName]}`}
                   alt={(queued || playing) ?? 'icon'}
                   className={`w-full h-full object-cover rounded-md ${
                     queued && 'opacity-40 animate-pulse'
                   }`}
-                />
+                /> */}
+                {clipName}
               </div>
               {/* {playing || queued ? (
               ) : (
                 <div className="w-full h-full object-cover rounded-md border border-1"></div>
               )} */}
             </div>
-            <VolumeSlider track={track} />
+            <VolumeSlider pillar={index} />
           </div>
         );
       })}

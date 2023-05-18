@@ -1,7 +1,10 @@
 import { createContext, useEffect, useState, ReactNode } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-export const CountdownContext = createContext({ countdown: 15, resetCountdown: () => {} } as {
+export const CountdownContext = createContext({
+  countdown: 15,
+  resetCountdown: () => null,
+} as {
   countdown: number;
   resetCountdown: () => void;
 });

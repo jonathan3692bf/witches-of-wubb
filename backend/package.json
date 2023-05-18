@@ -1,0 +1,30 @@
+{
+  "name": "witches-of-woe",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon index.ts | npx pino-pretty"
+  },
+  "dependencies": {
+    "@tsconfig/recommended": "^1.0.2",
+    "@types/lodash.memoize": "^4.1.7",
+    "@types/lodash.throttle": "^4.1.7",
+    "@types/node": "18.15.10",
+    "@types/node-osc": "^6.0.1",
+    "@types/papaparse": "^5.3.7",
+    "@types/pino": "^7.0.5",
+    "ableton-js": "3.1.5",
+    "lodash.memoize": "^4.1.2",
+    "lodash.throttle": "^4.1.1",
+    "node-osc": "^8.0.11",
+    "nodemon": "^2.0.22",
+    "papaparse": "^5.4.1",
+    "pino": "^8.11.0",
+    "pino-pretty": "^10.0.0",
+    "prettier": "^2.8.8",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1",
+    "ts-node": "^10.9.1",
+    "typescript": "5.0.2"
+  }
+}
