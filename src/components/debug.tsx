@@ -21,12 +21,57 @@ csv.forEach((row: any) => {
   }
 });
 
+function ClipButton({
+  clipName,
+  stopping,
+  playing,
+  queued,
+  onClick,
+}: {
+  clipName: string;
+  stopping?: boolean;
+  playing?: boolean;
+  queued?: boolean;
+  onClick: () => void;
+}) {
+  const classes = classNames({
+    'text-red-600 animate-pulse': stopping,
+    'text-green-600': playing && !stopping,
+    'text-green-500 animate-pulse': queued,
+    // 'text-sm': !loopLeader,
+    'gap-4': true,
+  });
+  return (
+    <div key={clipName} className={classes}>
+      <button onClick={onClick} className='grid grid-flow-col items-start gap-2'>
+        <Switch
+          checked={playing || queued}
+          className={`relative inline-flex h-6 w-11 items-center rounded-full ${
+            playing || queued
+              ? 'ui-checked:bg-green-600'
+              : stopping
+              ? 'ui-not-checked:bg-red-600'
+              : ''
+          } ui-not-checked:bg-gray-200`}
+        >
+          <span className='sr-only'>Play clip</span>
+          <span
+            className={`${playing || queued ? 'translate-x-6' : 'translate-x-1'} 
+          inline-block h-4 w-4 transform rounded-full bg-white transition`}
+          />
+        </Switch>
+
+        <div>{clipName}</div>
+      </button>
+    </div>
+  );
+}
+
 export default function DebugModal() {
   const socket = useContext(SocketioContext);
   const { enableDebug, disableDebug } = useContext(LoggerContext);
   const { playingClips, queuedClips, stoppingClips } = useContext(AbletonContext);
   const [isOpen, setIsOpen] = useState(false);
-  const socketStatus = socket?.connected ? 'connected' : 'not connected';
 
   function closeModal() {
     setIsOpen(false);
@@ -90,68 +135,79 @@ export default function DebugModal() {
                 leaveTo='opacity-0 scale-95'
               >
                 <Dialog.Panel className='w-screen max-w-xxl transform rounded-md bg-white text-black text-left align-middle shadow-xl transition-all'>
-                  <div className='flex flex-row gap-8 my-4 px-6'>
-                    <p className='text-xl'>Socket: {socketStatus}</p>
-                  </div>
-                  <div className='grid grid-flow-col gap-8 auto-cols-max px-6 w-full max-w-screen max-h-[calc(100vh-8rem)] overflow-scroll'>
-                    {[1, 2, 3, 4].map((pillar, index) => {
-                      return (
-                        <div key={pillar} className='grid grid-flow-row auto-rows-max'>
-                          <div>Pillar {pillar}</div>
-                          <div className='grid'>
-                            {Object.entries(ClipNameToInfoMap).map(([clipName, { rfid }]) => {
-                              const formattedName = clipName?.replace(/[* ]/g, '');
-                              const stopping =
-                                stoppingClips[index]?.clipName?.replace(/[* ]/g, '') ===
-                                formattedName;
-                              const queued =
-                                queuedClips[index]?.clipName?.replace(/[* ]/g, '') ===
-                                formattedName;
-                              const playing =
-                                playingClips[index]?.clipName?.replace(/[* ]/g, '') ===
-                                formattedName;
-
-                              const classes = classNames({
-                                'text-red-600 animate-pulse': stopping,
-                                'text-green-600': playing && !stopping,
-                                'text-green-500 animate-pulse': queued,
-                                // 'text-sm': !loopLeader,
-                                'flex gap-3 mt-2': true,
-                              });
-                              return (
-                                <div key={clipName} className={classes}>
-                                  <button
-                                    onClick={() => toggleSong(rfid, index, !(playing || queued))}
-                                    className='flex items-center gap-2'
-                                  >
-                                    <Switch
-                                      checked={playing || queued}
-                                      className={`relative inline-flex h-6 w-11 items-center rounded-full ${
-                                        playing || queued
-                                          ? 'ui-checked:bg-green-600'
-                                          : stopping
-                                          ? 'ui-not-checked:bg-red-600'
-                                          : ''
-                                      } ui-not-checked:bg-gray-200`}
-                                    >
-                                      <span className='sr-only'>Play clip</span>
-                                      <span
-                                        className={`${
-                                          playing || queued ? 'translate-x-6' : 'translate-x-1'
-                                        } 
-                                        inline-block h-4 w-4 transform rounded-full bg-white transition`}
-                                      />
-                                    </Switch>
-
-                                    <div>{clipName}</div>
-                                  </button>
+                  <div className='overflow-scroll max-h-[calc(100vh-4rem)]'>
+                    <div className='grid gap-8 grid-flow-col'>
+                      {/* <div className='grid grid-flow-col gap-8 auto-cols-max px-6 w-full max-w-screen max-h-[calc(100vh-8rem)] overflow-scroll'> */}
+                      {[1, 2, 3, 4].map((pillar, index) => {
+                        const stopping = Boolean(stoppingClips[index]?.clipName);
+                        const playingClip = stoppingClips[index] ?? playingClips[index];
+                        const queuedClip = queuedClips[index];
+                        return (
+                          <div key={pillar} className='grid grid-flow-row auto-rows-max'>
+                            <div className='sticky top-0 bg-white z-10 py-4'>
+                              <div className='text-lg'>Pillar {pillar}</div>
+                              {playingClip && (
+                                <div>
+                                  {stopping ? 'stopping' : 'playing'}:
+                                  <div>
+                                    <ClipButton
+                                      stopping={stopping}
+                                      playing={!stopping}
+                                      clipName={playingClip.clipName}
+                                      onClick={() =>
+                                        toggleSong(
+                                          ClipNameToInfoMap[playingClip.clipName].rfid,
+                                          index,
+                                          false,
+                                        )
+                                      }
+                                    />
+                                  </div>
                                 </div>
-                              );
-                            })}
+                              )}
+                              {queuedClip && (
+                                <div>
+                                  queued:
+                                  <div>
+                                    <ClipButton
+                                      queued
+                                      clipName={queuedClip.clipName}
+                                      onClick={() =>
+                                        toggleSong(
+                                          ClipNameToInfoMap[queuedClip.clipName].rfid,
+                                          index,
+                                          false,
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                            <div className='grid gap-4'>
+                              <hr />
+                              {Object.entries(ClipNameToInfoMap).map(([clipName, { rfid }]) => {
+                                const playing = playingClips[index]?.clipName === clipName;
+                                const stopping = stoppingClips[index]?.clipName === clipName;
+                                const queued = queuedClips[index]?.clipName === clipName;
+
+                                return (
+                                  !stopping &&
+                                  !playing &&
+                                  !queued && (
+                                    <ClipButton
+                                      key={clipName}
+                                      clipName={clipName}
+                                      onClick={() => toggleSong(rfid, index, true)}
+                                    />
+                                  )
+                                );
+                              })}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
 
                   <div className='p-6'>

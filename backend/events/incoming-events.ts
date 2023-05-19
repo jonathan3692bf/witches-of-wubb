@@ -66,7 +66,7 @@ function handleNewTag(rfid: string, requestAddress: string) {
     if (clipMetadata) {
       logger.info(`RFID ${rfid} maps to clip ${clipMetadata.clipName} > type ${clipMetadata.type}`);
       const pillar = IP_ADDRESS_TO_PILLAR_INDEX_MAP[requestAddress];
-      EmitEvent('ingredient_detected', { requestAddress });
+      EmitEvent('ingredient_detected', { ...clipMetadata, pillar, requestAddress });
       QueueClip(clipMetadata, pillar);
     }
   } catch (err) {
@@ -82,7 +82,7 @@ function handleDepartedTag(rfid: string, requestAddress: string) {
       logger.info(`RFID ${rfid} maps to clip ${clipMetadata.clipName} > type ${clipMetadata.type}`);
       const pillar = IP_ADDRESS_TO_PILLAR_INDEX_MAP[requestAddress];
 
-      EmitEvent('ingredient_removed', { requestAddress });
+      EmitEvent('ingredient_removed', { ...clipMetadata, pillar, requestAddress });
       StopOrRemoveClipFromQueue(clipMetadata.clipName, pillar);
     }
   } catch (err) {

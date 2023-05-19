@@ -45,6 +45,10 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
     if (socket.connected) {
       getTracksAndClips();
 
+      socket.on('ingredient_detected', (data: BrowserClipInfo) => {
+        setQueuedClips(UpdateIndex.bind(null, data.pillar, data));
+      });
+
       socket.on('clip_queued', (data: BrowserClipInfo) => {
         setQueuedClips(UpdateIndex.bind(null, data.pillar, data));
       });
@@ -56,6 +60,10 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
 
       socket.on('clip_playing', handlePlayingState);
 
+      socket.on('ingredient_removed', (data: BrowserClipInfo) => {
+        setPlayingClips(UpdateIndex.bind(null, data.pillar, null));
+        setStoppingClips(UpdateIndex.bind(null, data.pillar, data));
+      });
       socket.on('clip_stopping', (data: BrowserClipInfo) => {
         setPlayingClips(UpdateIndex.bind(null, data.pillar, null));
         setStoppingClips(UpdateIndex.bind(null, data.pillar, data));
