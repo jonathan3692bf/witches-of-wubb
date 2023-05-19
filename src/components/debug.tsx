@@ -8,7 +8,7 @@ import { LoggerContext } from '~/contexts/logger-provider';
 import { Dialog, Transition, Switch } from '@headlessui/react';
 import classNames from 'classnames';
 
-import csv from '~/assets/BSS 23 Master Spreadsheet Budget, Inventory, Schedule, ETC - Music Database.csv';
+import csv from '~/assets/Music Database.csv';
 const RFIDToClipMap: Record<string, any> = {};
 const ClipNameToInfoMap: Record<string, any> = {};
 csv.forEach((row: any) => {

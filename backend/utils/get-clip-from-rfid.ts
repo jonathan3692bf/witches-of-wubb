@@ -10,14 +10,7 @@ export const ClipNameToInfoMap: ClipNameToInfoMapType = {};
 
 try {
   logger.info('Trying to read RFID CSV file');
-  csv = fs.readFileSync(
-    path.join(
-      process.cwd(),
-      '../src/assets/',
-      'BSS 23 Master Spreadsheet Budget, Inventory, Schedule, ETC - Music Database.csv',
-    ),
-    'utf-8',
-  );
+  csv = fs.readFileSync(path.join(process.cwd(), '../src/assets/', 'Music Database.csv'), 'utf-8');
   const results = Papa.parse(csv, {
     header: true,
     transformHeader: (header) => header.replace(':', ''),
