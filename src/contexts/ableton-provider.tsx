@@ -7,7 +7,6 @@ export const AbletonContext = createContext({
   getTracksAndClips: () => null,
   changeTempo: (_) => null,
   changeTrackVolume: () => null,
-  isLoading: false,
   tempo: 120,
   trackVolume: [],
   queuedClips: [],
@@ -18,7 +17,6 @@ export const AbletonContext = createContext({
   getTracksAndClips: () => void;
   changeTempo: (x: number) => void;
   changeTrackVolume: (input: SetTrackVolumeInputType) => void;
-  isLoading: boolean;
   tempo: number;
   trackVolume: number[];
   queuedClips: BrowserClipInfoList;
@@ -36,7 +34,6 @@ function UpdateIndex(index: number, newValue: any, initialArray: any[]) {
 export default function AbletonProvider({ children }: { children: ReactNode }) {
   const socket = useContext(SocketioContext);
   const { logger } = useContext(LoggerContext);
-  const [isLoading, setLoading] = useState(false);
   const [tempo, setTempo] = useState(120);
   const [trackVolume, setTrackVolume] = useState<number[]>([]);
   const [queuedClips, setQueuedClips] = useState<BrowserClipInfoList>([]);
@@ -48,27 +45,23 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
     if (socket.connected) {
       getTracksAndClips();
 
-      socket.on('clip_is_queued', (data: BrowserClipInfo) => {
+      socket.on('clip_queued', (data: BrowserClipInfo) => {
         setQueuedClips(UpdateIndex.bind(null, data.pillar, data));
       });
-      socket.on('clip_is_unqueued', (data: BrowserClipInfo) => {
+      socket.on('clip_unqueued', (data: BrowserClipInfo) => {
         setQueuedClips(UpdateIndex.bind(null, data.pillar, null));
       });
 
-      socket.on('clip_playing', (data) => {
-        setQueuedClips(UpdateIndex.bind(null, data.pillar, null));
-        setPlayingClips(UpdateIndex.bind(null, data.pillar, data));
-        setClipTempo(UpdateIndex.bind(null, data.pillar, data.bpm));
-      });
+      socket.on('clip_started', handlePlayingState);
 
-      socket.on('clip_is_stopping', (data: BrowserClipInfo) => {
-        setQueuedClips(UpdateIndex.bind(null, data.pillar, null));
+      socket.on('clip_playing', handlePlayingState);
+
+      socket.on('clip_stopping', (data: BrowserClipInfo) => {
         setPlayingClips(UpdateIndex.bind(null, data.pillar, null));
         setStoppingClips(UpdateIndex.bind(null, data.pillar, data));
       });
       socket.on('clip_stopped', ({ pillar }: { pillar: number }) => {
         setClipTempo(UpdateIndex.bind(null, pillar, null));
-        setQueuedClips(UpdateIndex.bind(null, pillar, null));
         setPlayingClips(UpdateIndex.bind(null, pillar, null));
         setStoppingClips(UpdateIndex.bind(null, pillar, null));
       });
@@ -83,7 +76,6 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
   }, [socket]);
 
   function getTracksAndClips() {
-    setLoading(true);
     socket.emit('get_track_volumes', null, (volumes: number[]) => {
       logger.debug('get_track_volumes returned:', volumes);
       setTrackVolume(volumes);
@@ -115,12 +107,18 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
     });
   }
 
+  function handlePlayingState(data: BrowserClipInfo) {
+    setClipTempo(UpdateIndex.bind(null, data.pillar, data.bpm));
+    setPlayingClips(UpdateIndex.bind(null, data.pillar, data));
+    setQueuedClips(UpdateIndex.bind(null, data.pillar, null));
+    setStoppingClips(UpdateIndex.bind(null, data.pillar, null));
+  }
+
   return (
     <AbletonContext.Provider
       value={{
         getTracksAndClips,
         changeTempo,
-        isLoading,
         tempo,
         trackVolume,
         changeTrackVolume,

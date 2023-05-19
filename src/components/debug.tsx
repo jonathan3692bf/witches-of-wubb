@@ -1,7 +1,6 @@
 import { Fragment, useState, useContext, useEffect } from 'react';
 
 import { AbletonContext } from '~/contexts/ableton-provider';
-// import useCountdown from '~/hooks/use-countdown';
 import { SocketioContext } from '~/contexts/socketio-provider';
 import { LoggerContext } from '~/contexts/logger-provider';
 
@@ -25,8 +24,7 @@ csv.forEach((row: any) => {
 export default function DebugModal() {
   const socket = useContext(SocketioContext);
   const { enableDebug, disableDebug } = useContext(LoggerContext);
-  // const { countdown } = useCountdown();
-  const { isLoading, playingClips, queuedClips, stoppingClips } = useContext(AbletonContext);
+  const { playingClips, queuedClips, stoppingClips } = useContext(AbletonContext);
   const [isOpen, setIsOpen] = useState(false);
   const socketStatus = socket?.connected ? 'connected' : 'not connected';
 
@@ -94,8 +92,6 @@ export default function DebugModal() {
                 <Dialog.Panel className='w-screen max-w-xxl transform rounded-md bg-white text-black text-left align-middle shadow-xl transition-all'>
                   <div className='flex flex-row gap-8 my-4 px-6'>
                     <p className='text-xl'>Socket: {socketStatus}</p>
-                    <p className='text-xl'>Ableton: {isLoading ? 'loading' : 'loaded'}</p>
-                    {/* <p className='text-xl'>Reset timer: {countdown}s</p> */}
                   </div>
                   <div className='grid grid-flow-col gap-8 auto-cols-max px-6 w-full max-w-screen max-h-[calc(100vh-8rem)] overflow-scroll'>
                     {[1, 2, 3, 4].map((pillar, index) => {
@@ -124,21 +120,31 @@ export default function DebugModal() {
                               });
                               return (
                                 <div key={clipName} className={classes}>
-                                  <Switch
-                                    checked={playing || queued}
-                                    onChange={(newState) => toggleSong(rfid, index, newState)}
-                                    className='relative inline-flex h-6 w-11 items-center rounded-full ui-checked:bg-green-600 ui-not-checked:bg-gray-200'
+                                  <button
+                                    onClick={() => toggleSong(rfid, index, !(playing || queued))}
+                                    className='flex items-center gap-2'
                                   >
-                                    <span className='sr-only'>Play clip</span>
-                                    <span
-                                      className={`${
-                                        playing || queued ? 'translate-x-6' : 'translate-x-1'
-                                      } 
+                                    <Switch
+                                      checked={playing || queued}
+                                      className={`relative inline-flex h-6 w-11 items-center rounded-full ${
+                                        playing || queued
+                                          ? 'ui-checked:bg-green-600'
+                                          : stopping
+                                          ? 'ui-not-checked:bg-red-600'
+                                          : ''
+                                      } ui-not-checked:bg-gray-200`}
+                                    >
+                                      <span className='sr-only'>Play clip</span>
+                                      <span
+                                        className={`${
+                                          playing || queued ? 'translate-x-6' : 'translate-x-1'
+                                        } 
                                         inline-block h-4 w-4 transform rounded-full bg-white transition`}
-                                    />
-                                  </Switch>
+                                      />
+                                    </Switch>
 
-                                  <div>{clipName}</div>
+                                    <div>{clipName}</div>
+                                  </button>
                                 </div>
                               );
                             })}

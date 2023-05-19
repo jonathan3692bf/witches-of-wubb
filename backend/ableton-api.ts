@@ -42,12 +42,12 @@ export function ConnectOSCServer(server: nodeOSC.Server) {
   oscServer.on('message', OSCEventHandlers);
 }
 
-const MemoizedClipLocation = memoize((clipName, pillar) =>
-  allAbletonClips[pillar].find((clip) => {
-    // console.log('Looking for clip', clipName, 'against', clip?.raw.name);
-
-    return clip?.raw.name.trim() === clipName.trim();
-  }),
+const MemoizedClipLocation = memoize(
+  (clipName, pillar) =>
+    allAbletonClips[pillar].find((clip) => {
+      return clip?.raw.name.trim() === clipName.trim();
+    }),
+  (clipName, pillar) => `${clipName}-${pillar}`,
 );
 
 export function AddWebSocket(s: socketio.Socket) {
@@ -85,7 +85,7 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
         pillar,
         ...clipMetadata,
       };
-      EmitEvent('clip_is_queued', {
+      EmitEvent('clip_queued', {
         pillar,
         ...clipMetadata,
       });
@@ -93,20 +93,13 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
   }
 }
 
-export function TriggerQueuedClips() {
+export async function TriggerQueuedClips() {
   logger.info(`Begin triggering clip queue`);
-  const queueCopy = queuedClips.slice().filter((clip) => clip);
-  queueCopy.sort((a, b) => {
-    if (!a || !b) return 0;
-    return TRIGGER_ORDER.indexOf(a.type) - TRIGGER_ORDER.indexOf(b.type);
-  });
-
-  // shift items out of the queue and into the triggeredClips list
-  while (queueCopy.length) {
-    const item = queueCopy.shift();
+  for (let i = 0; i < queuedClips.length; i++) {
+    const item = queuedClips[i];
     if (!item) continue;
     logger.info(`Triggering clip "${item.clip.raw.name}" on pillar ${item.pillar} `);
-    item.clip.fire();
+    await item.clip.fire();
     queuedClips[item.pillar] = null;
   }
 }
@@ -119,7 +112,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
     logger.info(`Stopping clip "${clipName}" on pillar ${pillar}`);
     stoppingClips[pillar] = playingClip;
     // clip.stop() won't work because of looping: stop the whole track instead.
-    EmitEvent('clip_is_stopping', {
+    EmitEvent('clip_stopping', {
       ...playingClip,
       clip: undefined,
     });
@@ -141,7 +134,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
     if (queuedClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '')) {
       logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar}`);
       queuedClips[pillar] = null;
-      EmitEvent('clip_is_unqueued', {
+      EmitEvent('clip_unqueued', {
         ...queuedClip,
         clip: undefined,
       });
@@ -207,9 +200,13 @@ export const GetTracksAndClips = async () => {
             throw new Error(`Couldn't find clip metadata for "${clipName}"`);
           }
 
-          playingClips[pillar] = { ...clipInfo, clip };
           const browserInfo = { ...clipInfo, bpm };
-          EmitEvent('clip_playing', browserInfo);
+          if (playingClips[pillar]?.clipName === clipName) {
+            EmitEvent('clip_playing', browserInfo);
+          } else {
+            EmitEvent('clip_started', browserInfo);
+          }
+          playingClips[pillar] = { ...clipInfo, clip };
 
           const newPhraseLeader = FindNextPhraseLeader(playingClips);
           if (newPhraseLeader?.clipName === clipName) {
@@ -225,6 +222,7 @@ export const GetTracksAndClips = async () => {
           clip: undefined,
         });
         stoppingClips[pillar] = null;
+        playingClips[pillar] = null;
       }
     });
 
