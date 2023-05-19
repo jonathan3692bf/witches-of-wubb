@@ -4,10 +4,12 @@ import { RFIDToClipMap } from '../utils/get-clip-from-rfid';
 import logger from '../utils/logger';
 import EmitEvent from './outgoing-events';
 import {
+  GetTempo,
   GetTrackVolumes,
   QueueClip,
+  SetTempo,
+  SetTrackVolume,
   StopOrRemoveClipFromQueue,
-  ableton,
   playingClips,
   queuedClips,
   trackVolumes,
@@ -120,11 +122,11 @@ export function AddSocketEventsHandlers(socket: Socket) {
     callback(clips);
   });
   socket.on('get_tempo', async (_, callback) => {
-    const tempo = await ableton.song.get('tempo');
+    const tempo = await GetTempo();
     callback(tempo);
   });
   socket.on('set_tempo', (tempo: number, callback) => {
-    ableton.song.set('tempo', tempo);
+    SetTempo(tempo);
     callback(tempo);
   });
   socket.on('get_track_volumes', async (_, callback) => {
@@ -135,12 +137,8 @@ export function AddSocketEventsHandlers(socket: Socket) {
     logger.info(`Emitting track volumes: ${formattedVolumes}`);
     callback(formattedVolumes);
   });
-  socket.on('set_track_volume', async ({ pillar, volume }: SetTrackVolumeInputType, callback) => {
-    if (!trackVolumes?.length) await GetTrackVolumes();
-    const trackVolume = trackVolumes[pillar];
-    await trackVolume?.set('value', volume);
-    logger.info(`Setting volume for pillar ${pillar} to ${volume}`);
-    callback({ pillar, volume });
+  socket.on('set_track_volume', async ({ pillar, volume }: SetTrackVolumeInputType) => {
+    await SetTrackVolume(pillar, volume);
   });
   return socket;
 }

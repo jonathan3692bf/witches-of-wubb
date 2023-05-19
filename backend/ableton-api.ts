@@ -90,6 +90,8 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
         ...clipMetadata,
       });
     }
+  } else {
+    logger.warn(`No clip "${clipName}" found on pillar ${pillar}`);
   }
 }
 
@@ -205,6 +207,11 @@ export const GetTracksAndClips = async () => {
             EmitEvent('clip_playing', browserInfo);
           } else {
             EmitEvent('clip_started', browserInfo);
+            SetTrackVolume(pillar, 0.85);
+          }
+          if (playingClips.every((item) => !item)) {
+            // we're coming from a silent state, so let's set the tempo to this new clip's bpm
+            SetTempo(bpm);
           }
           playingClips[pillar] = { ...clipInfo, clip };
 
@@ -238,6 +245,17 @@ export const GetTracksAndClips = async () => {
   return { allAbletonClips, tracks };
 };
 
+export async function GetTempo() {
+  logger.info('Getting tempo');
+  return ableton.song.get('tempo');
+}
+
+export function SetTempo(tempo: number) {
+  logger.info(`Setting tempo to: ${tempo}`);
+  ableton.song.set('tempo', tempo);
+  EmitEvent('tempo_changed', { tempo });
+}
+
 export async function GetTrackVolumes() {
   logger.info('Getting track volumes');
   trackVolumes = [];
@@ -251,6 +269,14 @@ export async function GetTrackVolumes() {
     );
     trackVolumes.push(new DeviceParameter(ableton, deviceParameter));
   }
+}
+
+export async function SetTrackVolume(pillar: number, volume: number) {
+  logger.info(`Setting volume for pillar ${pillar} to ${volume}`);
+  if (!trackVolumes?.length) await GetTrackVolumes();
+  const trackVolume = trackVolumes[pillar];
+  await trackVolume?.set('value', volume);
+  EmitEvent('volume_changed', { pillar, volume });
 }
 
 export function CalculateBPMFromWarpMarkers(warp_markers: WarpMarker[]) {

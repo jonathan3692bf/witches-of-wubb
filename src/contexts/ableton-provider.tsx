@@ -61,8 +61,12 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
       socket.on('clip_playing', handlePlayingState);
 
       socket.on('ingredient_removed', (data: BrowserClipInfo) => {
-        setPlayingClips(UpdateIndex.bind(null, data.pillar, null));
-        setStoppingClips(UpdateIndex.bind(null, data.pillar, data));
+        if (playingClips.findIndex((item) => item?.clipName === data.clipName) > -1) {
+          setPlayingClips(UpdateIndex.bind(null, data.pillar, null));
+          setStoppingClips(UpdateIndex.bind(null, data.pillar, data));
+        } else if (queuedClips.findIndex((item) => item?.clipName === data.clipName)) {
+          setQueuedClips(UpdateIndex.bind(null, data.pillar, null));
+        }
       });
       socket.on('clip_stopping', (data: BrowserClipInfo) => {
         setPlayingClips(UpdateIndex.bind(null, data.pillar, null));
@@ -73,7 +77,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         setPlayingClips(UpdateIndex.bind(null, pillar, null));
         setStoppingClips(UpdateIndex.bind(null, pillar, null));
       });
-      socket.on('tempo_changed', (tempo: number) => {
+      socket.on('tempo_changed', ({ tempo }: { tempo: number }) => {
         setTempo(tempo);
       });
       socket.on('volume_changed', (data: SetTrackVolumeInputType) => {
@@ -109,10 +113,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
     });
   }
   function changeTrackVolume(data: SetTrackVolumeInputType) {
-    socket?.emit('set_track_volume', data, (resp: SetTrackVolumeInputType) => {
-      logger.debug('set_track_volume returned:', resp);
-      setTrackVolume(UpdateIndex.bind(null, resp.pillar, resp.volume));
-    });
+    socket?.emit('set_track_volume', data);
   }
 
   function handlePlayingState(data: BrowserClipInfo) {

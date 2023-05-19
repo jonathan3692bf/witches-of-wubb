@@ -45,7 +45,7 @@ function ClipButton({
     <div key={clipName} className={classes}>
       <button onClick={onClick} className='grid grid-flow-col items-start gap-2'>
         <Switch
-          checked={playing || queued}
+          checked={(playing || queued) ?? false}
           className={`relative inline-flex h-6 w-11 items-center rounded-full ${
             playing || queued
               ? 'ui-checked:bg-green-600'
@@ -144,11 +144,11 @@ export default function DebugModal() {
                         const queuedClip = queuedClips[index];
                         return (
                           <div key={pillar} className='grid grid-flow-row auto-rows-max'>
-                            <div className='sticky top-0 bg-white z-10 py-4'>
+                            <div className='sticky top-0 bg-white z-10 pt-4'>
                               <div className='text-lg'>Pillar {pillar}</div>
-                              {playingClip && (
-                                <div>
-                                  {stopping ? 'stopping' : 'playing'}:
+                              <div style={{ minHeight: 72 }}>
+                                <div className='text-sm'>{stopping ? 'stopping' : 'playing'}:</div>
+                                {playingClip && (
                                   <div>
                                     <ClipButton
                                       stopping={stopping}
@@ -163,11 +163,11 @@ export default function DebugModal() {
                                       }
                                     />
                                   </div>
-                                </div>
-                              )}
-                              {queuedClip && (
-                                <div>
-                                  queued:
+                                )}
+                              </div>
+                              <div style={{ minHeight: 72 }}>
+                                <div className='text-sm'>queued:</div>
+                                {queuedClip && (
                                   <div>
                                     <ClipButton
                                       queued
@@ -181,8 +181,8 @@ export default function DebugModal() {
                                       }
                                     />
                                   </div>
-                                </div>
-                              )}
+                                )}
+                              </div>
                             </div>
                             <div className='grid gap-4'>
                               <hr />
