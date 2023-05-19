@@ -1,13 +1,5 @@
 import { Clip } from 'ableton-js/ns/clip';
 
-export enum TrackNames {
-  Vocals,
-  Melody1,
-  Melody2,
-  Bass,
-  Drums,
-}
-
 export enum ClipTypes {
   Vox = 'Vox',
   Melody = 'Melody',

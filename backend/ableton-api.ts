@@ -7,27 +7,11 @@ import throttle from 'lodash.throttle';
 import memoize from 'lodash.memoize';
 import logger from './utils/logger';
 import { FindNextPhraseLeader } from './utils/is-new-phrase-leader';
-import {
-  ClipBoard,
-  ClipInfo,
-  ClipList,
-  ClipMetadataType,
-  ClipTypes,
-  TrackNames,
-  WarpMarker,
-} from './types';
+import { ClipBoard, ClipInfo, ClipList, ClipMetadataType, ClipTypes, WarpMarker } from './types';
 
 import EmitEvent from './events/outgoing-events';
 import { AddSocketEventsHandlers, OSCEventHandlers } from './events/incoming-events';
 import { ClipNameToInfoMap } from './utils/get-clip-from-rfid';
-
-export function getTrackName(track: number) {
-  return Object.values(TrackNames)[track];
-}
-
-export function getTrackIndex(track: string) {
-  return Object.values(TrackNames).indexOf(track);
-}
 
 let oscServer: nodeOSC.Server;
 export const sockets: socketio.Socket[] = [];
