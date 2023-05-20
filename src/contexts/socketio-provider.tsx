@@ -8,7 +8,7 @@ export default function SocketioProvider({ children }: { children: ReactNode }) 
   const [socket, setSocket] = useState<Socket>({} as Socket);
   useEffect(() => {
     if (!socket.connected) {
-      const sock = io('localhost:3335');
+      const sock = io(`localhost:${import.meta.env.VITE_WS_SERVER_PORT}`);
 
       sock.on('connect', () => {
         setSocket(sock);

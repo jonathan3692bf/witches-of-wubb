@@ -16,6 +16,12 @@ yarn install
 
 This project consists of a backend and frontend that you'll need to start independently. Both feature hot-reloading when files have changed, so you don't need to do anything special during development.
 
+#### 🚨 Check the `.env` for port/address conflicts
+
+This package assumes that your lighting server is `127.0.0.1`. If that's not the case, you'll want to change that in the [.env](https://github.com/jonathan3692bf/witches-of-wubb/blob/main/.env) file.
+
+You can also change the port of the `socket.io` server via `WS_SEVER_PORT` and the exposed port of the `osc` server (for RFID events) via `OSC_SERVER_PORT`.
+
 #### Starting the backend
 
 Once `ableton-js` is installed, run:
@@ -26,8 +32,8 @@ yarn start-backend
 
 At which point you will have:
 
-- an OSC server listening on port `9000`, or whatever you've assigned to `OSC_PORT`
-- a Websocket server listening on port `3335`, or whatever you've assigned to `WS_PORT`
+- an OSC server listening on port `9000`, or whatever you've assigned to `OSC_SERVER_PORT`
+- a Websocket server listening on port `3335`, or whatever you've assigned to `WS_SEVER_PORT`
 - a process listening to the socket exposed by `ableton-js`
 
 #### Starting the Web UI

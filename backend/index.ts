@@ -1,10 +1,13 @@
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+dotenv.config({ path: path.resolve('..', '.env') });
 import * as socketio from 'socket.io';
 import { StartAbleton, ConnectOSCServer, AddWebSocket } from './ableton-api';
 import logger from './utils/logger';
 import * as nodeOSC from 'node-osc';
 
-const wsPort: number = parseInt(process.env.WS_PORT || '3335', 10);
-const oscPort: number = parseInt(process.env.OSC_PORT || '9000', 10);
+const wsPort: number = parseInt(process.env.WS_SEVER_PORT as string, 10);
+const oscPort: number = parseInt(process.env.OSC_SERVER_PORT as string, 10);
 
 async function main() {
   await StartAbleton();
