@@ -7,19 +7,19 @@ e280f3372000f00003effca0,4,,Paramore,Misery Business,Mizbiz Drums 86,Drums,Drums
 ,6,,Disturbed,Down With the Sickness,DWTS guitar 5B 90bpm,Melody,Electric Guitar,5B,Major,5,90,,,,,"[""DWTS Drums 5B 90""]"
 ,7,,Disturbed,Down With the Sickness,Disturbed DWTS Bass 5B 90bpm,Bass,Bass,5B,Major,5,90,,,,,
 ,8,,Disturbed,Down With the Sickness,DWTS Drums 5B 90,Drums,Vox,5B,Major,5,90,,"[""Ice Ice vox 10B 116 | 1A""]","[""MGMT - Kids Synth 11B 123 bpm"",""Ice Ice synth 10B 116""]","[""MGMT - Kids Synth Bass 11B 123bpm"",""Ice Ice bass 10B 116""]","[""MGMT - Kids Drums 11B 123bpm"",""Ice Ice Drums 10B 116 | 11A""]"
-,9,,Evanescence,Bring Me To Life,BMTL vox 96,Vox,Vox,9A,Minor,9,96,,,,"[""BMTL Base 96""]","[""BMTL Drums 96""]"
-,10,,Evanescence,Bring Me To Life,BM2L backup vox 96,Melody,"Piano, Vox, Strings",9A,Minor,9,96,,,,,"[""BMTL Drums 96""]"
+e280f3372000f00003effca1,9,,Evanescence,Bring Me To Life,BMTL vox 96,Vox,Vox,9A,Minor,9,96,,,,"[""BMTL Base 96""]","[""BMTL Drums 96""]"
+,10,,Evanescence,Bring Me To Life,BM2L backup vox 96,Melody,"Piano, Vox, Strings",9A,Minor,9,96,eyeofnewt.jpg,,,,"[""BMTL Drums 96""]"
 ,11,,Evanescence,Bring Me To Life,BMTL Base 96,Bass,Bass,9A,Minor,9,96,,,,,
 ,12,,Evanescence,Bring Me To Life,BMTL Drums 96,Drums,Drums (standard kit),9A,Minor,9,96,,,"[""Feel Good Guit 139""]","[""Feel Good Base 139""]","[""Feel Good Drums 139""]"
 ,13,,Clozee,Harmony,Clozee Harmony Vox 4A 109 | 4A,Vox,Vox,4A,Minor,4,109,,"[""War vox 4A 109""]","[""War guitar 4A 109""]","[""Clozee Harmony Base 4A 109"",""War Base 4A 109""]","[""Clozee Harmony Drums 4A 109"",""War Drums 4A 109""]"
 ,14,,Clozee,Harmony,Clozee Harmony Guitars 4A 109 | 4A,Melody,Acoustic Guitar,4A,Minor,4,109,,"[""War vox 4A 109""]","[""War guitar 4A 109""]","[""War Base 4A 109""]","[""Clozee Harmony Drums 4A 109"",""War Drums 4A 109""]"
 ,15,,Clozee,Harmony,Clozee Harmony Base 4A 109,Bass,Synth,4A,Minor,4,109,,"[""War vox 4A 109""]","[""War guitar 4A 109""]","[""War Base 4A 109""]","[""War Drums 4A 109""]"
 ,16,,Clozee,Harmony,Clozee Harmony Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,,"[""Babylon Vox 4A 130""]","[""KP Dark Horse Synth 132 | 3A"",""Babylon Oud 130""]","[""KP Dark Horse Base 132 | 3B"",""Babylon Bass 130 4A""]","[""KP Dark Horse Drums 132"",""Babylon Drums 130 4A""]"
-,17,,"KSHMR ",Song Of War,War vox 4A 109,Vox,Vox,4A,Minor,4,109,,,,"[""War Base 4A 109""]","[""War Drums 4A 109""]"
-,18,,"KSHMR ",Song Of War,War guitar 4A 109,Melody,Synth,4A,Minor,4,109,,,,,"[""War Drums 4A 109""]"
-,19,,"KSHMR ",Song Of War,War Base 4A 109,Bass,Synth,4A,Minor,4,109,,,,,
-,20,,"KSHMR ",Song Of War,War Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,,,"[""Mizbiz guit 86""]","[""Mizbiz bass 86""]","[""Mizbiz Drums 86""]"
-,21,,"Odesza ",Say my name,Odesza SMN vox 11A 115,Vox,Vox,11A,Minor,11,115,,,,"[""Odesza SMN bass 11A 115""]","[""Odesza SMN drums 11A 115""]"
+,17,,KSHMR ,Song Of War,War vox 4A 109,Vox,Vox,4A,Minor,4,109,,,,"[""War Base 4A 109""]","[""War Drums 4A 109""]"
+,18,,KSHMR ,Song Of War,War guitar 4A 109,Melody,Synth,4A,Minor,4,109,,,,,"[""War Drums 4A 109""]"
+,19,,KSHMR ,Song Of War,War Base 4A 109,Bass,Synth,4A,Minor,4,109,,,,,
+,20,,KSHMR ,Song Of War,War Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,,,"[""Mizbiz guit 86""]","[""Mizbiz bass 86""]","[""Mizbiz Drums 86""]"
+,21,,Odesza ,Say my name,Odesza SMN vox 11A 115,Vox,Vox,11A,Minor,11,115,,,,"[""Odesza SMN bass 11A 115""]","[""Odesza SMN drums 11A 115""]"
 ,22,,Vanilla Ice,Ice Ice Baby,Ice Ice vox 10B 116 | 1A,Vox,Vox,10B,Major,10,116,,,,"[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
 ,23,,Vanilla Ice,Ice Ice Baby,Ice Ice synth 10B 116,Melody,Synth,10B,Major,10,116,,,,,"[""Ice Ice Drums 10B 116 | 11A""]"
 ,24,,Vanilla Ice,Ice Ice Baby,Ice Ice bass 10B 116,Bass,Bass,10B,Major,10,116,,,,,
@@ -28,11 +28,11 @@ e280f3372000f00003effca0,4,,Paramore,Misery Business,Mizbiz Drums 86,Drums,Drums
 ,27,,MGMT,Kids,MGMT - Kids Synth 11B 123 bpm,Melody,Synth,11B,Major,11,123,,"[""Ice Ice vox 10B 116 | 1A""]","[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""MGMT - Kids Drums 11B 123bpm"",""Ice Ice Drums 10B 116 | 11A""]"
 ,28,,MGMT,Kids,MGMT - Kids Synth Bass 11B 123bpm,Bass,Synth,11B,Major,11,123,,"[""Ice Ice vox 10B 116 | 1A""]","[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
 ,29,,MGMT,Kids,MGMT - Kids Drums 11B 123bpm,Drums,Drums (standard kit),11B,Major,11,123,,,"[""Little Bombay Sitar 7B 130bpm""]",,"[""Little Bombay Drums 7B 130bpm""]"
-,30,,"Tha Trickaz ",Little Bombay,Tha Trickaz - Little Bombay vox 7B 130,Vox,Vox,7B,Major,7,130,,,,,"[""Little Bombay Drums 7B 130bpm""]"
-,31,,"Tha Trickaz ",Little Bombay,Little Bombay Sitar 7B 130bpm,Melody,Sitar,7B,Major,7,130,,,,,
-,32,,"Tha Trickaz ",Little Bombay,Little Bombay Drums 7B 130bpm,Drums,Drums (standard kit),7B,Major,7,130,,,"[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
-e280f3372000f00003effc9d,33,,?,?? Babylon,Babylon Vox 4A 130,Vox,Vox,4A,Minor,4,130,,,,"[""Babylon Bass 130 4A""]","[""Babylon Drums 130 4A""]"
-e280f3372000f00003effc9a,34,,?,Babylon,Babylon Oud 4A 130,Melody,Oud,4A,Minor,4,130,,,,,"[""Babylon Drums 130 4A""]"
+,30,,Tha Trickaz ,Little Bombay,Tha Trickaz - Little Bombay vox 7B 130,Vox,Vox,7B,Major,7,130,,,,,"[""Little Bombay Drums 7B 130bpm""]"
+,31,,Tha Trickaz ,Little Bombay,Little Bombay Sitar 7B 130bpm,Melody,Sitar,7B,Major,7,130,,,,,
+,32,,Tha Trickaz ,Little Bombay,Little Bombay Drums 7B 130bpm,Drums,Drums (standard kit),7B,Major,7,130,,,"[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
+e280f3372000f00003effc9d,33,,?,?? Babylon,Babylon Vox,Vox,Vox,4A,Minor,4,130,,,,"[""Babylon Bass 130 4A""]","[""Babylon Drums 130 4A""]"
+e280f3372000f00003effc9a,34,,?,Babylon,Babylon Oud,Melody,Oud,4A,Minor,4,130,,,,,"[""Babylon Drums 130 4A""]"
 e280f3372000f00003effc9e,35,,?,Babylon,Babylon Bass 130 4A,Bass,Bass,4A,Minor,4,130,,,,,
 e280f3372000f00003effc9b,36,,?,Babylon,Babylon Drums 130 4A,Drums,808,4A,Minor,4,130,,,,,
 ,37,,Orgy,Blue Monday,Orgy BM vox 2A 130,Vox,Vox,4A,Minor,4,130,,,,"[""Orgy BM base 4B 130""]","[""Orgy BM drums 4B 130""]"
@@ -52,18 +52,18 @@ e280f3372000f00003effc9c,50,,Gorillaz,Feel Good Inc,Feel Good Guit 139,Melody,El
 ,51,,Gorillaz,Feel Good Inc,Feel Good Base 139,Bass,Bass,2B,Major,2,139,,,,,
 ,52,,Gorillaz,Feel Good Inc,Feel Good Drums 139,Drums,Drums (standard kit),2B,Major,2,139,,,"[""Babylon Oud 130""]","[""Babylon Bass 130 4A""]","[""Babylon Drums 130 4A""]"
 ,53,,Iniko,Jericho,Jericho Vox  154 bpm,Vox,Vox,7A,Minor,7,154,,,"[""Orgy BM mel 4B 130""]","[""Orgy BM base 4B 130""]","[""Orgy BM drums 4B 130""]"
-,54,,"Odesza ",Say my name,Odesza SMN mel 11A 115,Melody,Synth,4B,Major,4,,,,,,"[""Odesza SMN drums 11A 115""]"
-,55,,"Odesza ",Say my name,Odesza SMN bass 11A 115,Bass,Synth,4B,Major,4,,,,,,
-,56,,"Odesza ",Say my name,Odesza SMN drums 11A 115,Drums,Drums (standard kit),4B,Major,4,,,,,,
+e280f3372000f00003effca1,54,,Odesza ,Say my name,Odesza SMN mel 11A 115,Melody,Synth,4B,Major,4,,,,,,"[""Odesza SMN drums 11A 115""]"
+,55,,Odesza ,Say my name,Odesza SMN bass 11A 115,Bass,Synth,4B,Major,4,,,,,,
+,56,,Odesza ,Say my name,Odesza SMN drums 11A 115,Drums,Drums (standard kit),4B,Major,4,,,,,,
 ,57,,House of Pain,Jump Around,Jump vox 9A 107,Vox,Vox,9A,Minor,9,,,,,,
 ,58,,House of Pain,Jump Around,Jump samples  9A 107,Melody,Samples,9A,Minor,9,,,,,,
 ,59,,House of Pain,Jump Around,Jump drums  9A 107,Drums,Drums (standard kit),9A,Minor,9,,,,,,
 ,60,,Ariana Grande,7 Rings,7 Rings vox 12A 140,Vox,Vox,12A,Minor,12,,,,,,
 ,61,,BlackPink,How You Like That,How You Like That vox 2A 130,Vox,Vox,2A,Minor,2,,,,,,
-,62,,Cristobal Tapia de Veer,White Lotus,"White Lotus vox 3B 127 ",Vox,Vox,3B,Major,3,,,,,,
+,62,,Cristobal Tapia de Veer,White Lotus,White Lotus vox 3B 127 ,Vox,Vox,3B,Major,3,,,,,,
 ,63,,Angela Lee,Afro Beats,Afro House 125,Drums,Drums (standard kit),,TBD,,,,,,,
 ,64,,Angela Lee,Cinematic Trap,Cinematic Trap 130,Drums,Drums (standard kit),,TBD,,,,,,,
-,65,,"Golden Tbilisi ",Bulgarian,Bulgarian Vox 1A 130,Vox,Vox,1A,Minor,1,,,,,,
+,65,,Golden Tbilisi ,Bulgarian,Bulgarian Vox 1A 130,Vox,Vox,1A,Minor,1,,,,,,
 ,66,,Anup4m,Kuhaki,Kuhaki Koto 2A 130,Melody,Samples,2A,Minor,2,,,,,,
 ,67,,Anup4m,Kuhaki,Kuhaki Bass 2A 130,Bass,Bass,2A,Minor,2,,,,,,
 ,68,,Anup4m,Kuhaki,Kuhaki Drums 2A 130,Drums,Drums (standard kit),2A,Minor,2,,,,,,
@@ -73,12 +73,12 @@ e280f3372000f00003effc9c,50,,Gorillaz,Feel Good Inc,Feel Good Guit 139,Melody,El
 ,72,,ROSHIMA,Flashback,Flashback Bass 1A 135,Bass,Bass,1A,Minor,1,,,,,,
 ,73,,ROSHIMA,Flashback,Flashback Synth 1A 135,Melody,Synth,1A,Minor,1,,,,,,
 ,74,,Coolio,Gangsta's Paradise,Gangsta's Paradise vox 5A 80,Vox,Vox,5A,Minor,5,,,,,,
-,75,,Coolio,Gangsta's Paradise,"Gangsta's Paradise backup vox 5A 80 ",Melody,Vox,5A,Minor,5,,,,,,
+,75,,Coolio,Gangsta's Paradise,Gangsta's Paradise backup vox 5A 80 ,Melody,Vox,5A,Minor,5,,,,,,
 ,76,,Coolio,Gangsta's Paradise,Gangsta's Paradise Instrumental 5A 80,Melody,Samples,5A,Minor,5,,,,,,
-,77,,Marilyn Manson,The Beautiful People,TBPeople Vox 7A 144,Vox,Vox,7A,Minor,5,,,,,,
-,78,,Marilyn Manson,The Beautiful People,"TBPeople Guitar 7A 144 ",Melody,Electric Guitar,7A,Minor,5,,,,,,
+,77,,Alice Deejay,Better Off Alone,Better of Alone synth 1A 137,Melody,Synth,1A,Minor,1,,,,,,
+,78,,Marilyn Manson,The Beautiful People,TBPeople Guitar 7A 144 ,Melody,Electric Guitar,7A,Minor,5,,,,,,
 ,79,,Marilyn Manson,The Beautiful People,TBPeople Bass 7A 144,Bass,Bass,7A,Minor,5,,,,,,
 ,80,,Marilyn Manson,The Beautiful People,TBPeople Drums 7A 144,Drums,Drums (standard kit),7A,Minor,5,,,,,,
-,81,,,,,,,,,,,,,,,
-,82,,,,,,,,,,,,,,,
+,81,,Eiffel 65,I'm Blue (da ba dee),I'm Blue piano 6A 138,Melody,Synth,6A,Minor,6,,,,,,
+,82,,Eiffel 65,I'm Blue (da ba dee),I'm Blue vox 6A 128,Vox,Vox,6A,Minor,6,,,,,,
 ,83,,,,,,,,,,,,,,,

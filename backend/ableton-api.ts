@@ -76,10 +76,10 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
     // if no items are playing, skip the queue
     const silence = playingClips.every((clip) => !clip);
     if (silence) {
-      logger.info(`Triggering clip "${clipName}" on pillar ${pillar}`);
+      logger.info(`Triggering clip "${clipName}" on pillar ${pillar + 1}`);
       clip?.fire();
     } else {
-      logger.info(`Queuing clip "${clipName}" on pillar ${pillar}`);
+      logger.info(`Queuing clip "${clipName}" on pillar ${pillar + 1}`);
       queuedClips[pillar] = {
         clip,
         pillar,
@@ -91,7 +91,7 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
       });
     }
   } else {
-    logger.warn(`No clip "${clipName}" found on pillar ${pillar}`);
+    logger.warn(`No clip "${clipName}" found on pillar ${pillar + 1}`);
     EmitEvent('clip_unqueued', {
       ...clipMetadata,
       pillar,
@@ -117,7 +117,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   const isClipPlaying =
     playingClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
   if (isClipPlaying) {
-    logger.info(`Stopping clip "${clipName}" on pillar ${pillar}`);
+    logger.info(`Stopping clip "${clipName}" on pillar ${pillar + 1}`);
     stoppingClips[pillar] = playingClip;
     // clip.stop() won't work because of looping: stop the whole track instead.
     EmitEvent('clip_stopping', {
@@ -142,7 +142,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   // check if the clip is queued
   const isClipQueued = queuedClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
   if (isClipQueued) {
-    logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar}`);
+    logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar + 1}`);
     queuedClips[pillar] = null;
     EmitEvent('clip_unqueued', {
       ...queuedClip,
@@ -160,11 +160,11 @@ export async function AddPhraseLeader(newPhraseLeader: ClipInfo) {
   phraseLeader = newPhraseLeader;
 
   const { clip, clipName, pillar } = newPhraseLeader;
-  logger.info(`New phrase leader "${clipName}" on pillar ${pillar}`);
+  logger.info(`New phrase leader "${clipName}" on pillar ${pillar + 1}`);
 
   // figure out when this clip is about to end
   const endTime = await clip.get('loop_end');
-  logger.debug(`Loop end on pillar ${pillar} > "${clipName}" | ${endTime}`);
+  logger.debug(`Loop end on pillar ${pillar + 1} > "${clipName}" | ${endTime}`);
   cleanUpPhraseLeaderEventListener = await clip.addListener(
     'playing_position',
     throttle(
@@ -206,7 +206,9 @@ export const GetTracksAndClips = async () => {
             pillar,
           };
 
-          logger.info(`Pillar ${pillar} started playing ${clipName} > ${JSON.stringify(clipInfo)}`);
+          logger.info(
+            `Pillar ${pillar + 1} started playing ${clipName} > ${JSON.stringify(clipInfo)}`,
+          );
           if (!clipMetadata) {
             throw new Error(`Couldn't find clip metadata for "${clipName}"`);
           }
@@ -231,7 +233,7 @@ export const GetTracksAndClips = async () => {
         }
       } else {
         const clipInfo = stoppingClips[pillar];
-        logger.info(`Clip stopped playing on pillar ${pillar} > "${clipInfo?.clipName}"`);
+        logger.info(`Clip stopped playing on pillar ${pillar + 1} > "${clipInfo?.clipName}"`);
         EmitEvent('clip_stopped', {
           ...clipInfo,
           pillar,
@@ -243,7 +245,7 @@ export const GetTracksAndClips = async () => {
     });
 
     allAbletonClips.push([]);
-    for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.length; clipSlotIndex++) {
+    for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.slice(0, 200).length; clipSlotIndex++) {
       const cs = clipSlots[clipSlotIndex];
       const clip = await cs.get('clip');
       allAbletonClips[pillar].push(clip);
@@ -281,7 +283,7 @@ export async function GetTrackVolumes() {
 }
 
 export async function SetTrackVolume(pillar: number, volume: number) {
-  logger.info(`Setting volume for pillar ${pillar} to ${volume}`);
+  logger.info(`Setting volume for pillar ${pillar + 1} to ${volume}`);
   if (!trackVolumes?.length) await GetTrackVolumes();
   const trackVolume = trackVolumes[pillar];
   await trackVolume?.set('value', volume);
