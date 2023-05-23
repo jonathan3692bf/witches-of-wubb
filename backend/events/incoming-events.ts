@@ -23,10 +23,10 @@ import {
 } from '../types';
 
 export const IP_ADDRESS_TO_PILLAR_INDEX_MAP: Record<string, number> = {
-  '192.168.0.1': 0,
-  '192.168.0.2': 1,
-  '192.168.0.3': 2,
-  '192.168.0.4': 3,
+  '192.168.1.102': 1,
+  '192.168.1.103': 2,
+  '192.168.1.104': 3,
+  '192.168.1.105': 3,
 };
 
 export function getPillarIPAddressFromIndex(index: number) {

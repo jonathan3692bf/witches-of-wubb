@@ -11,7 +11,8 @@ import csv from '~/assets/Music Database.csv';
 const RFIDToClipMap: Record<string, any> = {};
 const ClipNameToInfoMap: Record<string, any> = {};
 csv.forEach((row: any) => {
-  const rfid = row['Asset ID'];
+  // const rfid = row['Asset ID'];
+  const rfid = row['RFID'];
   const clipName = row['Clip Name'];
   const type = row['Clip Type (e.g. Vocals)'];
   const assetName = row['Icon / Asset Name'];

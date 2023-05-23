@@ -16,8 +16,8 @@ try {
     transformHeader: (header) => header.replace(':', ''),
   });
   results.data.forEach((row: any) => {
-    // const rfid = row['RFID'];
-    const rfid = String(row['Asset ID']);
+    const rfid = row['RFID'];
+    // const rfid = String(row['Asset ID']);
     const clipName = String(row['Clip Name']);
     const type = row['Clip Type (e.g. Vocals)'] as ClipTypes;
     const assetName = String(row['Icon / Asset Name']);

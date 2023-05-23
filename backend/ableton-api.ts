@@ -92,6 +92,10 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
     }
   } else {
     logger.warn(`No clip "${clipName}" found on pillar ${pillar}`);
+    EmitEvent('clip_unqueued', {
+      ...clipMetadata,
+      pillar,
+    });
   }
 }
 
@@ -110,7 +114,9 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   logger.trace(`Try to stop or unqueue clip ${clipName}`);
   const playingClip = playingClips[pillar];
   const queuedClip = queuedClips[pillar];
-  if (playingClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '')) {
+  const isClipPlaying =
+    playingClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
+  if (isClipPlaying) {
     logger.info(`Stopping clip "${clipName}" on pillar ${pillar}`);
     stoppingClips[pillar] = playingClip;
     // clip.stop() won't work because of looping: stop the whole track instead.
@@ -131,18 +137,21 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
         TriggerQueuedClips();
       }
     }
-  } else {
-    // check if the clip is queued
-    if (queuedClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '')) {
-      logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar}`);
-      queuedClips[pillar] = null;
-      EmitEvent('clip_unqueued', {
-        ...queuedClip,
-        clip: undefined,
-      });
-    } else {
-      logger.debug(`Clip ${clipName} is neither playing or queue`);
-    }
+  }
+
+  // check if the clip is queued
+  const isClipQueued = queuedClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
+  if (isClipQueued) {
+    logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar}`);
+    queuedClips[pillar] = null;
+    EmitEvent('clip_unqueued', {
+      ...queuedClip,
+      clip: undefined,
+    });
+  }
+
+  if (!isClipPlaying && !isClipQueued) {
+    logger.warn(`Clip ${clipName} is neither playing or queue`);
   }
 }
 
