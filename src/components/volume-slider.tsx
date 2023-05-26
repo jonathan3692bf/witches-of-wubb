@@ -25,9 +25,12 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
         </label>
         <div className='flex flex-row text-lg h-full gap-4 justify-center'>
           <div className='flex flex-col justify-between'>
-            <div className=' text-gray-500 dark:text-gray-400'>{MAX_VALUE}</div>
-            <div className=' text-gray-500 dark:text-gray-400'>{MIN_VALUE}</div>
+            {/* <div className=' text-gray-500 dark:text-gray-400'>{MAX_VALUE}</div>
+            <div className=' text-gray-500 dark:text-gray-400'>{MIN_VALUE}</div> */}
           </div>
+          {/* <div className='flex flex-col justify-center text-xl'>
+            {Math.round((trackVolume[pillar] ?? 0) * 100)}
+          </div> */}
           <input
             id={`${pillar}-volume-range`}
             type='range'
@@ -37,11 +40,8 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
             value={trackVolume[pillar] ?? 0}
             onChange={handleChange}
             orient='vertical'
-            className='h-[24vh] w-3 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700'
+            className='h-[24vh] w-3 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-red-800'
           />
-          <div className='flex flex-col justify-center text-xl'>
-            {Math.round((trackVolume[pillar] ?? 0) * 100)}
-          </div>
         </div>
         <button
           onClick={resetVolume}
