@@ -245,7 +245,7 @@ export const GetTracksAndClips = async () => {
     });
 
     allAbletonClips.push([]);
-    for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.slice(0, 200).length; clipSlotIndex++) {
+    for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.length; clipSlotIndex++) {
       const cs = clipSlots[clipSlotIndex];
       const clip = await cs.get('clip');
       allAbletonClips[pillar].push(clip);
