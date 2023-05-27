@@ -83,8 +83,18 @@ export default function DebugModal() {
   }
 
   function toggleSong(rfid: string, pillar: number, start: boolean) {
+    // for (let i = 0; i < 4; i++) {
+    //   if (start) {
+    //     socket.emit('/new/tag', { rfid, pillar: i });
+    //   } else {
+    //     socket.emit('/departed/tag', { rfid, pillar: i });
+    //   }
+    // }
     if (start) {
       socket.emit('/new/tag', { rfid, pillar });
+      // setTimeout(() => {
+      //   socket.emit('/departed/tag', { rfid, pillar });
+      // }, 100);
     } else {
       socket.emit('/departed/tag', { rfid, pillar });
     }

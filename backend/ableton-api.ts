@@ -151,7 +151,10 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   }
 
   if (!isClipPlaying && !isClipQueued) {
-    logger.warn(`Clip ${clipName} is neither playing or queue`);
+    logger.warn(
+      `Clip ${clipName} is neither playing or queue. Stopping pillar ${pillar + 1} just in case.`,
+    );
+    await tracks[pillar].sendCommand('stop_all_clips');
   }
 }
 
@@ -249,6 +252,11 @@ export const GetTracksAndClips = async () => {
       const cs = clipSlots[clipSlotIndex];
       const clip = await cs.get('clip');
       allAbletonClips[pillar].push(clip);
+      // const clipName = clip?.raw.name;
+      // if (clipName) {
+      //   const info = ClipNameToInfoMap[clipName];
+      //   if (!info) logger.error(`Could not find clip ${pillar + 1} / "${clipName}" in database`);
+      // }
     }
   }
   logger.info('Tracks and clips from Ableton fetched');
