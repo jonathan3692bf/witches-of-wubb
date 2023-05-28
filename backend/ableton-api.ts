@@ -54,17 +54,17 @@ export async function handleTimeout() {
 export function startTimeoutTimer() {
   logger.info('Starting timeout timer');
   timeoutWarningId = setTimeout(() => {
-    if (playingClips.length && !queuedClips.length) {
-      logger.warn('Timeout warning');
-      EmitEventWithoutResetingTimout('timeout_warning');
-    }
+    // if (playingClips.length && !queuedClips.length) {
+    logger.warn('Timeout warning');
+    EmitEventWithoutResetingTimout('timeout_warning');
+    // }
   }, TIMEOUT_IN_MILISECONDS - 10_000);
   timeoutId = setTimeout(() => {
-    if (playingClips.length && !queuedClips.length) {
-      logger.warn('Timeout exceeded, restarting the UI');
-      EmitEventWithoutResetingTimout('attractor_state');
-      handleTimeout();
-    }
+    // if (playingClips.length && !queuedClips.length) {
+    logger.warn('Timeout exceeded, restarting the UI');
+    EmitEventWithoutResetingTimout('attractor_state');
+    handleTimeout();
+    // }
   }, TIMEOUT_IN_MILISECONDS);
 }
 
@@ -265,7 +265,7 @@ export const GetTracksAndClips = async () => {
           if (playingClips[pillar]?.clipName === clipName) {
             EmitEventWithoutResetingTimout('clip_playing', browserInfo);
           } else {
-            EmitEvent('clip_started', browserInfo);
+            EmitEventWithoutResetingTimout('clip_started', browserInfo);
             SetTrackVolume(pillar, 0.85);
           }
           if (playingClips.every((item) => !item)) {
