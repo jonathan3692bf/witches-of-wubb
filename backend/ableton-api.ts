@@ -9,13 +9,17 @@ import logger from './utils/logger';
 import { FindNextPhraseLeader } from './utils/is-new-phrase-leader';
 import { ClipBoard, ClipInfo, ClipList, ClipMetadataType, ClipTypes, WarpMarker } from './types';
 
-import EmitEvent from './events/outgoing-events';
+import EmitEvent, { EmitEventWithoutResetingTimout } from './events/outgoing-events';
 import { AddSocketEventsHandlers, OSCEventHandlers } from './events/incoming-events';
 import { ClipNameToInfoMap } from './utils/get-clip-from-rfid';
 
 let oscServer: nodeOSC.Server;
 export const sockets: socketio.Socket[] = [];
+export const TIMEOUT_IN_MILISECONDS = 15 * 1000;
 
+export let timeoutId: NodeJS.Timeout;
+export let timeoutWarningId: NodeJS.Timeout;
+export const ATTRACTOR_STATE_CLIP_NAME = 'Silencio-5min';
 export let allAbletonClips: ClipBoard;
 export let tracks: Track[];
 export let trackVolumes: Array<DeviceParameter>;
@@ -35,6 +39,40 @@ export async function StartAbleton() {
   await ableton.start();
   await GetTracksAndClips();
   await GetTrackVolumes();
+}
+
+export async function handleTimeout() {
+  for (let i = 0; i < 4; i++) {
+    await tracks[i].sendCommand('stop_all_clips');
+    setTimeout(() => {
+      const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
+      clip?.fire();
+    }, 2_000);
+  }
+}
+
+export function startTimeoutTimer() {
+  logger.info('Starting timeout timer');
+  timeoutWarningId = setTimeout(() => {
+    if (playingClips.length && !queuedClips.length) {
+      logger.warn('Timeout warning');
+      EmitEventWithoutResetingTimout('timeout_warning');
+    }
+  }, TIMEOUT_IN_MILISECONDS - 10_000);
+  timeoutId = setTimeout(() => {
+    if (playingClips.length && !queuedClips.length) {
+      logger.warn('Timeout exceeded, restarting the UI');
+      EmitEventWithoutResetingTimout('attractor_state');
+      handleTimeout();
+    }
+  }, TIMEOUT_IN_MILISECONDS);
+}
+
+export function restartTimeoutTimer() {
+  logger.warn('Restarting timeout timer');
+  clearTimeout(timeoutId);
+  clearTimeout(timeoutWarningId);
+  // startTimeoutTimer();
 }
 
 export function ConnectOSCServer(server: nodeOSC.Server) {
@@ -76,10 +114,10 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
     // if no items are playing, skip the queue
     const silence = playingClips.every((clip) => !clip);
     if (silence) {
-      logger.info(`Triggering clip "${clipName}" on pillar ${pillar}`);
+      logger.info(`Triggering clip "${clipName}" on pillar ${pillar + 1}`);
       clip?.fire();
     } else {
-      logger.info(`Queuing clip "${clipName}" on pillar ${pillar}`);
+      logger.info(`Queuing clip "${clipName}" on pillar ${pillar + 1}`);
       queuedClips[pillar] = {
         clip,
         pillar,
@@ -91,7 +129,7 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
       });
     }
   } else {
-    logger.warn(`No clip "${clipName}" found on pillar ${pillar}`);
+    logger.warn(`No clip "${clipName}" found on pillar ${pillar + 1}`);
     EmitEvent('clip_unqueued', {
       ...clipMetadata,
       pillar,
@@ -117,7 +155,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   const isClipPlaying =
     playingClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
   if (isClipPlaying) {
-    logger.info(`Stopping clip "${clipName}" on pillar ${pillar}`);
+    logger.info(`Stopping clip "${clipName}" on pillar ${pillar + 1}`);
     stoppingClips[pillar] = playingClip;
     // clip.stop() won't work because of looping: stop the whole track instead.
     EmitEvent('clip_stopping', {
@@ -142,7 +180,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   // check if the clip is queued
   const isClipQueued = queuedClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
   if (isClipQueued) {
-    logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar}`);
+    logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar + 1}`);
     queuedClips[pillar] = null;
     EmitEvent('clip_unqueued', {
       ...queuedClip,
@@ -151,7 +189,10 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   }
 
   if (!isClipPlaying && !isClipQueued) {
-    logger.warn(`Clip ${clipName} is neither playing or queue`);
+    logger.warn(
+      `Clip ${clipName} is neither playing or queue. Stopping pillar ${pillar + 1} just in case.`,
+    );
+    await tracks[pillar].sendCommand('stop_all_clips');
   }
 }
 
@@ -160,11 +201,11 @@ export async function AddPhraseLeader(newPhraseLeader: ClipInfo) {
   phraseLeader = newPhraseLeader;
 
   const { clip, clipName, pillar } = newPhraseLeader;
-  logger.info(`New phrase leader "${clipName}" on pillar ${pillar}`);
+  logger.info(`New phrase leader "${clipName}" on pillar ${pillar + 1}`);
 
   // figure out when this clip is about to end
   const endTime = await clip.get('loop_end');
-  logger.debug(`Loop end on pillar ${pillar} > "${clipName}" | ${endTime}`);
+  logger.debug(`Loop end on pillar ${pillar + 1} > "${clipName}" | ${endTime}`);
   cleanUpPhraseLeaderEventListener = await clip.addListener(
     'playing_position',
     throttle(
@@ -195,25 +236,27 @@ export const GetTracksAndClips = async () => {
     track.addListener('playing_slot_index', async (clipSlotIndex: number) => {
       if (clipSlotIndex >= 0) {
         const clip = allAbletonClips[pillar][clipSlotIndex];
-        if (clip) {
+        const clipName = clip?.raw.name;
+        if (clipName && clipName !== ATTRACTOR_STATE_CLIP_NAME) {
           const warpMarkers = await clip.get('warp_markers');
           const bpm = CalculateBPMFromWarpMarkers(warpMarkers);
-          const clipName = clip?.raw.name;
-          const clipMetadata = ClipNameToInfoMap[clipName?.replace(/[* ]/g, '')];
+          const clipMetadata = ClipNameToInfoMap[clipName.replace(/[* ]/g, '')];
           const clipInfo = {
             ...clipMetadata,
             clipName,
             pillar,
           };
 
-          logger.info(`Pillar ${pillar} started playing ${clipName} > ${JSON.stringify(clipInfo)}`);
+          logger.info(
+            `Pillar ${pillar + 1} started playing ${clipName} > ${JSON.stringify(clipInfo)}`,
+          );
           if (!clipMetadata) {
             throw new Error(`Couldn't find clip metadata for "${clipName}"`);
           }
 
           const browserInfo = { ...clipInfo, bpm };
           if (playingClips[pillar]?.clipName === clipName) {
-            EmitEvent('clip_playing', browserInfo);
+            EmitEventWithoutResetingTimout('clip_playing', browserInfo);
           } else {
             EmitEvent('clip_started', browserInfo);
             SetTrackVolume(pillar, 0.85);
@@ -231,8 +274,8 @@ export const GetTracksAndClips = async () => {
         }
       } else {
         const clipInfo = stoppingClips[pillar];
-        logger.info(`Clip stopped playing on pillar ${pillar} > "${clipInfo?.clipName}"`);
-        EmitEvent('clip_stopped', {
+        logger.info(`Clip stopped playing on pillar ${pillar + 1} > "${clipInfo?.clipName}"`);
+        EmitEventWithoutResetingTimout('clip_stopped', {
           ...clipInfo,
           pillar,
           clip: undefined,
@@ -243,10 +286,24 @@ export const GetTracksAndClips = async () => {
     });
 
     allAbletonClips.push([]);
+
     for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.length; clipSlotIndex++) {
       const cs = clipSlots[clipSlotIndex];
       const clip = await cs.get('clip');
       allAbletonClips[pillar].push(clip);
+      // const previousClipName = clipSlotIndex
+      //   ? (await clipSlots[clipSlotIndex - 1].get('clip'))?.raw.name
+      //   : null;
+      // const clipName = clip?.raw.name;
+      // const checkDatabase =
+      //   previousClipName && clipName ? previousClipName !== clipName : clipName ? true : false;
+      // if (checkDatabase) {
+      //   const info = ClipNameToInfoMap[clipName?.replace(/[ ]/g, '') as string];
+      //   if (!info)
+      //     logger.error(
+      //       `Could not find clip: ${pillar + 1} | ${clipSlotIndex} / "${clipName}" in database`,
+      //     );
+      // }
     }
   }
   logger.info('Tracks and clips from Ableton fetched');
@@ -281,7 +338,7 @@ export async function GetTrackVolumes() {
 }
 
 export async function SetTrackVolume(pillar: number, volume: number) {
-  logger.info(`Setting volume for pillar ${pillar} to ${volume}`);
+  logger.info(`Setting volume for pillar ${pillar + 1} to ${volume}`);
   if (!trackVolumes?.length) await GetTrackVolumes();
   const trackVolume = trackVolumes[pillar];
   await trackVolume?.set('value', volume);
