@@ -25,9 +25,9 @@ function Emit(eventName: string, data?: Record<any, any>) {
   });
   if (data?.pillar > -1) {
     const pillar = data?.pillar + 1;
-    SendOSCMessage(`/${pillar}/${eventName}`);
+    SendOSCMessage(`/${pillar}/${eventName}`, data);
   } else {
-    SendOSCMessage(`/${eventName}`);
+    SendOSCMessage(`/${eventName}`, data);
   }
 }
 

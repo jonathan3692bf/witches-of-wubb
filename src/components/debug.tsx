@@ -16,7 +16,7 @@ csv.forEach((row: any) => {
   const clipName = row['Clip Name'];
   const type = row['Clip Type (e.g. Vocals)'];
   const assetName = row['Icon / Asset Name'];
-  if (clipName?.trim()) {
+  if (clipName?.trim() && rfid) {
     RFIDToClipMap[rfid] = { clipName, type, assetName };
     ClipNameToInfoMap[clipName] = { rfid, type, assetName };
   }
