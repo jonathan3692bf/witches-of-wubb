@@ -9,7 +9,7 @@ import logger from './utils/logger';
 import { FindNextPhraseLeader } from './utils/is-new-phrase-leader';
 import { ClipBoard, ClipInfo, ClipList, ClipMetadataType, ClipTypes, WarpMarker } from './types';
 
-import EmitEvent from './events/outgoing-events';
+import EmitEvent, { EmitEventWithoutResetingTimout } from './events/outgoing-events';
 import { AddSocketEventsHandlers, OSCEventHandlers } from './events/incoming-events';
 import { ClipNameToInfoMap } from './utils/get-clip-from-rfid';
 
@@ -19,6 +19,7 @@ export const TIMEOUT_IN_MILISECONDS = 30 * 1000;
 
 export let timeoutId: NodeJS.Timeout;
 export let timeoutWarningId: NodeJS.Timeout;
+export const ATTRACTOR_STATE_CLIP_NAME = 'Silencio-5min';
 export let allAbletonClips: ClipBoard;
 export let tracks: Track[];
 export let trackVolumes: Array<DeviceParameter>;
@@ -40,18 +41,32 @@ export async function StartAbleton() {
   await GetTrackVolumes();
 }
 
+export async function handleTimeout() {
+  const attractorClipInfo = {
+    ...ClipNameToInfoMap[ATTRACTOR_STATE_CLIP_NAME],
+    clipName: ATTRACTOR_STATE_CLIP_NAME,
+  };
+  for (let i = 0; i < 4; i++) {
+    await tracks[i].sendCommand('stop_all_clips');
+    QueueClip(attractorClipInfo, i);
+  }
+}
+
 export function startTimeoutTimer() {
+  logger.info('Starting timeout timer');
   timeoutWarningId = setTimeout(() => {
-    logger.info('Timeout warning');
-    EmitEvent('timeout_warning');
+    logger.warn('Timeout warning');
+    EmitEventWithoutResetingTimout('timeout_warning');
   }, TIMEOUT_IN_MILISECONDS - 10_000);
   timeoutId = setTimeout(() => {
-    logger.info('Timeout exceeded, restarting the UI');
-    EmitEvent('attractor_state');
+    logger.warn('Timeout exceeded, restarting the UI');
+    EmitEventWithoutResetingTimout('attractor_state');
+    handleTimeout();
   }, TIMEOUT_IN_MILISECONDS);
 }
 
 export function restartTimeoutTimer() {
+  logger.warn('Restarting timeout timer');
   clearTimeout(timeoutId);
   clearTimeout(timeoutWarningId);
   startTimeoutTimer();
@@ -238,7 +253,7 @@ export const GetTracksAndClips = async () => {
 
           const browserInfo = { ...clipInfo, bpm };
           if (playingClips[pillar]?.clipName === clipName) {
-            EmitEvent('clip_playing', browserInfo);
+            EmitEventWithoutResetingTimout('clip_playing', browserInfo);
           } else {
             EmitEvent('clip_started', browserInfo);
             SetTrackVolume(pillar, 0.85);
@@ -257,7 +272,7 @@ export const GetTracksAndClips = async () => {
       } else {
         const clipInfo = stoppingClips[pillar];
         logger.info(`Clip stopped playing on pillar ${pillar + 1} > "${clipInfo?.clipName}"`);
-        EmitEvent('clip_stopped', {
+        EmitEventWithoutResetingTimout('clip_stopped', {
           ...clipInfo,
           pillar,
           clip: undefined,

@@ -26,10 +26,10 @@ function Emit(eventName: string, data?: Record<any, any>) {
 }
 
 export function EmitEventWithoutResetingTimout(eventName: string, data?: Record<any, any>) {
-  restartTimeoutTimer();
   Emit(eventName, data);
 }
 
 export default function EmitEvent(eventName: string, data?: Record<any, any>) {
+  restartTimeoutTimer();
   Emit(eventName, data);
 }
