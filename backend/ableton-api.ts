@@ -44,8 +44,8 @@ export async function StartAbleton() {
 export async function handleTimeout() {
   for (let i = 0; i < 4; i++) {
     await tracks[i].sendCommand('stop_all_clips');
-    setTimeout(() => {
-      const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
+    setTimeout(async () => {
+      const clip = await MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
       clip?.fire();
     }, 2_000);
   }
@@ -81,10 +81,18 @@ export function ConnectOSCServer(server: nodeOSC.Server) {
 }
 
 const MemoizedClipLocation = memoize(
-  (clipName, pillar) =>
-    allAbletonClips[pillar].find((clip) => {
+  async (clipName, pillar) => {
+    const clipSlotIndex = allAbletonClips.findIndex((clip) => {
       return clip?.raw.name.trim() === clipName.trim();
-    }),
+    });
+    if (pillar === 0) {
+      return allAbletonClips[clipSlotIndex];
+    } else {
+      const clipSlots = await tracks[pillar].get('clip_slots');
+      const clip = await clipSlots[clipSlotIndex].get('clip');
+      return clip;
+    }
+  },
   (clipName, pillar) => `${clipName}-${pillar}`,
 );
 
@@ -101,14 +109,14 @@ export function AddWebSocket(s: socketio.Socket) {
   AddSocketEventsHandlers(s);
 }
 
-export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
+export async function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
   const { clipName } = clipMetadata;
   logger.info(`Begin queing clip ${clipName}`);
   if (queuedClips[pillar]?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '')) {
     logger.info(`Clip ${clipName} is already queued`);
     return;
   }
-  const clip = MemoizedClipLocation(clipName, pillar);
+  const clip = await MemoizedClipLocation(clipName, pillar);
 
   if (clip) {
     // if no items are playing, skip the queue
@@ -231,11 +239,10 @@ export const GetTracksAndClips = async () => {
 
   for (let pillar = 0; pillar < 4; pillar++) {
     const track = tracks[pillar];
-    const clipSlots = await track.get('clip_slots');
 
     track.addListener('playing_slot_index', async (clipSlotIndex: number) => {
       if (clipSlotIndex >= 0) {
-        const clip = allAbletonClips[pillar][clipSlotIndex];
+        const clip = allAbletonClips[clipSlotIndex];
         const clipName = clip?.raw.name;
         if (clipName && clipName !== ATTRACTOR_STATE_CLIP_NAME) {
           const warpMarkers = await clip.get('warp_markers');
@@ -265,7 +272,12 @@ export const GetTracksAndClips = async () => {
             // we're coming from a silent state, so let's set the tempo to this new clip's bpm
             SetTempo(bpm);
           }
-          playingClips[pillar] = { ...clipInfo, clip };
+          if (pillar === 0) {
+            playingClips[pillar] = { ...clipInfo, clip };
+          } else {
+            const clip = await MemoizedClipLocation(clipName, pillar);
+            if (clip) playingClips[pillar] = { ...clipInfo, clip };
+          }
 
           const newPhraseLeader = FindNextPhraseLeader(playingClips);
           if (newPhraseLeader?.clipName === clipName) {
@@ -285,25 +297,26 @@ export const GetTracksAndClips = async () => {
       }
     });
 
-    allAbletonClips.push([]);
-
-    for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.length; clipSlotIndex++) {
-      const cs = clipSlots[clipSlotIndex];
-      const clip = await cs.get('clip');
-      allAbletonClips[pillar].push(clip);
-      // const previousClipName = clipSlotIndex
-      //   ? (await clipSlots[clipSlotIndex - 1].get('clip'))?.raw.name
-      //   : null;
-      // const clipName = clip?.raw.name;
-      // const checkDatabase =
-      //   previousClipName && clipName ? previousClipName !== clipName : clipName ? true : false;
-      // if (checkDatabase) {
-      //   const info = ClipNameToInfoMap[clipName?.replace(/[ ]/g, '') as string];
-      //   if (!info)
-      //     logger.error(
-      //       `Could not find clip: ${pillar + 1} | ${clipSlotIndex} / "${clipName}" in database`,
-      //     );
-      // }
+    if (pillar === 0) {
+      const clipSlots = await track.get('clip_slots');
+      for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.length; clipSlotIndex++) {
+        const cs = clipSlots[clipSlotIndex];
+        const clip = await cs.get('clip');
+        allAbletonClips.push(clip);
+        // const previousClipName = clipSlotIndex
+        //   ? (await clipSlots[clipSlotIndex - 1].get('clip'))?.raw.name
+        //   : null;
+        // const clipName = clip?.raw.name;
+        // const checkDatabase =
+        //   previousClipName && clipName ? previousClipName !== clipName : clipName ? true : false;
+        // if (checkDatabase) {
+        //   const info = ClipNameToInfoMap[clipName?.replace(/[ ]/g, '') as string];
+        //   if (!info)
+        //     logger.error(
+        //       `Could not find clip: ${pillar + 1} | ${clipSlotIndex} / "${clipName}" in database`,
+        //     );
+        // }
+      }
     }
   }
   logger.info('Tracks and clips from Ableton fetched');

@@ -32,7 +32,7 @@ export type BrowserClipInfo = Omit<ClipInfo, 'clip'> & { bpm?: number };
 export type BrowserClipInfoList = (BrowserClipInfo | null)[];
 
 export type ClipList = (ClipInfo | null)[];
-export type ClipBoard = Array<Clip | null>[];
+export type ClipBoard = (Clip | null)[];
 
 export type SetTrackVolumeInputType = { pillar: number; volume: number };
 export type TrackVolumesType = number[];
