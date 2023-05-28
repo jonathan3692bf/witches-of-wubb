@@ -72,7 +72,7 @@ export function restartTimeoutTimer() {
   logger.warn('Restarting timeout timer');
   clearTimeout(timeoutId);
   clearTimeout(timeoutWarningId);
-  startTimeoutTimer();
+  // startTimeoutTimer();
 }
 
 export function ConnectOSCServer(server: nodeOSC.Server) {
