@@ -6,6 +6,18 @@ const LIGHTING_SERVER_ADDRESS = process.env.LIGHTING_SERVER_ADDRESS as string;
 const LIGHTING_SERVER_PORT = Number(process.env.LIGHTING_SERVER_PORT as string);
 const lightingClient = new nodeOSC.Client(LIGHTING_SERVER_ADDRESS, LIGHTING_SERVER_PORT);
 
+function SendOSCMessage(address: string, data?: Record<any, any>) {
+  const message = new nodeOSC.Message(address);
+
+  if (data?.type) {
+    message.append(data.type);
+  }
+
+  lightingClient.send(message, (err) => {
+    if (err) logger.error(err);
+  });
+}
+
 function Emit(eventName: string, data?: Record<any, any>) {
   logger.info(`Emitting event ${eventName} with data: ${JSON.stringify(data)}`);
   sockets?.forEach((socket) => {
@@ -13,15 +25,9 @@ function Emit(eventName: string, data?: Record<any, any>) {
   });
   if (data?.pillar > -1) {
     const pillar = data?.pillar + 1;
-    const message = new nodeOSC.Message(`/${pillar}/${eventName}`);
-
-    if (data?.type) {
-      message.append(data.type);
-    }
-
-    lightingClient.send(message, (err) => {
-      if (err) logger.error(err);
-    });
+    SendOSCMessage(`/${pillar}/${eventName}`);
+  } else {
+    SendOSCMessage(`/${eventName}`);
   }
 }
 

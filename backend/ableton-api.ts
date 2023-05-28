@@ -15,7 +15,7 @@ import { ClipNameToInfoMap } from './utils/get-clip-from-rfid';
 
 let oscServer: nodeOSC.Server;
 export const sockets: socketio.Socket[] = [];
-export const TIMEOUT_IN_MILISECONDS = 30 * 1000;
+export const TIMEOUT_IN_MILISECONDS = 15 * 1000;
 
 export let timeoutId: NodeJS.Timeout;
 export let timeoutWarningId: NodeJS.Timeout;
@@ -42,26 +42,29 @@ export async function StartAbleton() {
 }
 
 export async function handleTimeout() {
-  const attractorClipInfo = {
-    ...ClipNameToInfoMap[ATTRACTOR_STATE_CLIP_NAME],
-    clipName: ATTRACTOR_STATE_CLIP_NAME,
-  };
   for (let i = 0; i < 4; i++) {
     await tracks[i].sendCommand('stop_all_clips');
-    QueueClip(attractorClipInfo, i);
+    setTimeout(() => {
+      const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
+      clip?.fire();
+    }, 2_000);
   }
 }
 
 export function startTimeoutTimer() {
   logger.info('Starting timeout timer');
   timeoutWarningId = setTimeout(() => {
-    logger.warn('Timeout warning');
-    EmitEventWithoutResetingTimout('timeout_warning');
+    if (playingClips.length && !queuedClips.length) {
+      logger.warn('Timeout warning');
+      EmitEventWithoutResetingTimout('timeout_warning');
+    }
   }, TIMEOUT_IN_MILISECONDS - 10_000);
   timeoutId = setTimeout(() => {
-    logger.warn('Timeout exceeded, restarting the UI');
-    EmitEventWithoutResetingTimout('attractor_state');
-    handleTimeout();
+    if (playingClips.length && !queuedClips.length) {
+      logger.warn('Timeout exceeded, restarting the UI');
+      EmitEventWithoutResetingTimout('attractor_state');
+      handleTimeout();
+    }
   }, TIMEOUT_IN_MILISECONDS);
 }
 
@@ -233,11 +236,11 @@ export const GetTracksAndClips = async () => {
     track.addListener('playing_slot_index', async (clipSlotIndex: number) => {
       if (clipSlotIndex >= 0) {
         const clip = allAbletonClips[pillar][clipSlotIndex];
-        if (clip) {
+        const clipName = clip?.raw.name;
+        if (clipName && clipName !== ATTRACTOR_STATE_CLIP_NAME) {
           const warpMarkers = await clip.get('warp_markers');
           const bpm = CalculateBPMFromWarpMarkers(warpMarkers);
-          const clipName = clip?.raw.name;
-          const clipMetadata = ClipNameToInfoMap[clipName?.replace(/[* ]/g, '')];
+          const clipMetadata = ClipNameToInfoMap[clipName.replace(/[* ]/g, '')];
           const clipInfo = {
             ...clipMetadata,
             clipName,
