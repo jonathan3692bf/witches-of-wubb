@@ -15,7 +15,10 @@ import { ClipNameToInfoMap } from './utils/get-clip-from-rfid';
 
 let oscServer: nodeOSC.Server;
 export const sockets: socketio.Socket[] = [];
+export const TIMEOUT_IN_MILISECONDS = 30 * 1000;
 
+export let timeoutId: NodeJS.Timeout;
+export let timeoutWarningId: NodeJS.Timeout;
 export let allAbletonClips: ClipBoard;
 export let tracks: Track[];
 export let trackVolumes: Array<DeviceParameter>;
@@ -35,6 +38,23 @@ export async function StartAbleton() {
   await ableton.start();
   await GetTracksAndClips();
   await GetTrackVolumes();
+}
+
+export function startTimeoutTimer() {
+  timeoutWarningId = setTimeout(() => {
+    logger.info('Timeout warning');
+    EmitEvent('timeout_warning');
+  }, TIMEOUT_IN_MILISECONDS - 10_000);
+  timeoutId = setTimeout(() => {
+    logger.info('Timeout exceeded, restarting the UI');
+    EmitEvent('attractor_state');
+  }, TIMEOUT_IN_MILISECONDS);
+}
+
+export function restartTimeoutTimer() {
+  clearTimeout(timeoutId);
+  clearTimeout(timeoutWarningId);
+  startTimeoutTimer();
 }
 
 export function ConnectOSCServer(server: nodeOSC.Server) {
@@ -248,14 +268,23 @@ export const GetTracksAndClips = async () => {
     });
 
     allAbletonClips.push([]);
+
     for (let clipSlotIndex = 0; clipSlotIndex < clipSlots.length; clipSlotIndex++) {
       const cs = clipSlots[clipSlotIndex];
       const clip = await cs.get('clip');
       allAbletonClips[pillar].push(clip);
+      // const previousClipName = clipSlotIndex
+      //   ? (await clipSlots[clipSlotIndex - 1].get('clip'))?.raw.name
+      //   : null;
       // const clipName = clip?.raw.name;
-      // if (clipName) {
-      //   const info = ClipNameToInfoMap[clipName];
-      //   if (!info) logger.error(`Could not find clip ${pillar + 1} / "${clipName}" in database`);
+      // const checkDatabase =
+      //   previousClipName && clipName ? previousClipName !== clipName : clipName ? true : false;
+      // if (checkDatabase) {
+      //   const info = ClipNameToInfoMap[clipName?.replace(/[ ]/g, '') as string];
+      //   if (!info)
+      //     logger.error(
+      //       `Could not find clip: ${pillar + 1} | ${clipSlotIndex} / "${clipName}" in database`,
+      //     );
       // }
     }
   }

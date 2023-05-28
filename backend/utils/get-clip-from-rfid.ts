@@ -23,7 +23,7 @@ try {
     const assetName = String(row['Icon / Asset Name']);
     if (clipName?.trim()) {
       RFIDToClipMap[rfid] = { clipName, type, assetName };
-      ClipNameToInfoMap[clipName?.replace(/[* ]/g, '')] = { type, assetName };
+      ClipNameToInfoMap[clipName?.replace(/[ ]/g, '')] = { type, assetName };
     }
   });
   logger.trace('RFID CSV parsed');
