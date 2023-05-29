@@ -15,7 +15,8 @@ import { ClipNameToInfoMap } from './utils/get-clip-from-rfid';
 
 let oscServer: nodeOSC.Server;
 export const sockets: socketio.Socket[] = [];
-export const TIMEOUT_IN_MILISECONDS = 15 * 1000;
+export const TIMEOUT_IN_MILISECONDS = 60 * 3 * 1000; // three minutes
+export const TIMEOUT_WARNING_IN_MILISECONDS = 30 * 1000; // thirty seconds
 
 export let timeoutId: NodeJS.Timeout;
 export let timeoutWarningId: NodeJS.Timeout;
@@ -44,25 +45,33 @@ export async function StartAbleton() {
 export async function handleTimeout() {
   for (let i = 0; i < 4; i++) {
     await tracks[i].sendCommand('stop_all_clips');
-    setTimeout(() => {
+  }
+  setTimeout(() => {
+    EmitEventWithoutResetingTimout('attractor_state');
+    for (let i = 0; i < 4; i++) {
       const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
       clip?.fire();
-    }, 2_000);
-  }
+    }
+  }, 2_000);
 }
 
 export function startTimeoutTimer() {
   logger.info('Starting timeout timer');
+  function shouldShowTimeout() {
+    return (
+      playingClips.filter((clip) => clip).length > 0 &&
+      stoppingClips.filter((clip) => clip).length === 0
+    );
+  }
   timeoutWarningId = setTimeout(() => {
-    if (playingClips.length && !queuedClips.length) {
+    if (shouldShowTimeout()) {
       logger.warn('Timeout warning');
       EmitEventWithoutResetingTimout('timeout_warning');
     }
-  }, TIMEOUT_IN_MILISECONDS - 10_000);
+  }, TIMEOUT_IN_MILISECONDS - TIMEOUT_WARNING_IN_MILISECONDS);
   timeoutId = setTimeout(() => {
-    if (playingClips.length && !queuedClips.length) {
+    if (shouldShowTimeout()) {
       logger.warn('Timeout exceeded, restarting the UI');
-      EmitEventWithoutResetingTimout('attractor_state');
       handleTimeout();
     }
   }, TIMEOUT_IN_MILISECONDS);
@@ -72,7 +81,7 @@ export function restartTimeoutTimer() {
   logger.warn('Restarting timeout timer');
   clearTimeout(timeoutId);
   clearTimeout(timeoutWarningId);
-  // startTimeoutTimer();
+  startTimeoutTimer();
 }
 
 export function ConnectOSCServer(server: nodeOSC.Server) {
