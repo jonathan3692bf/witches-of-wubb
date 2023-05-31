@@ -3,6 +3,8 @@ import { AbletonContext } from '~/contexts/ableton-provider';
 import VolumeSlider from './volume-slider';
 import cauldrongif from '../assets/images/cauldron-hottub.gif';
 import frame from '../assets/images/frame_576_v2.png';
+
+import { ClipTypes } from 'backend/types';
 // import { LoggerContext } from '~/contexts/logger-provider';
 
 export default function CurrentlyPlayingList() {
@@ -17,23 +19,24 @@ export default function CurrentlyPlayingList() {
           const queued = queuedClips[index];
           const stopping = stoppingClips[index];
           const info = queued ?? playing ?? stopping;
-          const clipName = info?.clipName?.replace(/^\*/, '').trimStart() ?? ''; // TODO - Replace with Artist - Track Name
+          let clipName = info?.clipName?.trimStart() ?? '';
+          if (info?.artist && info?.songTitle) {
+            clipName = `${info?.artist} - ${info?.songTitle}`;
+          }
 
           // determine the color-blur color based on the track type
           let colorBlurClass = 'bg-purple-700';
-          switch (
-            playingClips[index] // TODO - Looking for a playingClips[index].type
-          ) {
-            case 'Vox':
+          switch (playingClips[index]?.type) {
+            case ClipTypes.Vox:
               colorBlurClass = 'bg-red-700';
               break;
-            case 'Bass':
+            case ClipTypes.Bass:
               colorBlurClass = 'bg-green-700';
               break;
-            case 'Drums':
+            case ClipTypes.Drums:
               colorBlurClass = 'bg-blue-700';
               break;
-            case 'Melody':
+            case ClipTypes.Melody:
               colorBlurClass = 'bg-yellow-700';
               break;
             default:
@@ -53,7 +56,7 @@ export default function CurrentlyPlayingList() {
                   ></div>
                   <div className='max-h-[85%] max-w-[85%] border m-auto border-black relative'>
                     <div
-                      className={`absolute -inset-0 z-30 object-scale-down max-h-[90%] max-w-[90%] bg-white border m-auto text-center rounded-md border border-1 ${
+                      className={`absolute -inset-0 z-30 object-scale-down max-h-[90%] max-w-[90%] bg-white border m-auto text-center rounded-md border-1 ${
                         (queued || stopping) && 'animate-pulse'
                       }`}
                     >
@@ -77,7 +80,7 @@ export default function CurrentlyPlayingList() {
                   ) : (
                     <div className="w-full h-full object-cover rounded-md border border-1"></div>
                   )} */}
-                <div className='justify-center col-start-2 col-span-3 -inset-0 z-40 max-h-full max-w-full border mt-6 text-center text-xs rounded-md border border-1'>
+                <div className='justify-center col-start-2 col-span-3 -inset-0 z-40 max-h-full max-w-full mt-6 text-center text-xs rounded-md border border-1'>
                   {clipName}
                 </div>
               </div>

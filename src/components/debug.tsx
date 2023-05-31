@@ -4,23 +4,16 @@ import { AbletonContext } from '~/contexts/ableton-provider';
 import { SocketioContext } from '~/contexts/socketio-provider';
 import { LoggerContext } from '~/contexts/logger-provider';
 
+import ParseCSV from 'backend/utils/parse-csv';
+import { ClipNameToInfoMapType, RFIDToClipMapType } from 'backend/types';
 import { Dialog, Transition, Switch } from '@headlessui/react';
 import classNames from 'classnames';
 
 import csv from '~/assets/Music Database.csv';
-const RFIDToClipMap: Record<string, any> = {};
-const ClipNameToInfoMap: Record<string, any> = {};
-csv.forEach((row: any) => {
-  // const rfid = row['Asset ID'];
-  const rfid = row['RFID'];
-  const clipName = row['Clip Name'];
-  const type = row['Clip Type (e.g. Vocals)'];
-  const assetName = row['Icon / Asset Name'];
-  if (clipName?.trim() && rfid) {
-    RFIDToClipMap[rfid] = { clipName, type, assetName };
-    ClipNameToInfoMap[clipName] = { rfid, type, assetName };
-  }
-});
+const RFIDToClipMap: RFIDToClipMapType = {};
+const ClipNameToInfoMap: ClipNameToInfoMapType = {};
+
+csv.forEach(ParseCSV.bind(this, RFIDToClipMap, ClipNameToInfoMap));
 
 function ClipButton({
   clipName,
@@ -46,6 +39,7 @@ function ClipButton({
     <div key={clipName} className={classes}>
       <button onClick={onClick} className='grid grid-flow-col items-start gap-2'>
         <Switch
+          as='div'
           checked={(playing || queued) ?? false}
           className={`relative inline-flex h-6 w-11 items-center rounded-full ${
             playing || queued
@@ -153,6 +147,7 @@ export default function DebugModal() {
                         const stopping = Boolean(stoppingClips[index]?.clipName);
                         const playingClip = stoppingClips[index] ?? playingClips[index];
                         const queuedClip = queuedClips[index];
+
                         return (
                           <div key={pillar} className='grid grid-flow-row auto-rows-max'>
                             <div className='sticky top-0 bg-white z-10 pt-4'>
@@ -165,13 +160,7 @@ export default function DebugModal() {
                                       stopping={stopping}
                                       playing={!stopping}
                                       clipName={playingClip.clipName}
-                                      onClick={() =>
-                                        toggleSong(
-                                          ClipNameToInfoMap[playingClip.clipName].rfid,
-                                          index,
-                                          false,
-                                        )
-                                      }
+                                      onClick={() => toggleSong(playingClip.rfid, index, false)}
                                     />
                                   </div>
                                 )}
@@ -197,7 +186,7 @@ export default function DebugModal() {
                             </div>
                             <div className='grid gap-4'>
                               <hr />
-                              {Object.entries(ClipNameToInfoMap).map(([clipName, { rfid }]) => {
+                              {Object.entries(RFIDToClipMap).map(([rfid, { clipName }]) => {
                                 const playing = playingClips[index]?.clipName === clipName;
                                 const stopping = stoppingClips[index]?.clipName === clipName;
                                 const queued = queuedClips[index]?.clipName === clipName;
@@ -207,7 +196,7 @@ export default function DebugModal() {
                                   !playing &&
                                   !queued && (
                                     <ClipButton
-                                      key={clipName}
+                                      key={rfid}
                                       clipName={clipName}
                                       onClick={() => toggleSong(rfid, index, true)}
                                     />

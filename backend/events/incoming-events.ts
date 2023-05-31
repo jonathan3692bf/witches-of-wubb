@@ -68,8 +68,8 @@ function handleNewTag(rfid: string, requestAddress: string) {
     if (clipMetadata) {
       logger.info(`RFID ${rfid} maps to clip ${clipMetadata.clipName} > type ${clipMetadata.type}`);
       const pillar = IP_ADDRESS_TO_PILLAR_INDEX_MAP[requestAddress];
-      EmitEvent('ingredient_detected', { ...clipMetadata, pillar, requestAddress });
-      QueueClip(clipMetadata, pillar);
+      EmitEvent('ingredient_detected', { ...clipMetadata, rfid, pillar, requestAddress });
+      QueueClip({ ...clipMetadata, rfid }, pillar);
     }
   } catch (err) {
     logger.error("Couldn't find track from RFID tag");
@@ -102,8 +102,8 @@ export function AddSocketEventsHandlers(socket: Socket) {
   socket.on('get_playing_clips', (_, callback) => {
     const clips: BrowserClipInfoList = playingClips.map((data) => {
       if (data) {
-        const { pillar, clipName, type, assetName } = data;
-        const bci: BrowserClipInfo = { pillar, clipName, type, assetName };
+        const { pillar, clipName, type, assetName, rfid, artist, songTitle } = data;
+        const bci: BrowserClipInfo = { pillar, clipName, type, assetName, rfid, artist, songTitle };
         return bci;
       }
       return data;
@@ -113,8 +113,8 @@ export function AddSocketEventsHandlers(socket: Socket) {
   socket.on('get_queued_clips', (_, callback) => {
     const clips: BrowserClipInfoList = queuedClips.map((data) => {
       if (data) {
-        const { pillar, clipName, type, assetName } = data;
-        const bci: BrowserClipInfo = { pillar, clipName, type, assetName };
+        const { pillar, clipName, type, assetName, rfid, artist, songTitle } = data;
+        const bci: BrowserClipInfo = { pillar, clipName, type, assetName, rfid, artist, songTitle };
         return bci;
       }
       return data;
