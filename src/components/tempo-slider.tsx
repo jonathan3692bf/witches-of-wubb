@@ -15,8 +15,9 @@ export default function TempoSlider() {
 
   return (
     <div className='w-full text-center flex flex-col'>
-      <label htmlFor='tempo-slider' className='block mb-2 text-sm font-medium '>
-        Adjust tempo
+      <label htmlFor='tempo-slider' className='block mb-12 text-xl font-medium '>
+        Adjust Tempo <br></br>
+        {Math.ceil(tempo)}
       </label>
       <div className='flex items-center gap-8 text-lg mx-auto'>
         <span className=' text-gray-500 dark:text-gray-400'>{MIN_VALUE}</span>
@@ -27,13 +28,11 @@ export default function TempoSlider() {
           max={MAX_VALUE}
           value={tempo}
           onChange={handleChange}
-          className='w-[50vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700'
+          className='w-[50vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-slider'
         />
-
         <span className=' text-gray-500 dark:text-gray-400'>{MAX_VALUE}</span>
       </div>
-      <div className='text-xl'>{Math.ceil(tempo)}</div>
-      <div className='flex gap-8 mx-auto'>
+      <div className='flex gap-8 mx-auto mt-10'>
         {[0, 1, 2, 3].map((pillar) => {
           return (
             <button

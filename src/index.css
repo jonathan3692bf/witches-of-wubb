@@ -4,6 +4,7 @@
 
 body {
   @apply bg-black text-white;
+  background-image: radial-gradient(#021027, #000000);
 }
 
 input[type='range'][orient='vertical'] {
