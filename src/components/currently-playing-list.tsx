@@ -4,7 +4,7 @@ import VolumeSlider from './volume-slider';
 import cauldrongif from '../assets/images/cauldron-hottub.gif';
 import frame from '../assets/images/frame_576_v2.png';
 
-import { ClipTypes } from 'backend/types';
+import { getBackgroundColorFromType } from '~/lib/utils';
 // import { LoggerContext } from '~/contexts/logger-provider';
 
 export default function CurrentlyPlayingList() {
@@ -30,23 +30,8 @@ export default function CurrentlyPlayingList() {
           }
 
           // determine the color-blur color based on the track type
-          let colorBlurClass = 'bg-purple-700';
-          switch (playingClips[index]?.type) {
-            case ClipTypes.Vox:
-              colorBlurClass = 'bg-red-700';
-              break;
-            case ClipTypes.Bass:
-              colorBlurClass = 'bg-green-700';
-              break;
-            case ClipTypes.Drums:
-              colorBlurClass = 'bg-blue-700';
-              break;
-            case ClipTypes.Melody:
-              colorBlurClass = 'bg-yellow-700';
-              break;
-            default:
-              colorBlurClass = 'bg-purple-700';
-          }
+          const colorBlurClass = getBackgroundColorFromType(info?.type);
+
           return (
             <div id={`pillar-${pillar}`} className='w-[50%]' key={pillar}>
               Pillar {pillar}
@@ -69,13 +54,13 @@ export default function CurrentlyPlayingList() {
                         (queued || stopping) && 'animate-pulse'
                       }`}
                     >
-                      {/* <img
-                        src={`icons/${ClipNameAssetMap[clipName]}`}
-                        alt={(queued || playing) ?? 'icon'}
+                      <img
+                        src={`icons/${info?.assetName}`}
+                        alt={info?.assetName ?? 'icon'}
                         className={`w-full h-full object-cover rounded-md ${
                           queued && 'opacity-40 animate-pulse'
                         }`}
-                      /> */}
+                      />
                     </div>
                     <div
                       id='frame'
