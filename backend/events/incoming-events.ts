@@ -102,8 +102,18 @@ export function AddSocketEventsHandlers(socket: Socket) {
   socket.on('get_playing_clips', (_, callback) => {
     const clips: BrowserClipInfoList = playingClips.map((data) => {
       if (data) {
-        const { pillar, clipName, type, assetName, rfid, artist, songTitle } = data;
-        const bci: BrowserClipInfo = { pillar, clipName, type, assetName, rfid, artist, songTitle };
+        const { pillar, clipName, type, assetName, rfid, artist, songTitle, recommendedClips } =
+          data;
+        const bci: BrowserClipInfo = {
+          pillar,
+          clipName,
+          type,
+          assetName,
+          rfid,
+          artist,
+          songTitle,
+          recommendedClips,
+        };
         return bci;
       }
       return data;
@@ -113,8 +123,18 @@ export function AddSocketEventsHandlers(socket: Socket) {
   socket.on('get_queued_clips', (_, callback) => {
     const clips: BrowserClipInfoList = queuedClips.map((data) => {
       if (data) {
-        const { pillar, clipName, type, assetName, rfid, artist, songTitle } = data;
-        const bci: BrowserClipInfo = { pillar, clipName, type, assetName, rfid, artist, songTitle };
+        const { pillar, clipName, type, assetName, rfid, artist, songTitle, recommendedClips } =
+          data;
+        const bci: BrowserClipInfo = {
+          pillar,
+          clipName,
+          type,
+          assetName,
+          rfid,
+          artist,
+          songTitle,
+          recommendedClips,
+        };
         return bci;
       }
       return data;
