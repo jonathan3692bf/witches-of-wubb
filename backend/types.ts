@@ -24,7 +24,7 @@ export type ClipMetadataType = {
   bpm?: number;
   ingredientName?: string;
   recommendedClips?: {
-    [key: string]: string[]; // name of the clips as surfaced from the CSV
+    [key: string]: Omit<ClipMetadataType, 'recommendedClips'>[]; // name of the clips as surfaced from the CSV
   };
   // recommendedSpells?: { [key in keyof ClipTypes]: ClipMetadataType }[];
 };
