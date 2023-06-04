@@ -23,7 +23,6 @@ export default function ParseCSV(
       artist,
       songTitle,
       ingredientName,
-      // recommendedClips,
     };
     ClipNameToInfoMap[clipName?.replace(/[ ]/g, '')] = {
       rfid,
@@ -32,7 +31,6 @@ export default function ParseCSV(
       artist,
       songTitle,
       ingredientName,
-      // recommendedClips,
     };
   }
 }
@@ -40,42 +38,42 @@ export default function ParseCSV(
 export function EnrichRecommendations(
   RFIDToClipMap: RFIDToClipMapType,
   ClipNameToInfoMap: ClipNameToInfoMapType,
+  csv: any[],
   row: any,
 ) {
-  function GetClipMetaData(clipName: string) {
-    return ClipNameToInfoMap[clipName.replace(/[ ]/g, '')];
-  }
+  const keyHeader = 'Key Numerical';
+  const bpmHeader = 'BPM';
+
   const rfid = row['RFID'];
-  if (RFIDToClipMap[rfid]) {
-    const clipName = String(row['Clip Name']);
-    const recommendedVox = row['Compatible Vox Clips']
-      ? JSON.parse(row['Compatible Vox Clips'])
-      : [];
-    const recommendedMelody = row['Compatible Mel Clips']
-      ? JSON.parse(row['Compatible Mel Clips'])
-      : [];
-    const recommendedBass = row['Compatible Bass Clips']
-      ? JSON.parse(row['Compatible Bass Clips'])
-      : [];
-    const recommendedDrums = row['Compatible Drum Clips']
-      ? JSON.parse(row['Compatible Drum Clips'])
-      : [];
+  const clipName = String(row['Clip Name']);
 
-    const recommendedClips = {
-      [ClipTypes.Vox]: recommendedVox?.map(GetClipMetaData).filter((val: any) => val),
-      [ClipTypes.Melody]: recommendedMelody?.map(GetClipMetaData).filter((val: any) => val),
-      [ClipTypes.Bass]: recommendedBass?.map(GetClipMetaData).filter((val: any) => val),
-      [ClipTypes.Drums]: recommendedDrums?.map(GetClipMetaData).filter((val: any) => val),
-    };
+  const recommendedClips = csv
+    .filter((compRow: any) => {
+      return (
+        Math.abs(compRow[keyHeader] - row[keyHeader]) <= 1 &&
+        Math.abs(compRow[bpmHeader] - row[bpmHeader]) <= 20
+      );
+    })
+    .map((row: any) => ({
+      ...RFIDToClipMap[row['RFID']],
+      rfid: row['RFID'],
+    }))
+    .reduce((acc: any, curr: any) => {
+      if (acc[curr.type]) {
+        acc[curr.type].push(curr);
+      } else {
+        acc[curr.type] = [curr];
+      }
+      return acc;
+    }, {});
 
-    RFIDToClipMap[rfid] = {
-      ...RFIDToClipMap[rfid],
-      recommendedClips,
-    };
+  RFIDToClipMap[rfid] = {
+    ...RFIDToClipMap[rfid],
+    recommendedClips,
+  };
 
-    ClipNameToInfoMap[clipName?.replace(/[ ]/g, '')] = {
-      ...ClipNameToInfoMap[clipName?.replace(/[ ]/g, '')],
-      recommendedClips,
-    };
-  }
+  ClipNameToInfoMap[clipName?.replace(/[ ]/g, '')] = {
+    ...ClipNameToInfoMap[clipName?.replace(/[ ]/g, '')],
+    recommendedClips,
+  };
 }

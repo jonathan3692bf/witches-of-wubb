@@ -17,7 +17,9 @@ try {
     transformHeader: (header) => header.replace(':', ''),
   });
   results.data.forEach(ParseCSV.bind(this, RFIDToClipMap, ClipNameToInfoMap));
-  results.data.forEach(EnrichRecommendations.bind(this, RFIDToClipMap, ClipNameToInfoMap));
+  results.data.forEach(
+    EnrichRecommendations.bind(this, RFIDToClipMap, ClipNameToInfoMap, results.data),
+  );
   logger.trace('RFID CSV parsed');
 } catch (err) {
   logger.error(err);

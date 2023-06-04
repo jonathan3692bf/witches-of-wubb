@@ -7,4 +7,4 @@ export const ClipNameToInfoMap: ClipNameToInfoMapType = {};
 
 csv.forEach(ParseCSV.bind(this, RFIDToClipMap, ClipNameToInfoMap));
 
-csv.forEach(EnrichRecommendations.bind(this, RFIDToClipMap, ClipNameToInfoMap));
+csv.forEach(EnrichRecommendations.bind(this, RFIDToClipMap, ClipNameToInfoMap, csv));
