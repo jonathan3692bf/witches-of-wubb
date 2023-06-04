@@ -8,7 +8,7 @@ import { getBackgroundColorFromType } from '~/lib/utils';
 // import { LoggerContext } from '~/contexts/logger-provider';
 
 export default function CurrentlyPlayingList() {
-  const { queuedClips, playingClips, stoppingClips } = useContext(AbletonContext);
+  const { queuedClips, playingClips, stoppingClips, clipTempo } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
 
   return (
@@ -33,10 +33,12 @@ export default function CurrentlyPlayingList() {
           const colorBlurClass = getBackgroundColorFromType(info?.type);
 
           return (
-            <div id={`pillar-${pillar}`} className='w-[50%]' key={pillar}>
-              Pillar {pillar}
+            <div id={`pillar-${pillar}`} className='w-[50%] text-center' key={pillar}>
               <div className='object-scale-down mb-4 grid grid-cols-4'>
-                <div className='object-scale-down max-h-full max-w-full m-auto'>
+                <div id='bpm' className='col-start-2 col-span-3'>
+                  BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
+                </div>
+                <div className='object-scale-down max-h-full max-w-full mr-12'>
                   <VolumeSlider pillar={index} />
                 </div>
                 <div className='relative col-span-3 flex justify-items-center'>
