@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AbletonContext } from '../contexts/ableton-provider';
 import { ClipTypes, ClipMetadataType } from 'backend/types';
 
-type SpellRecipeType = { [key: string]: ClipMetadataType };
+export type SpellRecipeType = { [key: string]: ClipMetadataType };
 
 export default function useGrimoire() {
   const { playingClips } = useContext(AbletonContext);
