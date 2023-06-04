@@ -19,7 +19,7 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
 
   return (
     <>
-      <div className='w-full text-center flex flex-col'>
+      <div id={`${pillar}-volume-range`} className='w-full text-center flex flex-col'>
         <label htmlFor={`${pillar}-volume-range`} className='block mb-2 text-sm font-medium '>
           Volume
         </label>
@@ -40,7 +40,7 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
             value={trackVolume[pillar] ?? 0}
             onChange={handleChange}
             orient='vertical'
-            className='h-[24vh] w-3 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-red-800'
+            className='w-3 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-red-800'
           />
         </div>
         <button

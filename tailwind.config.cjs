@@ -29,7 +29,6 @@ module.exports = {
     },
   },
 
-  //plugins: [require('@headlessui/tailwindcss')({ prefix: 'ui' })],
   plugins: [
     require('@headlessui/tailwindcss')({ prefix: 'ui' }),
     function ({ addComponents }) {
@@ -44,9 +43,6 @@ module.exports = {
             '@apply appearance-none h-96 w-96 bg-center bg-no-repeat border-none scale-100': {},
             'background-image': "url('/src/assets/images/arcane_tempo_slider_120.png')",
           },
-          /* Additional vendor prefixes for Firefox or IE/Edge, if needed */
-          /* '&::-moz-range-thumb': { ... }, */
-          /* '&::-ms-thumb': { ... }, */
         },
       }
       addComponents(newComponents)

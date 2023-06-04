@@ -12,8 +12,11 @@ export default function CurrentlyPlayingList() {
   // const { logger } = useContext(LoggerContext);
 
   return (
-    <div className='h-[75vh] w-screen'>
-      <div className='h-[75%] w-screen grid grid-cols-2 gap-10 justify-items-center absolute inset-0 z-10'>
+    <div id='inner_playing' className='h-[50vh] w-screen'>
+      <div
+        id='pillars'
+        className='h-[50%] mt-5 w-screen grid grid-cols-2 gap-10 justify-items-center absolute inset-0 z-10'
+      >
         {[1, 2, 3, 4]?.map((pillar, index) => {
           const playing = playingClips[index];
           const queued = queuedClips[index];
@@ -22,6 +25,8 @@ export default function CurrentlyPlayingList() {
           let clipName = info?.clipName?.trimStart() ?? '';
           if (info?.artist && info?.songTitle) {
             clipName = `${info?.artist} - ${info?.songTitle}`;
+          } else {
+            clipName = '';
           }
 
           // determine the color-blur color based on the track type
@@ -43,9 +48,9 @@ export default function CurrentlyPlayingList() {
               colorBlurClass = 'bg-purple-700';
           }
           return (
-            <div className='w-[50%]' key={pillar}>
+            <div id={`pillar-${pillar}`} className='w-[50%]' key={pillar}>
               Pillar {pillar}
-              <div className='object-scale-down max-h-full max-w-full mb-4 grid grid-cols-4'>
+              <div className='object-scale-down mb-4 grid grid-cols-4'>
                 <div className='object-scale-down max-h-full max-w-full m-auto'>
                   <VolumeSlider pillar={index} />
                 </div>
@@ -54,8 +59,12 @@ export default function CurrentlyPlayingList() {
                     id='color-blur'
                     className={`absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
                   ></div>
-                  <div className='max-h-[85%] max-w-[85%] border m-auto border-black relative'>
+                  <div
+                    id='frame_full'
+                    className='max-h-[85%] max-w-[85%] border m-auto border-black relative'
+                  >
                     <div
+                      id='frame_bg'
                       className={`absolute -inset-0 z-30 object-scale-down max-h-[90%] max-w-[90%] bg-white border m-auto text-center rounded-md border-1 ${
                         (queued || stopping) && 'animate-pulse'
                       }`}
@@ -80,7 +89,10 @@ export default function CurrentlyPlayingList() {
                   ) : (
                     <div className="w-full h-full object-cover rounded-md border border-1"></div>
                   )} */}
-                <div className='justify-center col-start-2 col-span-3 -inset-0 z-40 max-h-full max-w-full mt-6 text-center text-xs rounded-md border border-1'>
+                <div
+                  id='clip-name'
+                  className='justify-center col-start-2 col-span-3 -inset-0 z-40 h-[18px] max-h-full max-w-full mt-6 text-center text-xs rounded-md border border-1'
+                >
                   {clipName}
                 </div>
               </div>
@@ -89,7 +101,7 @@ export default function CurrentlyPlayingList() {
         })}
       </div>
 
-      <div className='h-[75%] w-screen grid justify-items-center relative z-0'>
+      <div id='Cauldron' className='h-[75%] w-screen grid justify-items-center relative z-0'>
         <img
           className='object-scale-down max-h-full max-w-[30%] m-auto'
           src={cauldrongif}
