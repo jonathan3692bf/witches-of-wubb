@@ -3,17 +3,9 @@ import { Fragment, useState, useContext, useEffect } from 'react';
 import { AbletonContext } from '~/contexts/ableton-provider';
 import { SocketioContext } from '~/contexts/socketio-provider';
 import { LoggerContext } from '~/contexts/logger-provider';
-
-import ParseCSV from 'backend/utils/parse-csv';
-import { ClipNameToInfoMapType, RFIDToClipMapType } from 'backend/types';
+import { RFIDToClipMap, ClipNameToInfoMap } from '~/lib/database-output';
 import { Dialog, Transition, Switch } from '@headlessui/react';
 import classNames from 'classnames';
-
-import csv from '~/assets/Music Database.csv';
-const RFIDToClipMap: RFIDToClipMapType = {};
-const ClipNameToInfoMap: ClipNameToInfoMapType = {};
-
-csv.forEach(ParseCSV.bind(this, RFIDToClipMap, ClipNameToInfoMap));
 
 function ClipButton({
   clipName,

@@ -22,6 +22,11 @@ export type ClipMetadataType = {
   artist?: string;
   songTitle?: string;
   bpm?: number;
+  ingredientName?: string;
+  recommendedClips?: {
+    [key: string]: string[]; // name of the clips as surfaced from the CSV
+  };
+  // recommendedSpells?: { [key in keyof ClipTypes]: ClipMetadataType }[];
 };
 
 export type RFIDToClipMapType = {

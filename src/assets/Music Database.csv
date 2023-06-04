@@ -1,6 +1,6 @@
 RFID,Asset ID,Ingredient Name / Description,Tested and works (5/28),Comment (5/28),Artist,Song Title,Clip Name,Clip Type (e.g. Vocals),Instrument,Key,Major or Minor,Key Numerical,BPM,Icon / Asset Name,Compatible Vox Clips,Compatible Mel Clips,Compatible Bass Clips,Compatible Drum Clips
 e280f3372000f00003effc95,1,Poison,TRUE,,Paramore,Misery Business,Mizbiz vox 3B 86,Vox,Vox,3B,Major,3,86,poison.png,,,"[""Mizbiz bass 86""]","[""Mizbiz Drums 86""]"
-e280f3372000f00003effc90,2,Sally Jack's Worms Wort,TRUE,,Paramore,Misery Business,Mizbiz guit 3B 86,Melody,Electric Guitar,3B,Major,3,86,wormswort.png,78,,,"[""Mizbiz Drums 86""]"
+e280f3372000f00003effc90,2,Sally Jack's Worms Wort,TRUE,,Paramore,Misery Business,Mizbiz guit 3B 86,Melody,Electric Guitar,3B,Major,3,86,wormswort.png,,,,"[""Mizbiz Drums 86""]"
 e280f3372000f00003effc8c,3,Witches Brew,TRUE,,Paramore,Misery Business,Mizbiz bass 3B 86,Bass,Bass,3B,Major,3,86,,,,,
 e280f3372000f00003effc8b,4,Potion of Mana,TRUE,,Paramore,Misery Business,Mizbiz Drums 3B 86,Drums,Drums (standard kit),3B,Major,3,86,,,"[""BM2L backup vox 96""]","[""BMTL Base 96""]","[""BMTL Drums 96""]"
 e280f3372000f00003effc8a,5,Wolfsbane Potion,TRUE,,Disturbed,Down With the Sickness,Disturbed - DWTS vox 5B 90,Vox,Vox,5B,Major,5,90,wolfsbane_potion.png,,,"[""Disturbed DWTS Bass 5B 90bpm""]","[""DWTS Drums 5B 90""]"
@@ -11,7 +11,7 @@ e280f3372000f00003effc77,9,Pure Awesomeness,TRUE,,Evanescence,Bring Me To Life,B
 e280f3372000f00003effc76,10,Pond Scum,TRUE,,Evanescence,Bring Me To Life,BM2L backup vox 9A 96,Melody,"Piano, Vox, Strings",9A,Minor,9,96,pond_scum.png,,,,"[""BMTL Drums 96""]"
 e280f3372000f00003effc75,11,Potion of Amnesia,TRUE,check clip,Evanescence,Bring Me To Life,BMTL Base 9A 96,Bass,Bass,9A,Minor,9,96,,,,,
 e280f3372000f00003effc73,12,Superior Healing Potion,TRUE,,Evanescence,Bring Me To Life,BMTL Drums 9A 96,Drums,Drums (standard kit),9A,Minor,9,96,superior_healing_potion.png,,"[""Feel Good Guit 139""]","[""Feel Good Base 139""]","[""Feel Good Drums 139""]"
-e280f3372000f00003effc87,13,Magic Potion of Medicianal venom,TRUE,,Clozee,Harmony,Clozee Harmony Vox 4A 109 ,Vox,Vox,4A,Minor,4,109,,"[""War vox 4A 109""]","[""War guitar 4A 109""]","[""Clozee Harmony Base 4A 109"",""War Base 4A 109""]","[""Clozee Harmony Drums 4A 109"",""War Drums 4A 109""]"
+e280f3372000f00003effc87,13,Magic Potion of Medicianal venom,TRUE,,Clozee,Harmony,"Clozee Harmony Vox 4A 109 ",Vox,Vox,4A,Minor,4,109,,"[""War vox 4A 109""]","[""War guitar 4A 109""]","[""Clozee Harmony Base 4A 109"",""War Base 4A 109""]","[""Clozee Harmony Drums 4A 109"",""War Drums 4A 109""]"
 e280f3372000f00003effc97,14,Bat wings,TRUE,very quiet,Clozee,Harmony,Clozee Harmony Guitars 4A 109,Melody,Acoustic Guitar,4A,Minor,4,109,bat_wings.png,"[""War vox 4A 109""]","[""War guitar 4A 109""]","[""War Base 4A 109""]","[""Clozee Harmony Drums 4A 109"",""War Drums 4A 109""]"
 e280f3372000f00003effc96,15,Phoenix Tears,TRUE,,Clozee,Harmony,Clozee Harmony Base 4A 109,Bass,Synth,4A,Minor,4,109,pheonix_tears.png,"[""War vox 4A 109""]","[""War guitar 4A 109""]","[""War Base 4A 109""]","[""War Drums 4A 109""]"
 e280f3372000f00003effc98,16,Toad Flax,TRUE,,Clozee,Harmony,Clozee Harmony Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,toad_flax.png,"[""Babylon Vox 4A 130""]","[""KP Dark Horse Synth 132 | 3A"",""Babylon Oud 130""]","[""KP Dark Horse Base 132 | 3B"",""Babylon Bass 130 4A""]","[""KP Dark Horse Drums 132"",""Babylon Drums 130 4A""]"
@@ -19,7 +19,7 @@ e280f3372000f00003effc91,17,Scale of Dragon,TRUE,,KSHMR,Song Of War,War vox 4A 1
 e280f3372000f00003effc94,18,Unicorn icon,TRUE,launches ice ice baby but has been fixed in this sheet,KSHMR,Song Of War,War guitar 4A 109,Melody,Synth,4A,Minor,4,109,unicorn_icon.png,,,,"[""War Drums 4A 109""]"
 e280f3372000f00003effc86,19,Drink of Eternal Sleep,TRUE,,KSHMR,Song Of War,War Base 4A 109,Bass,Synth,4A,Minor,4,109,,,,,
 e280f3372000f00003effc8d,20,Death Potion,TRUE,,KSHMR,Song Of War,War Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,,,"[""Mizbiz guit 86""]","[""Mizbiz bass 86""]","[""Mizbiz Drums 86""]"
-e280f3372000f00003effc8f,21,Wearwolf Lure,TRUE,,Odesza ,Say my name,Odesza SMN vox 11A 115,Vox,Vox,11A,Minor,11,115,wearwolf_lure.png,,,"[""Odesza SMN bass 11A 115""]","[""Odesza SMN drums 11A 115""]"
+e280f3372000f00003effc8f,21,Wearwolf Lure,TRUE,,"Odesza ",Say my name,Odesza SMN vox 11A 115,Vox,Vox,11A,Minor,11,115,wearwolf_lure.png,,,"[""Odesza SMN bass 11A 115""]","[""Odesza SMN drums 11A 115""]"
 e280f3372000f00003effc82,22,Bone Dust,TRUE,,Vanilla Ice,Ice Ice Baby,Ice Ice vox 10B 116,Vox,Vox,10B,Major,10,116,bone_dust.png,,,"[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
 e280f3372000f00003effc80,23,Mandrake,TRUE,,Vanilla Ice,Ice Ice Baby,Ice Ice synth 10B 116,Melody,Synth,10B,Major,10,116,mandrake.png,,,,"[""Ice Ice Drums 10B 116 | 11A""]"
 e280f3372000f00003effc7f,24,Venomous Calendula,TRUE,,Vanilla Ice,Ice Ice Baby,Ice Ice bass 10B 116,Bass,Bass,10B,Major,10,116,venomous_candula.png,,,,
@@ -28,9 +28,9 @@ e280f3372000f00003effc7b,26,Fairy Dust,TRUE,,MGMT,Kids,MGMT - Kids vox 11B 123,V
 e280f3372000f00003effc74,27,Wyvern Venom,TRUE,,MGMT,Kids,MGMT - Kids Synth 11B 123 bpm,Melody,Synth,11B,Major,11,123,,"[""Ice Ice vox 10B 116 | 1A""]","[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""MGMT - Kids Drums 11B 123bpm"",""Ice Ice Drums 10B 116 | 11A""]"
 e280f3372000f00003effc83,28,Wearwolf Hair,TRUE,,MGMT,Kids,MGMT - Kids Synth Bass 11B 123bpm,Bass,Synth,11B,Major,11,123,wearwolf_hair.png,"[""Ice Ice vox 10B 116 | 1A""]","[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
 e280f3372000f00003effc93,29,Basilisk Venom,TRUE,,MGMT,Kids,MGMT - Kids Drums 11B 123bpm,Drums,Drums (standard kit),11B,Major,11,123,basilisk_venom.png,,"[""Little Bombay Sitar 7B 130bpm""]",,"[""Little Bombay Drums 7B 130bpm""]"
-e280f3372000f00003effc92,30,Hell Broth,TRUE,,Tha Trickaz ,Little Bombay,Tha Trickaz - Little Bombay vox 7B 130,Vox,Vox,7B,Major,7,130,hell_broth.png,,,,"[""Little Bombay Drums 7B 130bpm""]"
-e280f3372000f00003effc72,31,Hemlock Elixer,TRUE,,Tha Trickaz ,Little Bombay,Little Bombay Sitar 7B 130bpm,Melody,Sitar,7B,Major,7,130,hemlock_elixer.png,,,,
-e280f3372000f00003effc6e,32,Inkap Wrinkles,TRUE,,Tha Trickaz ,Little Bombay,Little Bombay Drums 7B 130bpm,Drums,Drums (standard kit),7B,Major,7,130,inkcap_wrinkles.png,,"[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
+e280f3372000f00003effc92,30,Hell Broth,TRUE,,"Tha Trickaz ",Little Bombay,Tha Trickaz - Little Bombay vox 7B 130,Vox,Vox,7B,Major,7,130,hell_broth.png,,,,"[""Little Bombay Drums 7B 130bpm""]"
+e280f3372000f00003effc72,31,Hemlock Elixer,TRUE,,"Tha Trickaz ",Little Bombay,Little Bombay Sitar 7B 130bpm,Melody,Sitar,7B,Major,7,130,hemlock_elixer.png,,,,
+e280f3372000f00003effc6e,32,Inkap Wrinkles,TRUE,,"Tha Trickaz ",Little Bombay,Little Bombay Drums 7B 130bpm,Drums,Drums (standard kit),7B,Major,7,130,inkcap_wrinkles.png,,"[""Ice Ice synth 10B 116""]","[""Ice Ice bass 10B 116""]","[""Ice Ice Drums 10B 116 | 11A""]"
 e280f3372000f00003effc6d,33,Drink of Eternal Sleep,TRUE,,?,?? Babylon,Babylon Vox 4A 130,Vox,Vox,4A,Minor,4,130,,,,"[""Babylon Bass 130 4A""]","[""Babylon Drums 130 4A""]"
 e280f3372000f00003effc6b,34,Deadly Nightshade,TRUE,,?,Babylon,Babylon Oud 4A 130,Melody,Oud,4A,Minor,4,130,deadly_nightshade.png,,,,"[""Babylon Drums 130 4A""]"
 e280f3372000f00003effc6a,35,Witches Butter,TRUE,,?,Babylon,Babylon Bass 130 4A,Bass,Bass,4A,Minor,4,130,witches_butter.png,,,,
@@ -52,9 +52,9 @@ e280f3372000f00003effc5b,50,,TRUE,,Gorillaz,Feel Good Inc,Feel Good Guit 2B 139,
 e280f3372000f00003effc5a,51,,TRUE,,Gorillaz,Feel Good Inc,Feel Good Base 2B 139,Bass,Bass,2B,Major,2,139,,,,,
 e280f3372000f00003effc59,52,,TRUE,Need to be broken into smaller sgemtns,Gorillaz,Feel Good Inc,Feel Good Drums 2B 139,Drums,Drums (standard kit),2B,Major,2,139,,,"[""Babylon Oud 130""]","[""Babylon Bass 130 4A""]","[""Babylon Drums 130 4A""]"
 e280f3372000f00003effc58,53,,TRUE,,Iniko,Jericho,Jericho Vox  154 bpm,Vox,Vox,7A,Minor,7,154,,,"[""Orgy BM mel 4B 130""]","[""Orgy BM base 4B 130""]","[""Orgy BM drums 4B 130""]"
-e280f3372000f00003effc57,54,,TRUE,Very quiet,Odesza ,Say my name,Odesza SMN mel 11A 115,Melody,Synth,11A,Minor,11,115,,,,,"[""Odesza SMN drums 11A 115""]"
-e280f3372000f00003effc56,55,,TRUE,,Odesza ,Say my name,Odesza SMN bass 11A 115,Bass,Synth,11A,Minor,11,115,,,,,
-e280f3372000f00003effc55,56,,TRUE,,Odesza ,Say my name,Odesza SMN drums 11A 115,Drums,Drums (standard kit),11A,Minor,11,115,,,,,
+e280f3372000f00003effc57,54,,TRUE,Very quiet,"Odesza ",Say my name,Odesza SMN mel 11A 115,Melody,Synth,11A,Minor,11,115,,,,,"[""Odesza SMN drums 11A 115""]"
+e280f3372000f00003effc56,55,,TRUE,,"Odesza ",Say my name,Odesza SMN bass 11A 115,Bass,Synth,11A,Minor,11,115,,,,,
+e280f3372000f00003effc55,56,,TRUE,,"Odesza ",Say my name,Odesza SMN drums 11A 115,Drums,Drums (standard kit),11A,Minor,11,115,,,,,
 e280f3372000f00003effc54,57,,TRUE,,House of Pain,Jump Around,Jump vox 9A 107,Vox,Vox,9A,Minor,9,107,,,,,
 e280f3372000f00003effc53,58,,TRUE,,House of Pain,Jump Around,Jump samples  9A 107,Melody,Samples,9A,Minor,9,107,,,,,
 e280f3372000f00003effc51,59,,TRUE,,House of Pain,Jump Around,Jump drums  9A 107,Drums,Drums (standard kit),9A,Minor,9,107,,,,,
@@ -63,7 +63,7 @@ e280f3372000f00003effc3d,61,,TRUE,,BlackPink,How You Like That,How You Like That
 e20042150090641704c3cd91,62,silver hand (1),TRUE,"CHECK CLIP LENGTH!  I can't stop clip from playing!  hit play and try and ""hot swap"" to another clip by untoggling it in debug it does not work for some reason.   Possibly due to phrase length!",Cristobal Tapia de Veer,White Lotus,White Lotus vox 3B 127,Vox,Vox,3B,Major,3,127,,,,,
 e2004214fde0641704c3cd66,63,silver hand (2),TRUE,,Angela Lee,Afro Beats,Afro House 125,Drums,Drums (standard kit),,TBD,,125,,,,,
 ,64,,FALSE,,Angela Lee,Cinematic Trap,Cinematic Trap 130,Drums,Drums (standard kit),,TBD,,130,,,,,
-,65,,FALSE,,Golden Tbilisi ,Bulgarian,Bulgarian Vox 1A 130,Vox,Vox,1A,Minor,1,130,,,,,
+,65,,FALSE,,"Golden Tbilisi ",Bulgarian,Bulgarian Vox 1A 130,Vox,Vox,1A,Minor,1,130,,,,,
 ,66,,FALSE,,Anup4m,Kuhaki,Kuhaki Koto 2A 130,Melody,Samples,2A,Minor,2,130,,,,,
 ,67,,FALSE,,Anup4m,Kuhaki,Kuhaki Bass 2A 130,Bass,Bass,2A,Minor,2,130,,,,,
 e20042137950641704c3b51d,68,pink flower 2,TRUE,,Anup4m,Kuhaki,Kuhaki Drums 2A 130,Drums,Drums (standard kit),2A,Minor,2,130,,,,,
@@ -103,7 +103,7 @@ e2004211f4f0641704c39cd7,101,small round box blue/gold,TRUE,,Shivarasa,Tala,Tala
 e200421256b0641704c3a2f3,102,Mortis Sanguis Glass Jar,TRUE,,Shivarasa,Tala,Tala Drums 8A 140,Drums,Drums (standard kit),8A,Minor,8,140,,,,,
 e2004212b5b0641704c3a8e3,103,Felix Felicis Purple Jar,TRUE,title says vox but this is melody needs to be broken up into smaller phrases,,,Anti-General vox 6A 140,Melody,Vox,6A,Minor,6,140,,,,,
 e200421192b0641704c396b3,104,Polyjuice potion,TRUE,needs to be broken up into smaller phrases,,,Anti-General drums 6A 140,Drums,Drums (standard kit),6A,Minor,6,140,,,,,
-e280f3372000f00003effc3c,105,,TRUE,,Rammstein,Du Hast,Du Hast vox 8A 125 ,Vox,Vox,8A,Minor,8,125,,,,,
+e280f3372000f00003effc3c,105,,TRUE,,Rammstein,Du Hast,"Du Hast vox 8A 125 ",Vox,Vox,8A,Minor,8,125,,,,,
 e280f3372000f00003effc3e,106,,TRUE,,Rammstein,Du Hast,Du Hast guitar 8A 125,Melody,,8A,Minor,8,,,,,,
 e280f3372000f00003effc49,107,,TRUE,,Rammstein,Du Hast,Du Hast Base 8A 125 OG,Bass,,8A,Minor,8,,,,,,
 e280f3372000f00003effc48,108,,TRUE,,Rammstein,Du Hast,Du Hast Drums 125 OG,Drums,,8A,Minor,8,,,,,,
