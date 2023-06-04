@@ -54,13 +54,16 @@ export default function CurrentlyPlayingList() {
                         (queued || stopping) && 'animate-pulse'
                       }`}
                     >
-                      <img
-                        src={`icons/${info?.assetName}`}
-                        alt={info?.assetName ?? 'icon'}
-                        className={`w-full h-full object-cover rounded-md ${
-                          queued && 'opacity-40 animate-pulse'
-                        }`}
-                      />
+                      {info?.assetName ? (
+                        <img
+                          src={`icons/${info?.assetName}`}
+                          // src={`icons/magic_icon_bass_342c1a64-2dd6-40ac-b51d-003cabe29068.png`}
+                          alt={info?.assetName ?? 'icon'}
+                          className={`w-full h-full object-cover rounded-md ${
+                            queued && 'opacity-40 animate-pulse'
+                          }`}
+                        />
+                      ) : null}
                     </div>
                     <div
                       id='frame'
