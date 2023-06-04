@@ -40,7 +40,7 @@ module.exports = {
           },
           '&::-webkit-slider-thumb': {
             //            '@apply appearance-none max-h-[36%] max-w-[36%] bg-center bg-no-repeat border-none rounded-full': {},
-            '@apply appearance-none h-96 w-96 bg-center bg-no-repeat border-none scale-100': {},
+            '@apply appearance-none h-32 w-32 bg-center bg-no-repeat border-none scale-100': {},
             'background-image': "url('/src/assets/images/arcane_tempo_slider_120.png')",
           },
         },
