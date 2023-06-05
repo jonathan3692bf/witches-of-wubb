@@ -37,7 +37,7 @@ export default function RecipeBox() {
                   )}`}
                 ></div>
                 <img
-                  className='relative flex'
+                  className='relative flex mt-3'
                   src={`public/ingredients/${recipe?.assetName}`}
                   alt={`ingredient-${recipe.ingredientName}`}
                 ></img>
