@@ -58,7 +58,7 @@ export default function CurrentlyPlayingList() {
                     >
                       {info?.assetName ? (
                         <img
-                          src={`icons/${info?.assetName}`}
+                          src={`public/ingredients/${info?.assetName}`}
                           // src={`icons/magic_icon_bass_342c1a64-2dd6-40ac-b51d-003cabe29068.png`}
                           alt={info?.assetName ?? 'icon'}
                           className={`w-full h-full object-cover rounded-md ${
