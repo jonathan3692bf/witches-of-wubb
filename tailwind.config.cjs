@@ -3,6 +3,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundImage: theme => ({
+        'recipe-bg': "radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%), url('src/assets/images/script_bg.jpg')"
+      }),
       colors: {
         'blue-400': 'hsl(180, 100%, 80%)',
       },

@@ -16,15 +16,15 @@ export default function RecipeBox() {
   // })
   return (
     <div id='inner_recipe_box' className='flex flex-col max-w-full max-h-full'>
-      <div
-        id='recipe_bg'
-        className="w-full h-[320px] mx-auto mt-10 bg-[url('src/assets/images/script_bg.jpg')]"
-      >
+      <div id='recipe-bg' className='w-full bg-recipe-bg h-[320px] mx-auto mt-10'>
         <div id='title' className='mt-3 flex items-center justify-center gap-6'>
-          <h4>TEST</h4>
-          <button className='button bg-black text-white p-2' onClick={generateNewSpell}>
-            Generate!
-          </button>
+          <h4>Suggested Recipe</h4>
+          <button
+            id='new-spell-btn'
+            style={{ backgroundImage: `url(src/assets/images/new-spell.gif)` }}
+            className='bg-cover h-[80px] w-[80px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50'
+            onClick={generateNewSpell}
+          ></button>
         </div>
         <div id='ingredients_contianer' className='gap-8 mx-auto mt-2 grid grid-cols-4 text-center'>
           {Object.entries(spellRecipe).map(([type, recipe]) => {
