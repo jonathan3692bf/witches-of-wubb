@@ -1,8 +1,6 @@
 import { useContext } from 'react';
 import { AbletonContext } from '~/contexts/ableton-provider';
 import VolumeSlider from './volume-slider';
-import cauldrongif from '../assets/images/cauldron-hottub.gif';
-import frame from '../assets/images/frame_576_v2.png';
 
 import { getBackgroundColorFromType } from '~/lib/utils';
 // import { LoggerContext } from '~/contexts/logger-provider';
@@ -16,7 +14,7 @@ export default function CurrentlyPlayingList({
   // const { logger } = useContext(LoggerContext);
 
   return (
-    <div id='inner_playing' className='h-[50vh] w-screen'>
+    <div id='inner_playing' className='h-[50vh] w-screen relative'>
       <div
         id='pillars'
         className='h-[50%] mt-5 w-screen grid grid-cols-2 gap-10 justify-items-center absolute inset-0'
@@ -75,7 +73,7 @@ export default function CurrentlyPlayingList({
                       id='frame'
                       className='object-scale-down max-h-full max-w-full relative scale-150'
                     >
-                      <img src={frame} alt='Frame'></img>
+                      <img src='/images/frame_576_v2.png' alt='Frame'></img>
                     </div>
                   </div>
                 </div>
@@ -97,16 +95,16 @@ export default function CurrentlyPlayingList({
 
       <button
         data-testid='cauldron'
-        className='h-[75%] w-screen grid justify-items-center relative'
         onClick={() => {
           setIsModalOpen(true);
         }}
+        className='absolute top-[10%] left-[36%] h-[400px]'
       >
         <img
-          className='object-scale-down max-h-full max-w-[30%] m-auto'
-          src={cauldrongif}
+          className='object-scale-down h-full'
+          src='/images/cauldron-hottub-crop.gif'
           alt='Cauldron'
-        ></img>
+        />
       </button>
     </div>
   );
