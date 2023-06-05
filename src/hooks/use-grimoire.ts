@@ -1,17 +1,26 @@
 import { useContext, useEffect, useState } from 'react';
 import { AbletonContext } from '../contexts/ableton-provider';
 import { ClipTypes, ClipMetadataType } from 'backend/types';
+import { RFIDToClipMap } from '~/lib/database-output';
 
 export type SpellRecipeType = { [key: string]: ClipMetadataType };
 
 export default function useGrimoire() {
   const { playingClips } = useContext(AbletonContext);
   const [spellRecipe, setSpellRecipe] = useState<SpellRecipeType>({});
-  const actuallyPlayingClips = playingClips.filter((clip) => clip);
+  const actuallyPlayingClips = playingClips
+    .filter((clip) => clip)
+    .map((clip) => {
+      if (clip) {
+        return RFIDToClipMap[clip.rfid];
+      }
+      return clip;
+    });
 
   function generateNewSpell() {
     const randomClip =
       actuallyPlayingClips[Math.floor(Math.random() * actuallyPlayingClips.length)];
+
     const newSpell = {} as SpellRecipeType;
     for (const type of Object.keys(ClipTypes)) {
       const reccs = randomClip?.recommendedClips?.[type];

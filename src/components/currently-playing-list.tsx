@@ -96,6 +96,8 @@ export default function CurrentlyPlayingList({
       <button
         data-testid='cauldron'
         onClick={() => {
+          // console.log(ev.touches);
+          // ev.touches.length === 3 &&
           setIsModalOpen(true);
         }}
         className='absolute top-[10%] left-[36%] h-[400px]'

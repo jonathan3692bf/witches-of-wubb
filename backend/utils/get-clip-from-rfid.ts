@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import Papa from 'papaparse';
 import logger from './logger';
-import ParseCSV, { EnrichRecommendations } from './parse-csv';
+import ParseCSV from './parse-csv';
 import { ClipNameToInfoMapType, RFIDToClipMapType } from '../types';
 
 let csv = '';
@@ -17,9 +17,9 @@ try {
     transformHeader: (header) => header.replace(':', ''),
   });
   results.data.forEach(ParseCSV.bind(this, RFIDToClipMap, ClipNameToInfoMap));
-  results.data.forEach(
-    EnrichRecommendations.bind(this, RFIDToClipMap, ClipNameToInfoMap, results.data),
-  );
+  // results.data.forEach(
+  //   EnrichRecommendations.bind(this, RFIDToClipMap, ClipNameToInfoMap, results.data),
+  // );
   logger.trace('RFID CSV parsed');
 } catch (err) {
   logger.error(err);

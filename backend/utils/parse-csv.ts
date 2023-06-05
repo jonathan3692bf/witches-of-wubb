@@ -15,7 +15,7 @@ export default function ParseCSV(
   const ingredientName = String(row['Ingredient Name / Description']);
   // console.log(recommendedClips);
 
-  if (clipName?.trim()) {
+  if (clipName?.trim() && rfid?.trim()) {
     RFIDToClipMap[rfid] = {
       clipName,
       type,
