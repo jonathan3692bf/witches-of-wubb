@@ -34,9 +34,16 @@ export default function CurrentlyPlayingList({
           return (
             <div id={`pillar-${pillar}`} className='w-[70%] text-center' key={pillar}>
               <div className='object-scale-down grid grid-cols-4'>
-                <div id='bpm' className='col-start-2 col-span-3 h-[50px]'>
-                  BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
-                </div>
+                {index % 2 === 0 ? (
+                  <div id='bpm' className='col-start-2 col-span-3 h-[50px]'>
+                    BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
+                  </div>
+                ) : null}
+                {index % 2 === 1 ? (
+                  <div id='bpm' className='col-start-1 col-span-3 h-[50px]'>
+                    BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
+                  </div>
+                ) : null}
                 {index % 2 === 0 ? (
                   <div className='object-scale-down max-h-full max-w-full mr-20'>
                     <VolumeSlider pillar={index} />
@@ -67,7 +74,7 @@ export default function CurrentlyPlayingList({
                     </div>
                     <div
                       id='frame'
-                      className='object-scale-down max-h-full max-w-full relative scale-150'
+                      className='object-scale-down max-h-full max-w-full relative scale-[135%]'
                     >
                       <img src='/images/frame_576_v2.png' alt='Frame'></img>
                     </div>
@@ -83,14 +90,26 @@ export default function CurrentlyPlayingList({
                     <div className="w-full h-full object-cover rounded-md border border-1"></div>
                   )} */}
               </div>
-              <div className='grid col-span-4'>
-                <div
-                  id='clip-name'
-                  className='mt-[60px] justify-center col-start-2 col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
-                >
-                  {clipName}
+              {index % 2 === 0 ? (
+                <div className='grid grid-cols-4'>
+                  <div
+                    id='clip-name'
+                    className='mt-[60px] justify-center col-start-2 col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
+                  >
+                    {clipName}
+                  </div>
                 </div>
-              </div>
+              ) : null}
+              {index % 2 === 1 ? (
+                <div className='grid grid-cols-4'>
+                  <div
+                    id='clip-name'
+                    className='mt-[60px] justify-center col-start-1  col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
+                  >
+                    {clipName}
+                  </div>
+                </div>
+              ) : null}
             </div>
           );
         })}
@@ -103,7 +122,7 @@ export default function CurrentlyPlayingList({
           // ev.touches.length === 3 &&
           setIsModalOpen(true);
         }}
-        className='scale-95 absolute top-[20%] left-[38%] h-[400px]'
+        className='scale-95 absolute top-[20%] left-[36.5%] h-[400px]'
       >
         <img
           className='object-scale-down h-full'

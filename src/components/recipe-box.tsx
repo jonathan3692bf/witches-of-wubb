@@ -18,7 +18,10 @@ export default function RecipeBox() {
     <div id='inner_recipe_box' className='flex flex-col max-w-full max-h-full'>
       <div id='recipe-bg' className='w-full bg-recipe-bg h-[320px] mx-auto'>
         <div id='recipe-header' className='grid grid-cols-3'>
-          <div id='title' className='mt-3 flex items-center justify-center gap-6 col-start-2'>
+          <div
+            id='title'
+            className='mt-3 flex items-center justify-center gap-6 col-start-2 text-2xl'
+          >
             <h4>Suggested Recipe</h4>
           </div>
           <div id='new-spell' className='float-right'>
