@@ -7,7 +7,11 @@ import frame from '../assets/images/frame_576_v2.png';
 import { getBackgroundColorFromType } from '~/lib/utils';
 // import { LoggerContext } from '~/contexts/logger-provider';
 
-export default function CurrentlyPlayingList() {
+export default function CurrentlyPlayingList({
+  setIsModalOpen,
+}: {
+  setIsModalOpen: (state: boolean) => void;
+}) {
   const { queuedClips, playingClips, stoppingClips, clipTempo } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
 
@@ -15,7 +19,7 @@ export default function CurrentlyPlayingList() {
     <div id='inner_playing' className='h-[50vh] w-screen'>
       <div
         id='pillars'
-        className='h-[50%] mt-5 w-screen grid grid-cols-2 gap-10 justify-items-center absolute inset-0 z-10'
+        className='h-[50%] mt-5 w-screen grid grid-cols-2 gap-10 justify-items-center absolute inset-0'
       >
         {[1, 2, 3, 4]?.map((pillar, index) => {
           const playing = playingClips[index];
@@ -52,7 +56,7 @@ export default function CurrentlyPlayingList() {
                   >
                     <div
                       id='frame_bg'
-                      className={`absolute -inset-0 z-30 object-scale-down max-h-[90%] max-w-[90%] bg-white border m-auto text-center rounded-md border-1 ${
+                      className={`absolute -inset-0 object-scale-down max-h-[90%] max-w-[90%] bg-white border m-auto text-center rounded-md border-1 ${
                         (queued || stopping) && 'animate-pulse'
                       }`}
                     >
@@ -69,7 +73,7 @@ export default function CurrentlyPlayingList() {
                     </div>
                     <div
                       id='frame'
-                      className='object-scale-down max-h-full max-w-full relative z-40 scale-150'
+                      className='object-scale-down max-h-full max-w-full relative scale-150'
                     >
                       <img src={frame} alt='Frame'></img>
                     </div>
@@ -81,7 +85,7 @@ export default function CurrentlyPlayingList() {
                   )} */}
                 <div
                   id='clip-name'
-                  className='justify-center col-start-2 col-span-3 -inset-0 z-40 h-[18px] max-h-full max-w-full mt-6 text-center text-xs rounded-md border border-1'
+                  className='justify-center col-start-2 col-span-3 -inset-0 h-[18px] max-h-full max-w-full mt-6 text-center text-xs rounded-md border border-1'
                 >
                   {clipName}
                 </div>
@@ -91,13 +95,19 @@ export default function CurrentlyPlayingList() {
         })}
       </div>
 
-      <div id='Cauldron' className='h-[75%] w-screen grid justify-items-center relative z-0'>
+      <button
+        data-testid='cauldron'
+        className='h-[75%] w-screen grid justify-items-center relative'
+        onClick={() => {
+          setIsModalOpen(true);
+        }}
+      >
         <img
           className='object-scale-down max-h-full max-w-[30%] m-auto'
           src={cauldrongif}
           alt='Cauldron'
         ></img>
-      </div>
+      </button>
     </div>
   );
 }
