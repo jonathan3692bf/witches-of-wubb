@@ -14,11 +14,8 @@ export default function CurrentlyPlayingList({
   // const { logger } = useContext(LoggerContext);
 
   return (
-    <div id='inner_playing' className='h-[50vh] w-screen relative'>
-      <div
-        id='pillars'
-        className='h-[50%] mt-5 w-screen grid grid-cols-2 gap-10 justify-items-center absolute inset-0'
-      >
+    <div id='inner_playing' className='h-[75vh] w-screen relative'>
+      <div id='pillars' className='mt-5 w-screen grid grid-cols-2 gap-20 justify-items-center'>
         {[1, 2, 3, 4]?.map((pillar, index) => {
           const playing = playingClips[index];
           const queued = queuedClips[index];
@@ -35,26 +32,25 @@ export default function CurrentlyPlayingList({
           const colorBlurClass = getBackgroundColorFromType(info?.type);
 
           return (
-            <div id={`pillar-${pillar}`} className='w-[50%] text-center' key={pillar}>
-              <div className='object-scale-down mb-4 grid grid-cols-4'>
-                <div id='bpm' className='col-start-2 col-span-3'>
+            <div id={`pillar-${pillar}`} className='w-[70%] text-center' key={pillar}>
+              <div className='object-scale-down grid grid-cols-4'>
+                <div id='bpm' className='col-start-2 col-span-3 h-[50px]'>
                   BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
                 </div>
-                <div className='object-scale-down max-h-full max-w-full mr-12'>
-                  <VolumeSlider pillar={index} />
-                </div>
+                {index % 2 === 0 ? (
+                  <div className='object-scale-down max-h-full max-w-full mr-20'>
+                    <VolumeSlider pillar={index} />
+                  </div>
+                ) : null}
                 <div className='relative col-span-3 flex justify-items-center'>
                   <div
                     id='color-blur'
                     className={`absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
                   ></div>
-                  <div
-                    id='frame_full'
-                    className='max-h-[85%] max-w-[85%] border m-auto border-black relative'
-                  >
+                  <div id='frame_full' className=' border m-auto border-black relative'>
                     <div
                       id='frame_bg'
-                      className={`absolute -inset-0 object-scale-down max-h-[90%] max-w-[90%] bg-black/25 border m-auto text-center rounded-md border-1 ${
+                      className={`absolute -inset-0 object-scale-down bg-black/25 border m-auto text-center rounded-md border-1 ${
                         (queued || stopping) && 'animate-pulse'
                       }`}
                     >
@@ -77,13 +73,20 @@ export default function CurrentlyPlayingList({
                     </div>
                   </div>
                 </div>
+                {index % 2 === 1 ? (
+                  <div className='object-scale-down max-h-full max-w-full ml-20'>
+                    <VolumeSlider pillar={index} />
+                  </div>
+                ) : null}
                 {/* {playing || queued ? (
                   ) : (
                     <div className="w-full h-full object-cover rounded-md border border-1"></div>
                   )} */}
+              </div>
+              <div className='grid col-span-4'>
                 <div
                   id='clip-name'
-                  className='justify-center col-start-2 col-span-3 -inset-0 h-[18px] max-h-full max-w-full mt-6 text-center text-xs rounded-md border border-1'
+                  className='mt-[60px] justify-center col-start-2 col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
                 >
                   {clipName}
                 </div>
@@ -100,7 +103,7 @@ export default function CurrentlyPlayingList({
           // ev.touches.length === 3 &&
           setIsModalOpen(true);
         }}
-        className='absolute top-[10%] left-[36%] h-[400px]'
+        className='scale-95 absolute top-[20%] left-[38%] h-[400px]'
       >
         <img
           className='object-scale-down h-full'

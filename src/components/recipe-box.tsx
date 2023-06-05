@@ -16,7 +16,7 @@ export default function RecipeBox() {
   // })
   return (
     <div id='inner_recipe_box' className='flex flex-col max-w-full max-h-full'>
-      <div id='recipe-bg' className='w-full bg-recipe-bg h-[320px] mx-auto mt-10'>
+      <div id='recipe-bg' className='w-full bg-recipe-bg h-[320px] mx-auto'>
         <div id='recipe-header' className='grid grid-cols-3'>
           <div id='title' className='mt-3 flex items-center justify-center gap-6 col-start-2'>
             <h4>Suggested Recipe</h4>
@@ -25,7 +25,7 @@ export default function RecipeBox() {
             <button
               id='new-spell-btn'
               style={{ backgroundImage: `url(/images/new-spell.gif)` }}
-              className='bg-cover h-[80px] w-[80px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-1'
+              className='scale-150 bg-cover h-[80px] w-[80px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
               onClick={generateNewSpell}
             ></button>
           </div>
@@ -42,7 +42,7 @@ export default function RecipeBox() {
                 ></div>
                 <img
                   className='relative flex mt-3'
-                  src={`public/ingredients/${recipe?.assetName}`}
+                  src={`/ingredients/${recipe?.assetName}`}
                   alt={`ingredient-${recipe.ingredientName}`}
                 ></img>
                 <div id={`ingredient-${recipe.ingredientName}-label`} className='mt-4 relative'>

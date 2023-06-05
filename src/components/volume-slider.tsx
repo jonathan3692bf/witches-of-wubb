@@ -40,7 +40,7 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
             value={trackVolume[pillar] ?? 0}
             onChange={handleChange}
             orient='vertical'
-            className='w-3 rounded-lg appearance-none cursor-pointer bg-gray-200 dark:bg-gray-700 accent-red-800 custom-volume-slider'
+            className='z-100 w-3 rounded-lg appearance-none cursor-pointer bg-gray-200 dark:bg-gray-700 accent-red-800 custom-volume-slider'
           />
         </div>
         <button
