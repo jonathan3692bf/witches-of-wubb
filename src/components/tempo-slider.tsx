@@ -28,7 +28,7 @@ export default function TempoSlider() {
           max={MAX_VALUE}
           value={tempo}
           onChange={handleChange}
-          className='w-[50vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-slider'
+          className='w-[50vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-tempo-slider'
         />
         <span className=' text-gray-500 dark:text-gray-400'>{MAX_VALUE}</span>
       </div>
