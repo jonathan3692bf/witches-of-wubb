@@ -54,7 +54,7 @@ export default function CurrentlyPlayingList({
                   >
                     <div
                       id='frame_bg'
-                      className={`absolute -inset-0 object-scale-down max-h-[90%] max-w-[90%] bg-white border m-auto text-center rounded-md border-1 ${
+                      className={`absolute -inset-0 object-scale-down max-h-[90%] max-w-[90%] bg-black/25 border m-auto text-center rounded-md border-1 ${
                         (queued || stopping) && 'animate-pulse'
                       }`}
                     >
