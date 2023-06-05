@@ -24,7 +24,7 @@ export default function RecipeBox() {
           <div id='new-spell' className='float-right'>
             <button
               id='new-spell-btn'
-              style={{ backgroundImage: `url(public/images/new-spell.gif)` }}
+              style={{ backgroundImage: `url(/images/new-spell.gif)` }}
               className='bg-cover h-[80px] w-[80px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-1'
               onClick={generateNewSpell}
             ></button>

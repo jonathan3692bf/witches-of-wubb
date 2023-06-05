@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: theme => ({
-        'recipe-bg': "radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%), url('public/images/script_bg.jpg')"
+        'recipe-bg': "radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%), url('/images/script_bg.jpg')"
       }),
       colors: {
         'blue-400': 'hsl(180, 100%, 80%)',
@@ -43,7 +43,7 @@ module.exports = {
           },
           '&::-webkit-slider-thumb': {
             '@apply appearance-none h-32 w-32 bg-center bg-no-repeat border-none scale-100': {},
-            'background-image': "url('public/images/arcane_tempo_slider_120.png')",
+            'background-image': "url('/images/arcane_tempo_slider_120.png')",
           },
           '&::-webkit-slider-runnable-track': {
             '@apply rounded-full bg-black/25': {},
@@ -56,7 +56,7 @@ module.exports = {
           },
           '&::-webkit-slider-thumb': {
             '@apply appearance-none h-64 w-64 bg-center bg-no-repeat border-none': {},
-            'background-image': "url('public/images/arcane_volume_slider_120.png')", // Use new image URL here
+            'background-image': "url('/images/arcane_volume_slider_120.png')", // Use new image URL here
           },
           '&::-webkit-slider-runnable-track': {
             '@apply rounded-full bg-black/25': {},
