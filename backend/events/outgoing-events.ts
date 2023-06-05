@@ -19,7 +19,7 @@ function SendOSCMessage(address: string, data?: Record<any, any>) {
 }
 
 function Emit(eventName: string, data?: Record<any, any>) {
-  logger.info(`Emitting event ${eventName} with data: ${JSON.stringify(data)}`);
+  logger.debug(`Emitting event ${eventName} with data: ${JSON.stringify(data)}`);
   sockets?.forEach((socket) => {
     socket?.emit(eventName, data);
   });

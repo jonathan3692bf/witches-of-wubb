@@ -256,9 +256,7 @@ export const GetTracksAndClips = async () => {
             pillar,
           };
 
-          logger.info(
-            `Pillar ${pillar + 1} started playing ${clipName} > ${JSON.stringify(clipInfo)}`,
-          );
+          logger.info(`Pillar ${pillar + 1} started playing ${clipName}`);
           if (!clipMetadata) {
             throw new Error(`Couldn't find clip metadata for "${clipName}"`);
           }
