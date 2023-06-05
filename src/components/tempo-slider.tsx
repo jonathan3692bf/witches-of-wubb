@@ -5,7 +5,7 @@ import { AbletonContext } from '../contexts/ableton-provider';
 const MIN_VALUE = 75;
 const MAX_VALUE = 155;
 export default function TempoSlider() {
-  const { changeTempo, tempo, clipTempo } = useContext(AbletonContext);
+  const { changeTempo, tempo } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -32,7 +32,7 @@ export default function TempoSlider() {
         />
         <span className=' text-gray-500 dark:text-gray-400'>{MAX_VALUE}</span>
       </div>
-      <div className='flex gap-8 mx-auto mt-10'>
+      {/* <div className='flex gap-8 mx-auto mt-10'>
         {[0, 1, 2, 3].map((pillar) => {
           return (
             <button
@@ -46,7 +46,7 @@ export default function TempoSlider() {
             </button>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }
