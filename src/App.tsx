@@ -23,7 +23,7 @@ export default function App() {
       <div id='container_tempo' className='absolute top-[800px] left-[200px] h-[16vh]'>
         <TempoSlider />
       </div>
-      <div id='container_recipe_box' className='h-[25vh] mt-0'>
+      <div id='container_recipe_box' className='h-[20vh] mt-8'>
         <RecipeBox />
       </div>
       <DebugModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />

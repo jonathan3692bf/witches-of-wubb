@@ -45,9 +45,7 @@ module.exports = {
             '@apply appearance-none h-32 w-32 bg-center bg-no-repeat border-none scale-100': {},
             'background-image': "url('/images/arcane_tempo_slider_120.png')",
           },
-          '&::-webkit-slider-runnable-track': {
-            '@apply rounded-full bg-black/25': {},
-          },
+
         },
         'input[type="range"].custom-volume-slider': { // Add new CSS class here
           '@apply appearance-none': {},
@@ -57,9 +55,6 @@ module.exports = {
           '&::-webkit-slider-thumb': {
             '@apply appearance-none h-64 w-64 bg-center bg-no-repeat border-none': {},
             'background-image': "url('/images/arcane_volume_slider_120.png')", // Use new image URL here
-          },
-          '&::-webkit-slider-runnable-track': {
-            '@apply rounded-full bg-black/25': {},
           },
         },
       }
