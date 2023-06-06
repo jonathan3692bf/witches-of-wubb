@@ -18,12 +18,12 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div id='container_playing' className='h-[80vh]'>
+    <div id='container_playing' className=''>
       <CurrentlyPlayingList setIsModalOpen={setIsModalOpen} />
       <div id='container_tempo' className='absolute top-[800px] left-[200px] h-[16vh]'>
         <TempoSlider />
       </div>
-      <div id='container_recipe_box' className='h-[20vh] mt-0'>
+      <div id='container_recipe_box' className=''>
         <RecipeBox />
       </div>
       <DebugModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />

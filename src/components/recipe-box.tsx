@@ -15,20 +15,20 @@ export default function RecipeBox() {
 
   // })
   return (
-    <div id='inner_recipe_box' className='flex flex-col max-w-full'>
-      <div id='recipe-bg' className='h-[20vh] w-full bg-recipe-bg mx-auto max-h-full'>
+    <div id='inner_recipe_box' className='max-w-full mt-[150px]'>
+      <div id='recipe-bg' className='h-[20vh] w-full max-h-full mx-auto bg-recipe-bg'>
         <div id='recipe-header' className='h-[80p] grid grid-cols-3'>
           <div
             id='title'
-            className='mt-3 flex items-center justify-center gap-6 col-start-2 text-m'
+            className='mt-3 flex items-center justify-center gap-6 col-start-2 text-xl'
           >
-            <h4>Suggested Recipe</h4>
+            Suggested Recipe
           </div>
           <div id='new-spell' className='float-right'>
             <button
               id='new-spell-btn'
               style={{ backgroundImage: `url(/images/new-spell.gif)` }}
-              className='scale-65 bg-cover h-[60px] w-[60px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
+              className='scale-70 bg-cover h-[70px] w-[70px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
               onClick={generateNewSpell}
             ></button>
           </div>
@@ -36,10 +36,14 @@ export default function RecipeBox() {
         <div id='ingredients_contianer' className='grid grid-cols-4 text-center align-top'>
           {Object.entries(spellRecipe).map(([type, recipe]) => {
             return recipe ? (
-              <div id={`ingredient-${recipe.rfid}-${type}`} className='scale-50' key={recipe.rfid}>
+              <div
+                id={`ingredient-${recipe.rfid}-${type}`}
+                className='relative -top-[80px] scale-50'
+                key={recipe.rfid}
+              >
                 <div
                   id='color-blur'
-                  className={`absolute -inset-0 rounded-lg blur-xl z-0 ${getBackgroundColorFromType(
+                  className={`absolute inset-0 rounded-lg blur-xl z-0 ${getBackgroundColorFromType(
                     type,
                   )}`}
                 ></div>
@@ -49,7 +53,7 @@ export default function RecipeBox() {
                   alt={`ingredient-${recipe.ingredientName}`}
                 ></img>
                 <div id={`ingredient-${recipe.ingredientName}-label`} className='mt-4 relative'>
-                  <div className='mt-3'>{`${recipe.ingredientName}`}</div>
+                  <div className='mt-3 text-xl'>{`${recipe.ingredientName}`}</div>
                 </div>
               </div>
             ) : null;

@@ -36,6 +36,9 @@ module.exports = {
     require('@headlessui/tailwindcss')({ prefix: 'ui' }),
     function ({ addComponents }) {
       const newComponents = {
+        '.backdrop-blur': {
+          'backdrop-filter': 'blur(13px)', // Adjust blur radius as per your needs
+        },
         'input[type="range"].custom-tempo-slider': {
           '@apply appearance-none': {},
           '&:focus': {

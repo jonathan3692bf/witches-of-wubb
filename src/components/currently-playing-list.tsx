@@ -14,7 +14,7 @@ export default function CurrentlyPlayingList({
   // const { logger } = useContext(LoggerContext);
 
   return (
-    <div id='inner_playing' className='h-[75vh] w-screen relative'>
+    <div id='inner_playing' className='mb-[90px] w-screen relative'>
       <div id='pillars' className='mt-5 w-screen grid grid-cols-2 gap-20 justify-items-center'>
         {[1, 2, 3, 4]?.map((pillar, index) => {
           const playing = playingClips[index];
@@ -52,7 +52,7 @@ export default function CurrentlyPlayingList({
                 <div className='relative col-span-3 flex justify-items-center'>
                   <div
                     id='color-blur'
-                    className={`absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
+                    className={`scale-[120%] absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
                   ></div>
                   <div id='frame_full' className=' border m-auto border-black relative'>
                     <div
