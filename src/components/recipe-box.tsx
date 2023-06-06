@@ -5,7 +5,7 @@ export default function RecipeBox() {
   // const { queuedClips, playingClips, stoppingClips } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
   // console.log('spell receipe', spellRecipe);
-  const { spellRecipe, generateNewSpell, generateNewSpellName } = useGrimoire();
+  const { spellRecipe, generateNewSpell, spellName } = useGrimoire();
 
   return (
     <div id='inner_recipe_box' className='max-w-full mt-[140px]'>
@@ -15,7 +15,7 @@ export default function RecipeBox() {
             id='title'
             className='flex items-center stroke-black justify-center gap-6 col-start-2 text-xl -top-[20px] align-top font-fondamento'
           >
-            Suggested Recipe: {generateNewSpellName()}
+            Suggested Recipe: {spellName}
           </div>
           <div id='new-spell' className='float-right'>
             <button
@@ -43,13 +43,13 @@ export default function RecipeBox() {
                 <img
                   className='relative flex mt-3 scale-75'
                   src={`/ingredients/${recipe?.assetName}`}
-                  alt={`ingredient-${recipe.ingredientName}`}
+                  alt={recipe.ingredientName}
                 ></img>
                 <div
                   id={`ingredient-${recipe.ingredientName}-label`}
                   className='mt-3 relative text-xl scale-150 stroke-black font-fondamento'
                 >
-                  {`${recipe.ingredientName}`}
+                  {recipe.ingredientName}
                 </div>
               </div>
             ) : null;

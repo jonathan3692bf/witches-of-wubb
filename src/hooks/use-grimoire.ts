@@ -8,6 +8,7 @@ export type SpellRecipeType = { [key: string]: ClipMetadataType };
 export default function useGrimoire() {
   const { playingClips } = useContext(AbletonContext);
   const [spellRecipe, setSpellRecipe] = useState<SpellRecipeType>({});
+  const [spellName, setSpellName] = useState<string>('');
   const actuallyPlayingClips = playingClips
     .filter((clip) => clip)
     .map((clip) => {
@@ -60,13 +61,7 @@ export default function useGrimoire() {
       'Flower Shower',
     ];
 
-    let spellName = '';
-
-    if (actuallyPlayingClips.length === 1) {
-      spellName = listOfSpellsNames[Math.floor(Math.random() * listOfSpellsNames.length)];
-    }
-
-    return spellName;
+    setSpellName(listOfSpellsNames[Math.floor(Math.random() * listOfSpellsNames.length)]);
   }
 
   function generateNewSpell() {
@@ -81,6 +76,7 @@ export default function useGrimoire() {
       }
     }
 
+    generateNewSpellName();
     setSpellRecipe(newSpell);
   }
 
@@ -93,5 +89,5 @@ export default function useGrimoire() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actuallyPlayingClips.length]);
 
-  return { spellRecipe, generateNewSpell, generateNewSpellName };
+  return { spellRecipe, spellName, generateNewSpell };
 }
