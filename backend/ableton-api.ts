@@ -42,16 +42,20 @@ export async function StartAbleton() {
   await GetTrackVolumes();
 }
 
+function StartAttractorState() {
+  EmitEventWithoutResetingTimout('attractor_state');
+  for (let i = 0; i < 4; i++) {
+    const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
+    clip?.fire();
+  }
+}
+
 export async function handleTimeout() {
   for (let i = 0; i < 4; i++) {
     await tracks[i].sendCommand('stop_all_clips');
   }
   setTimeout(() => {
-    EmitEventWithoutResetingTimout('attractor_state');
-    for (let i = 0; i < 4; i++) {
-      const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
-      clip?.fire();
-    }
+    StartAttractorState();
   }, 2_000);
 }
 
@@ -110,7 +114,7 @@ export function AddWebSocket(s: socketio.Socket) {
   AddSocketEventsHandlers(s);
 }
 
-export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
+export async function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
   const { clipName } = clipMetadata;
   logger.info(`Begin queing clip ${clipName}`);
   if (queuedClips[pillar]?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '')) {
@@ -123,6 +127,11 @@ export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
     // if no items are playing, skip the queue
     const silence = playingClips.every((clip) => !clip);
     if (silence) {
+      logger.info('Stopping attractor state');
+      for (let i = 0; i < 4; i++) {
+        if (i === pillar) continue;
+        await tracks[i].sendCommand('stop_all_clips');
+      }
       logger.info(`Triggering clip "${clipName}" on pillar ${pillar + 1}`);
       clip?.fire();
     } else {
@@ -289,6 +298,10 @@ export const GetTracksAndClips = async () => {
         });
         stoppingClips[pillar] = null;
         playingClips[pillar] = null;
+        const silence = playingClips.every((clip) => !clip);
+        if (silence) {
+          StartAttractorState();
+        }
       }
     });
 
