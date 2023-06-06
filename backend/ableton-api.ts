@@ -20,7 +20,7 @@ export const TIMEOUT_WARNING_IN_MILISECONDS = 30 * 1000; // thirty seconds
 
 export let timeoutId: NodeJS.Timeout;
 export let timeoutWarningId: NodeJS.Timeout;
-export const ATTRACTOR_STATE_CLIP_NAME = 'Silencio-5min';
+export const ATTRACTOR_STATE_CLIP_NAME = 'Wicked Casting';
 export let allAbletonClips: ClipBoard;
 export let tracks: Track[];
 export let trackVolumes: Array<DeviceParameter>;

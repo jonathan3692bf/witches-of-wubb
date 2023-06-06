@@ -42,16 +42,18 @@ export function EnrichRecommendations(
   row: any,
 ) {
   const keyHeader = 'Key Numerical';
-  const bpmHeader = 'BPM';
+  // const bpmHeader = 'BPM';
+  const clipNameHeader = 'Clip Name';
 
   const rfid = row['RFID'];
-  const clipName = String(row['Clip Name']);
+  const clipName = String(row[clipNameHeader]);
 
   const recommendedClips = csv
     .filter((compRow: any) => {
       return (
         Math.abs(compRow[keyHeader] - row[keyHeader]) <= 1 &&
-        Math.abs(compRow[bpmHeader] - row[bpmHeader]) <= 20
+        compRow[clipNameHeader] !== row[clipNameHeader]
+        // && Math.abs(compRow[bpmHeader] - row[bpmHeader]) <= 20
       );
     })
     .map((row: any) => ({
