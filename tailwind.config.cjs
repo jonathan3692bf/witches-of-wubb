@@ -34,6 +34,12 @@ module.exports = {
 
   plugins: [
     require('@headlessui/tailwindcss')({ prefix: 'ui' }),
+    function({ addBase, config }) {
+      addBase({
+        'html::-webkit-scrollbar': { display: 'none' },
+        'html': { scrollbarWidth: 'none', msOverflowStyle: 'none' }
+      });
+    },
     function ({ addComponents }) {
       const newComponents = {
         '.backdrop-blur': {
