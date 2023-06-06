@@ -5,11 +5,7 @@ import VolumeSlider from './volume-slider';
 import { getBackgroundColorFromType } from '~/lib/utils';
 // import { LoggerContext } from '~/contexts/logger-provider';
 
-export default function CurrentlyPlayingList({
-  setIsModalOpen,
-}: {
-  setIsModalOpen: (state: boolean) => void;
-}) {
+export default function CurrentlyPlayingList() {
   const { queuedClips, playingClips, stoppingClips, clipTempo } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
 
@@ -114,21 +110,13 @@ export default function CurrentlyPlayingList({
         })}
       </div>
 
-      <button
-        data-testid='cauldron'
-        onClick={() => {
-          // console.log(ev.touches);
-          // ev.touches.length === 3 &&
-          setIsModalOpen(true);
-        }}
-        className='scale-95 absolute top-[20%] left-[36.5%] h-[400px]'
-      >
+      <div data-testid='cauldron' className='scale-95 absolute top-[20%] left-[36.5%] h-[400px]'>
         <img
           className='object-scale-down h-full'
           src='/images/cauldron-hottub-crop.gif'
           alt='Cauldron'
         />
-      </button>
+      </div>
     </div>
   );
 }

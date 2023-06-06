@@ -46,13 +46,6 @@ export async function handleTimeout() {
   for (let i = 0; i < 4; i++) {
     await tracks[i].sendCommand('stop_all_clips');
   }
-  setTimeout(() => {
-    EmitEventWithoutResetingTimout('attractor_state');
-    for (let i = 0; i < 4; i++) {
-      const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
-      clip?.fire();
-    }
-  }, 2_000);
 }
 
 export function startTimeoutTimer() {
