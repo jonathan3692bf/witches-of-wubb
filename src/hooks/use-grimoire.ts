@@ -83,6 +83,7 @@ export default function useGrimoire() {
   useEffect(() => {
     if (actuallyPlayingClips.length === 0) {
       setSpellRecipe({});
+      setSpellName('');
     } else if (actuallyPlayingClips.length === 1) {
       generateNewSpell();
     }
