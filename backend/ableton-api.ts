@@ -31,8 +31,6 @@ export const playingClips: ClipList = [];
 export const triggeredClips: ClipList = [];
 export const queuedClips: ClipList = [];
 
-export let attractorStateEnabled = true;
-
 export const ableton = new Ableton({ logger: logger });
 
 export const TRIGGER_ORDER = [ClipTypes.Drums, ClipTypes.Melody, ClipTypes.Bass, ClipTypes.Vox];
@@ -42,25 +40,13 @@ export async function StartAbleton() {
   await ableton.start();
   await GetTracksAndClips();
   await GetTrackVolumes();
-  StartAttractorState();
 }
 
 function StartAttractorState() {
-  logger.info('Starting attractor state');
-  attractorStateEnabled = true;
   EmitEventWithoutResetingTimout('attractor_state');
   for (let i = 0; i < 4; i++) {
     const clip = MemoizedClipLocation(ATTRACTOR_STATE_CLIP_NAME, i);
     clip?.fire();
-  }
-}
-
-async function StopAttractorState() {
-  logger.info('Stopping attractor state');
-  attractorStateEnabled = false;
-  for (let i = 0; i < 4; i++) {
-    // if (i === pillar) continue;
-    await tracks[i].sendCommand('stop_all_clips');
   }
 }
 
@@ -141,11 +127,13 @@ export async function QueueClip(clipMetadata: ClipMetadataType, pillar: number) 
     // if no items are playing, skip the queue
     const silence = playingClips.every((clip) => !clip);
     if (silence) {
-      await StopAttractorState();
-      setTimeout(() => {
-        logger.info(`Triggering clip "${clipName}" on pillar ${pillar + 1}`);
-        clip?.fire();
-      }, 1_200);
+      logger.info('Stopping attractor state');
+      for (let i = 0; i < 4; i++) {
+        if (i === pillar) continue;
+        await tracks[i].sendCommand('stop_all_clips');
+      }
+      logger.info(`Triggering clip "${clipName}" on pillar ${pillar + 1}`);
+      clip?.fire();
     } else {
       logger.info(`Queuing clip "${clipName}" on pillar ${pillar + 1}`);
       queuedClips[pillar] = {
@@ -184,7 +172,6 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   const queuedClip = queuedClips[pillar];
   const isClipPlaying =
     playingClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
-  attractorStateEnabled = true;
   if (isClipPlaying) {
     logger.info(`Stopping clip "${clipName}" on pillar ${pillar + 1}`);
     stoppingClips[pillar] = playingClip;
@@ -268,13 +255,7 @@ export const GetTracksAndClips = async () => {
       if (clipSlotIndex >= 0) {
         const clip = allAbletonClips[pillar][clipSlotIndex];
         const clipName = clip?.raw.name;
-        if (clipName === ATTRACTOR_STATE_CLIP_NAME) {
-          attractorStateEnabled = true;
-          return;
-        } else {
-          attractorStateEnabled = false;
-        }
-        if (clipName) {
+        if (clipName && clipName !== ATTRACTOR_STATE_CLIP_NAME) {
           const warpMarkers = await clip.get('warp_markers');
           const bpm = CalculateBPMFromWarpMarkers(warpMarkers);
           const clipMetadata = ClipNameToInfoMap[clipName.replace(/[* ]/g, '')];
@@ -318,7 +299,7 @@ export const GetTracksAndClips = async () => {
         stoppingClips[pillar] = null;
         playingClips[pillar] = null;
         const silence = playingClips.every((clip) => !clip);
-        if (silence && attractorStateEnabled) {
+        if (silence) {
           StartAttractorState();
         }
       }
