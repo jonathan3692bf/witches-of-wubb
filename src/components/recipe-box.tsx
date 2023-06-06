@@ -52,8 +52,11 @@ export default function RecipeBox() {
                   src={`/ingredients/${recipe?.assetName}`}
                   alt={`ingredient-${recipe.ingredientName}`}
                 ></img>
-                <div id={`ingredient-${recipe.ingredientName}-label`} className='mt-4 relative'>
-                  <div className='mt-3 text-xl'>{`${recipe.ingredientName}`}</div>
+                <div
+                  id={`ingredient-${recipe.ingredientName}-label`}
+                  className='mt-4 relative mt-3 text-xl'
+                >
+                  {`${recipe.ingredientName}`}
                 </div>
               </div>
             ) : null;
