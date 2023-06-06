@@ -3,8 +3,8 @@ import App from '~/App';
 
 describe('App', () => {
   it('renders headline', () => {
-    const { getByText } = render(<App />);
+    const { getByTestId } = render(<App />);
 
-    expect(getByText('Open debug')).toBeInTheDocument();
+    expect(getByTestId('cauldron')).toBeInTheDocument();
   });
 });
