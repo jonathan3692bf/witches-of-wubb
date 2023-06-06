@@ -15,12 +15,12 @@ export default function RecipeBox() {
 
   // })
   return (
-    <div id='inner_recipe_box' className='max-w-full mt-[150px]'>
-      <div id='recipe-bg' className='h-[20vh] w-full max-h-full mx-auto bg-recipe-bg'>
-        <div id='recipe-header' className='h-[80p] grid grid-cols-3'>
+    <div id='inner_recipe_box' className='max-w-full mt-[140px]'>
+      <div id='recipe-bg' className='h-[23vh] w-full max-h-full mx-auto bg-recipe-bg'>
+        <div id='recipe-header' className='h-[80px] grid grid-cols-3'>
           <div
             id='title'
-            className='mt-3 flex items-center justify-center gap-6 col-start-2 text-xl'
+            className='flex items-center justify-center gap-6 col-start-2 text-xl -top-[20px] align-top'
           >
             Suggested Recipe
           </div>
@@ -28,7 +28,7 @@ export default function RecipeBox() {
             <button
               id='new-spell-btn'
               style={{ backgroundImage: `url(/images/new-spell.gif)` }}
-              className='scale-70 bg-cover h-[70px] w-[70px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
+              className='bg-cover h-[100px] w-[100px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
               onClick={generateNewSpell}
             ></button>
           </div>
@@ -54,7 +54,7 @@ export default function RecipeBox() {
                 ></img>
                 <div
                   id={`ingredient-${recipe.ingredientName}-label`}
-                  className='mt-4 relative mt-3 text-xl'
+                  className='mt-3 relative text-xl scale-150'
                 >
                   {`${recipe.ingredientName}`}
                 </div>
