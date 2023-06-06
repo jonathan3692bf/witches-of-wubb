@@ -18,34 +18,6 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Disable scrolling on the body by setting the overflow property to hidden
-    document.body.style.overflow = 'hidden';
-
-    // Don't forget to reset this on component unmount
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
-
-  useEffect(() => {
-    const preventZoom = (e: WheelEvent | KeyboardEvent) => {
-      const { ctrlKey, metaKey } = e;
-      const zoomCondition = navigator.platform.match('Mac') ? metaKey : ctrlKey;
-      if (zoomCondition) {
-        e.preventDefault();
-      }
-    };
-
-    window.addEventListener('keydown', preventZoom);
-    window.addEventListener('wheel', preventZoom, { passive: false });
-
-    return () => {
-      window.removeEventListener('keydown', preventZoom);
-      window.removeEventListener('wheel', preventZoom);
-    };
-  }, []);
-
-  useEffect(() => {
     const handleContextMenu = (event: MouseEvent) => {
       event.preventDefault();
     };
@@ -59,7 +31,7 @@ export default function App() {
   }, []);
 
   return (
-    <div id='container_playing' className=''>
+    <div id='container_playing' className='overflow-hidden max-h-screen'>
       <CurrentlyPlayingList />
       <button onClick={() => setIsModalOpen(true)} className='absolute start-0 p-4'>
         &nbsp;&nbsp;&nbsp;
