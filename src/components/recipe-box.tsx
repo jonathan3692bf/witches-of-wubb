@@ -15,12 +15,12 @@ export default function RecipeBox() {
 
   // })
   return (
-    <div id='inner_recipe_box' className='flex flex-col max-w-full max-h-full'>
-      <div id='recipe-bg' className='w-full bg-recipe-bg h-[320px] mx-auto'>
-        <div id='recipe-header' className='grid grid-cols-3'>
+    <div id='inner_recipe_box' className='flex flex-col max-w-full'>
+      <div id='recipe-bg' className='h-[20vh] w-full bg-recipe-bg mx-auto max-h-full'>
+        <div id='recipe-header' className='h-[80p] grid grid-cols-3'>
           <div
             id='title'
-            className='mt-3 flex items-center justify-center gap-6 col-start-2 text-xl'
+            className='mt-3 flex items-center justify-center gap-6 col-start-2 text-m'
           >
             <h4>Suggested Recipe</h4>
           </div>
@@ -28,15 +28,15 @@ export default function RecipeBox() {
             <button
               id='new-spell-btn'
               style={{ backgroundImage: `url(/images/new-spell.gif)` }}
-              className='scale-100 bg-cover h-[80px] w-[80px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
+              className='scale-65 bg-cover h-[60px] w-[60px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
               onClick={generateNewSpell}
             ></button>
           </div>
         </div>
-        <div id='ingredients_contianer' className='gap-8 mx-auto mt-2 grid grid-cols-4 text-center'>
+        <div id='ingredients_contianer' className='grid grid-cols-4 text-center align-top'>
           {Object.entries(spellRecipe).map(([type, recipe]) => {
             return recipe ? (
-              <div id={`ingredient-${recipe.rfid}-${type}`} className='scale-75' key={recipe.rfid}>
+              <div id={`ingredient-${recipe.rfid}-${type}`} className='scale-50' key={recipe.rfid}>
                 <div
                   id='color-blur'
                   className={`absolute -inset-0 rounded-lg blur-xl z-0 ${getBackgroundColorFromType(

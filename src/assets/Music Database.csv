@@ -1,114 +1,114 @@
 RFID,Asset ID,Ingredient Name / Description,Tested and works (5/28),Comment (5/28),Artist,Song Title,Clip Name,Clip Type (e.g. Vocals),Instrument,Key,Major or Minor,Key Numerical,BPM,Icon / Asset Name
-e280f3372000f00003effc95,1,Poison,TRUE,,Paramore,Misery Business,Mizbiz vox 3B 86,Vox,Vox,4A,Minor,4,86,poison.png
-e280f3372000f00003effc90,2,Sally Jack's Worms Wort,TRUE,,Paramore,Misery Business,Mizbiz guit 3B 86,Melody,Electric Guitar,4A,Minor,4,86,wormswort.png
-e280f3372000f00003effc8c,3,Witches Brew,TRUE,,Paramore,Misery Business,Mizbiz bass 3B 86,Bass,Bass,4A,Minor,4,86,witchs_brew.png
-e280f3372000f00003effc8b,4,Potion of Mana,TRUE,,Paramore,Misery Business,Mizbiz Drums 3B 86,Drums,Drums (standard kit),4A,Minor,4,86,potion_of_mana.png
-e280f3372000f00003effc8a,5,Wolfsbane Potion,TRUE,,Disturbed,Down With the Sickness,Disturbed - DWTS vox 5B 90,Vox,Vox,5B,Major,5,90,wolfsbane_potion.png
-e280f3372000f00003effc88,6,Moon Dew,TRUE,,Disturbed,Down With the Sickness,DWTS guitar 5B 90bpm,Melody,Electric Guitar,5B,Major,5,90,moondew.png
-e280f3372000f00003effc7a,7,Mermaid Brand Kelp,TRUE,,Disturbed,Down With the Sickness,Disturbed DWTS Bass 5B 90bpm,Bass,Bass,5B,Major,5,90,mermaid_brand_kelp.png
-e280f3372000f00003effc78,8,Spider Web (black widow),TRUE,,Disturbed,Down With the Sickness,DWTS Drums 5B 90,Drums,Vox,5B,Major,5,90,spider_web.png
-e280f3372000f00003effc77,9,Pure Awesomeness,TRUE,,Evanescence,Bring Me To Life,BMTL vox 9A 96,Vox,Vox,9A,Minor,9,96,pure_awesome.png
-e280f3372000f00003effc76,10,Pond Scum,TRUE,,Evanescence,Bring Me To Life,BM2L backup vox 9A 96,Melody,"Piano, Vox, Strings",9A,Minor,9,96,pond_scum.png
-e280f3372000f00003effc75,11,Potion of Amnesia,TRUE,,Evanescence,Bring Me To Life,BMTL Base 9A 96,Bass,Bass,9A,Minor,9,96,potion_of_amnesia.png
-e280f3372000f00003effc73,12,Superior Healing Potion,TRUE,,Evanescence,Bring Me To Life,BMTL Drums 9A 96,Drums,Drums (standard kit),9A,Minor,9,96,superior_healing_potion.png
-e280f3372000f00003effc87,13,Magic Potion of Medicianal venom,TRUE,,Clozee,Harmony,Clozee Harmony Vox 4A 109 ,Vox,Vox,4A,Minor,4,109,magick_potion_of_medicinal_venom.png
-e280f3372000f00003effc97,14,Bat wings,TRUE,,Clozee,Harmony,Clozee Harmony Guitars 4A 109,Melody,Acoustic Guitar,4A,Minor,4,109,bat_wings.png
-e280f3372000f00003effc96,15,Phoenix Tears,TRUE,,Clozee,Harmony,Clozee Harmony Base 4A 109,Bass,Synth,4A,Minor,4,109,pheonix_tears.png
-e280f3372000f00003effc98,16,Toad Flax,TRUE,,Clozee,Harmony,Clozee Harmony Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,toad_flax.png
-e280f3372000f00003effc91,17,Scale of Dragon,TRUE,,KSHMR,Song Of War,War vox 4A 109,Vox,Vox,4A,Minor,4,109,scale_of_dragon.png
-e280f3372000f00003effc94,18,Unicorn icon,TRUE,,KSHMR,Song Of War,War guitar 4A 109,Melody,Synth,4A,Minor,4,109,unicorn_icon.png
-e280f3372000f00003effc86,19,Drink of Eternal Sleep,TRUE,,KSHMR,Song Of War,War Base 4A 109,Bass,Synth,4A,Minor,4,109,drink_of_eternal_sleep.png
-e280f3372000f00003effc8d,20,Death Potion,TRUE,,KSHMR,Song Of War,War Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,death_potion.png
-e280f3372000f00003effc8f,21,Wearwolf Lure,TRUE,,Odesza ,Say my name,Odesza SMN vox 11A 115,Vox,Vox,11A,Minor,11,115,wearwolf_lure.png
-e280f3372000f00003effc82,22,Bone Dust,TRUE,,Vanilla Ice,Ice Ice Baby,Ice Ice vox 10B 116,Vox,Vox,10B,Major,10,116,bone_dust.png
-e280f3372000f00003effc80,23,Mandrake,TRUE,,Vanilla Ice,Ice Ice Baby,Ice Ice synth 10B 116,Melody,Synth,10B,Major,10,116,mandrake.png
-e280f3372000f00003effc7f,24,Venomous Calendula,TRUE,,Vanilla Ice,Ice Ice Baby,Ice Ice bass 10B 116,Bass,Bass,10B,Major,10,116,venomous_candula.png
-e280f3372000f00003effc7c,25,Mermaid Tears,TRUE,,Vanilla Ice,Ice Ice Baby,Ice Ice Drums 10B 116,Drums,Drums (standard kit),10B,Major,10,116,mermaid_tears.png
-e280f3372000f00003effc7b,26,Fairy Dust,TRUE,,MGMT,Kids,MGMT - Kids vox 11B 123,Vox,Vox,11B,Major,11,123,fairy_dust.png
-e280f3372000f00003effc74,27,Wyvern Venom,TRUE,,MGMT,Kids,MGMT - Kids Synth 11B 123 bpm,Melody,Synth,11B,Major,11,123,wyvern_venom.png
-e280f3372000f00003effc83,28,Wearwolf Hair,TRUE,,MGMT,Kids,MGMT - Kids Synth Bass 11B 123bpm,Bass,Synth,11B,Major,11,123,wearwolf_hair.png
-e280f3372000f00003effc93,29,Basilisk Venom,TRUE,,MGMT,Kids,MGMT - Kids Drums 11B 123bpm,Drums,Drums (standard kit),11B,Major,11,123,basilisk_venom.png
-e280f3372000f00003effc92,30,Hell Broth,TRUE,,Tha Trickaz ,Little Bombay,Tha Trickaz - Little Bombay vox 7B 130,Vox,Vox,7B,Major,7,130,hell_broth.png
-e280f3372000f00003effc72,31,Hemlock Elixer,TRUE,,Tha Trickaz ,Little Bombay,Little Bombay Sitar 7B 130bpm,Melody,Sitar,7B,Major,7,130,hemlock_elixer.png
-e280f3372000f00003effc6e,32,Inkap Wrinkles,TRUE,,Tha Trickaz ,Little Bombay,Little Bombay Drums 7B 130bpm,Drums,Drums (standard kit),7B,Major,7,130,inkcap_wrinkles.png
-e280f3372000f00003effc6d,33,Magic Mushrooms,TRUE,,?,?? Babylon,Babylon Vox 4A 130,Vox,Vox,4A,Minor,4,130,magic_mushrooms.png
-e280f3372000f00003effc6b,34,Deadly Nightshade,TRUE,,?,Babylon,Babylon Oud 4A 130,Melody,Oud,4A,Minor,4,130,deadly_nightshade.png
-e280f3372000f00003effc6a,35,Witches Butter,TRUE,,?,Babylon,Babylon Bass 130 4A,Bass,Bass,4A,Minor,4,130,witches_butter.png
-e280f3372000f00003effc69,36,Elixer of Lucid Dreams,TRUE,,?,Babylon,Babylon Drums 130 4A,Drums,808,4A,Minor,4,130,elixir_of_lucid_dreams.png
-e280f3372000f00003effc68,37,Five of Strength,TRUE,,Orgy,Blue Monday,Orgy BM vox 2A 130,Vox,Vox,2A,Minor,2,130,fiveofstrength.png
-e280f3372000f00003effc67,38,Four of Intelligence,TRUE,needs a rework sound staticky and has a 16bar phrase,Orgy,Blue Monday,Orgy BM mel 2A 130,Melody,Electric Guitar,2A,Minor,2,130,fourofintelligence.png
-e280f3372000f00003effc66,39,Page of Strength,TRUE,,Orgy,Blue Monday,Orgy BM base 2A 130,Bass,Synth,2A,Minor,2,130,pageofstrength.png
-e280f3372000f00003effc65,40,Seven of Strength,TRUE,,Orgy,Blue Monday,Orgy BM drums 2A 130,Drums,Drums (standard kit),2A,Minor,2,130,sevenofstrength.png
-e280f3372000f00003effc64,41,Two of Intelligence,TRUE,,Katy Perry,Dark Horse,KP Dark Horse Vox 3A 132,Vox,Vox,3A,Minor,3,132,twoofintelligence.png
-e280f3372000f00003effc63,42,Queen of Strength,TRUE,,Katy Perry,Dark Horse,KP Dark Horse Synth 132 | 3A,Melody,Synth,3A,Minor,3,132,queenofstrength.png
-e280f3372000f00003effc62,43,King of Strength,TRUE,,Katy Perry,Dark Horse,KP Dark Horse Base 132 | 3B,Bass,Synth,3A,Minor,3,132,kingofstrength.png
-e280f3372000f00003effca3,44,Ace of Strength,TRUE,,Katy Perry,Dark Horse,KP Dark Horse Drums 132,Drums,Drums (standard kit),3A,Minor,3,132,aceofstrength.png
-e280f3372000f00003effc60,45,Four of Strength,TRUE,,Billie Eilish,Bad Guy,Bad Guy vox 9B 135,Vox,Vox,9B,Major,9,135,fourofstrength.png
-e280f3372000f00003effc5f,46,Knight of Strength,TRUE,,Billie Eilish,Bad Guy,Bad Guy synth 9B 135bpm,Melody,Synth,9B,Major,9,135,knightofstrength.png
-e280f3372000f00003effc5e,47,Ten of Strength,TRUE,,Billie Eilish,Bad Guy,Bad Guy Bass 9B 135 bpm,Bass,Synth,9B,Major,9,135,tenofstrength.png
-e280f3372000f00003effc5d,48,Nine of Strength,TRUE,,Billie Eilish,Bad Guy,Bad Guy Drums 9B 135bpm,Drums,Drums (full kit),9B,Major,9,135,nineofstrength.png
-e280f3372000f00003effc5c,49,Six of Strength,TRUE,,Gorillaz,Feel Good Inc,Feel Good Vox 2B 139,Vox,Vox,2B,Major,2,139,sixofstrength.png
-e280f3372000f00003effc5b,50,Eight of Intelligence,TRUE,,Gorillaz,Feel Good Inc,Feel Good Guit 2B 139,Melody,Electric Guitar,2B,Major,2,139,eightofintelligence.png
-e280f3372000f00003effc5a,51,Two of Strength,TRUE,,Gorillaz,Feel Good Inc,Feel Good Base 2B 139,Bass,Bass,2B,Major,2,139,twoofstrength.png
-e280f3372000f00003effc59,52,Seven of Intelligence,TRUE,,Gorillaz,Feel Good Inc,Feel Good Drums 2B 139,Drums,Drums (standard kit),2B,Major,2,139,sevenofintelligence.png
-e280f3372000f00003effc58,53,Three of Intelligence,TRUE,,Iniko,Jericho,Jericho Vox  154 bpm,Vox,Vox,7A,Minor,7,154,threeofintelligence.png
-,54,,TRUE,e280f3372000f00003effc57,Odesza ,Say my name,,,,,,,,
-e280f3372000f00003effc56,55,Knight of Intelligence,TRUE,,Odesza ,Say my name,Odesza SMN bass 11A 115,Bass,Synth,11A,Minor,11,115,knightofintelligence.png
-e280f3372000f00003effc55,56,Three of Strength,TRUE,,Odesza ,Say my name,Odesza SMN drums 11A 115,Drums,Drums (standard kit),11A,Minor,11,115,threeofstrength.png
-e280f3372000f00003effc54,57,FIve of Intelligence,TRUE,,House of Pain,Jump Around,Jump vox 9A 107,Vox,Vox,9A,Minor,9,107,fiveofintelligence.png
-e280f3372000f00003effc53,58,Eight of Strength,TRUE,,House of Pain,Jump Around,Jump samples  9A 107,Melody,Samples,9A,Minor,9,107,eightofstrength.png
-e280f3372000f00003effc51,59,The World,TRUE,,House of Pain,Jump Around,Jump drums  9A 107,Drums,Drums (standard kit),9A,Minor,9,107,theworld.png
-e280f3372000f00003effc4f,60,Ace of Intelligence,TRUE,,Ariana Grande,7 Rings,7 Rings vox 12A 140,Vox,Vox,12A,Minor,12,140,
-e280f3372000f00003effc3d,61,Six of Intelligence,TRUE,,BlackPink,How You Like That,How You Like That vox 2A 130,Vox,Vox,2A,Minor,2,130,sixofintelligence.png
-e20042150090641704c3cd91,62,silver hand (1),TRUE,"CHECK CLIP LENGTH!  I can't stop clip from playing!  hit play and try and ""hot swap"" to another clip by untoggling it in debug it does not work for some reason.   Possibly due to phrase length!",Cristobal Tapia de Veer,White Lotus,White Lotus vox 3B 127,Vox,Vox,3B,Major,3,127,
-e2004214fde0641704c3cd66,63,silver hand (2),TRUE,,Angela Lee,Afro Beats,Afro House 125,Drums,Drums (standard kit),,TBD,,125,
-e2004214a150641704c3c79d,64,Paige of charisma,FALSE,,Angela Lee,Cinematic Trap,Cinematic Trap 130,Drums,Drums (standard kit),,TBD,,130,pageofcharisma.png
+e280f3372000f00003effc95,1,Poison,FALSE,,Paramore,Misery Business,Mizbiz vox 3B 86,Vox,Vox,4A,Minor,4,86,poison.png
+e280f3372000f00003effc90,2,Sally Jack's Worms Wort,FALSE,,Paramore,Misery Business,Mizbiz guit 3B 86,Melody,Electric Guitar,4A,Minor,4,86,wormswort.png
+e280f3372000f00003effc8c,3,Witches Brew,FALSE,,Paramore,Misery Business,Mizbiz bass 3B 86,Bass,Bass,4A,Minor,4,86,witchs_brew.png
+e280f3372000f00003effc8b,4,Potion of Mana,FALSE,,Paramore,Misery Business,Mizbiz Drums 3B 86,Drums,Drums (standard kit),4A,Minor,4,86,potion_of_mana.png
+e280f3372000f00003effc8a,5,Wolfsbane Potion,FALSE,,Disturbed,Down With the Sickness,Disturbed - DWTS vox 5B 90,Vox,Vox,5B,Major,5,90,wolfsbane_potion.png
+e280f3372000f00003effc88,6,Moon Dew,FALSE,,Disturbed,Down With the Sickness,DWTS guitar 5B 90bpm,Melody,Electric Guitar,5B,Major,5,90,moondew.png
+e280f3372000f00003effc7a,7,Mermaid Brand Kelp,FALSE,,Disturbed,Down With the Sickness,Disturbed DWTS Bass 5B 90bpm,Bass,Bass,5B,Major,5,90,mermaid_brand_kelp.png
+e280f3372000f00003effc78,8,Spider Web (black widow),FALSE,,Disturbed,Down With the Sickness,DWTS Drums 5B 90,Drums,Vox,5B,Major,5,90,spider_web.png
+e280f3372000f00003effc77,9,Pure Awesomeness,FALSE,,Evanescence,Bring Me To Life,BMTL vox 9A 96,Vox,Vox,9A,Minor,9,96,pure_awesome.png
+e280f3372000f00003effc76,10,Pond Scum,FALSE,,Evanescence,Bring Me To Life,BM2L backup vox 9A 96,Melody,"Piano, Vox, Strings",9A,Minor,9,96,pond_scum.png
+e280f3372000f00003effc75,11,Potion of Amnesia,FALSE,,Evanescence,Bring Me To Life,BMTL Base 9A 96,Bass,Bass,9A,Minor,9,96,potion_of_amnesia.png
+e280f3372000f00003effc73,12,Superior Healing Potion,FALSE,,Evanescence,Bring Me To Life,BMTL Drums 9A 96,Drums,Drums (standard kit),9A,Minor,9,96,superior_healing_potion.png
+e280f3372000f00003effc87,13,Magic Potion of Medicianal venom,FALSE,,Clozee,Harmony,Clozee Harmony Vox 4A 109 ,Vox,Vox,4A,Minor,4,109,magick_potion_of_medicinal_venom.png
+e280f3372000f00003effc97,14,Bat wings,FALSE,,Clozee,Harmony,Clozee Harmony Guitars 4A 109,Melody,Acoustic Guitar,4A,Minor,4,109,bat_wings.png
+e280f3372000f00003effc96,15,Phoenix Tears,FALSE,,Clozee,Harmony,Clozee Harmony Base 4A 109,Bass,Synth,4A,Minor,4,109,pheonix_tears.png
+e280f3372000f00003effc98,16,Toad Flax,FALSE,,Clozee,Harmony,Clozee Harmony Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,toad_flax.png
+e280f3372000f00003effc91,17,Scale of Dragon,FALSE,,KSHMR,Song Of War,War vox 4A 109,Vox,Vox,4A,Minor,4,109,scale_of_dragon.png
+e280f3372000f00003effc94,18,Unicorn icon,FALSE,,KSHMR,Song Of War,War guitar 4A 109,Melody,Synth,4A,Minor,4,109,unicorn_icon.png
+e280f3372000f00003effc86,19,Drink of Eternal Sleep,FALSE,,KSHMR,Song Of War,War Base 4A 109,Bass,Synth,4A,Minor,4,109,drink_of_eternal_sleep.png
+e280f3372000f00003effc8d,20,Death Potion,FALSE,,KSHMR,Song Of War,War Drums 4A 109,Drums,Drums (standard kit),4A,Minor,4,109,death_potion.png
+e280f3372000f00003effc8f,21,Wearwolf Lure,FALSE,,Odesza ,Say my name,Odesza SMN vox 11A 115,Vox,Vox,11A,Minor,11,115,wearwolf_lure.png
+e280f3372000f00003effc82,22,Bone Dust,FALSE,,Vanilla Ice,Ice Ice Baby,Ice Ice vox 10B 116,Vox,Vox,10B,Major,10,116,bone_dust.png
+e280f3372000f00003effc80,23,Mandrake,FALSE,,Vanilla Ice,Ice Ice Baby,Ice Ice synth 10B 116,Melody,Synth,10B,Major,10,116,mandrake.png
+e280f3372000f00003effc7f,24,Venomous Calendula,FALSE,,Vanilla Ice,Ice Ice Baby,Ice Ice bass 10B 116,Bass,Bass,10B,Major,10,116,venomous_candula.png
+e280f3372000f00003effc7c,25,Mermaid Tears,FALSE,,Vanilla Ice,Ice Ice Baby,Ice Ice Drums 10B 116,Drums,Drums (standard kit),10B,Major,10,116,mermaid_tears.png
+e280f3372000f00003effc7b,26,Fairy Dust,FALSE,,MGMT,Kids,MGMT - Kids vox 11B 123,Vox,Vox,11B,Major,11,123,fairy_dust.png
+e280f3372000f00003effc74,27,Wyvern Venom,FALSE,,MGMT,Kids,MGMT - Kids Synth 11B 123 bpm,Melody,Synth,11B,Major,11,123,wyvern_venom.png
+e280f3372000f00003effc83,28,Wearwolf Hair,FALSE,,MGMT,Kids,MGMT - Kids Synth Bass 11B 123bpm,Bass,Synth,11B,Major,11,123,wearwolf_hair.png
+e280f3372000f00003effc93,29,Basilisk Venom,FALSE,,MGMT,Kids,MGMT - Kids Drums 11B 123bpm,Drums,Drums (standard kit),11B,Major,11,123,basilisk_venom.png
+e280f3372000f00003effc92,30,Hell Broth,FALSE,,Tha Trickaz ,Little Bombay,Tha Trickaz - Little Bombay vox 7B 130,Vox,Vox,7B,Major,7,130,hell_broth.png
+e280f3372000f00003effc72,31,Hemlock Elixer,FALSE,,Tha Trickaz ,Little Bombay,Little Bombay Sitar 7B 130bpm,Melody,Sitar,7B,Major,7,130,hemlock_elixer.png
+e280f3372000f00003effc6e,32,Inkap Wrinkles,FALSE,,Tha Trickaz ,Little Bombay,Little Bombay Drums 7B 130bpm,Drums,Drums (standard kit),7B,Major,7,130,inkcap_wrinkles.png
+e280f3372000f00003effc6d,33,Magic Mushrooms,FALSE,,?,?? Babylon,Babylon Vox 4A 130,Vox,Vox,4A,Minor,4,130,magic_mushrooms.png
+e280f3372000f00003effc6b,34,Deadly Nightshade,FALSE,,?,Babylon,Babylon Oud 4A 130,Melody,Oud,4A,Minor,4,130,deadly_nightshade.png
+e280f3372000f00003effc6a,35,Witches Butter,FALSE,,?,Babylon,Babylon Bass 130 4A,Bass,Bass,4A,Minor,4,130,witches_butter.png
+e280f3372000f00003effc69,36,Elixer of Lucid Dreams,FALSE,,?,Babylon,Babylon Drums 130 4A,Drums,808,4A,Minor,4,130,elixir_of_lucid_dreams.png
+e280f3372000f00003effc68,37,Five of Strength,FALSE,,Orgy,Blue Monday,Orgy BM vox 2A 130,Vox,Vox,2A,Minor,2,130,fiveofstrength.png
+e280f3372000f00003effc67,38,Four of Intelligence,FALSE,needs a rework sound staticky and has a 16bar phrase,Orgy,Blue Monday,Orgy BM mel 2A 130,Melody,Electric Guitar,2A,Minor,2,130,fourofintelligence.png
+e280f3372000f00003effc66,39,Page of Strength,FALSE,,Orgy,Blue Monday,Orgy BM base 2A 130,Bass,Synth,2A,Minor,2,130,pageofstrength.png
+e280f3372000f00003effc65,40,Seven of Strength,FALSE,,Orgy,Blue Monday,Orgy BM drums 2A 130,Drums,Drums (standard kit),2A,Minor,2,130,sevenofstrength.png
+e280f3372000f00003effc64,41,Two of Intelligence,FALSE,,Katy Perry,Dark Horse,KP Dark Horse Vox 3A 132,Vox,Vox,3A,Minor,3,132,twoofintelligence.png
+e280f3372000f00003effc63,42,Queen of Strength,FALSE,,Katy Perry,Dark Horse,KP Dark Horse Synth 132 | 3A,Melody,Synth,3A,Minor,3,132,queenofstrength.png
+e280f3372000f00003effc62,43,King of Strength,FALSE,,Katy Perry,Dark Horse,KP Dark Horse Base 132 | 3B,Bass,Synth,3A,Minor,3,132,kingofstrength.png
+e280f3372000f00003effca3,44,Ace of Strength,FALSE,,Katy Perry,Dark Horse,KP Dark Horse Drums 132,Drums,Drums (standard kit),3A,Minor,3,132,aceofstrength.png
+e280f3372000f00003effc60,45,Four of Strength,FALSE,,Billie Eilish,Bad Guy,Bad Guy vox 9B 135,Vox,Vox,9B,Major,9,135,fourofstrength.png
+e280f3372000f00003effc5f,46,Knight of Strength,FALSE,,Billie Eilish,Bad Guy,Bad Guy synth 9B 135bpm,Melody,Synth,9B,Major,9,135,knightofstrength.png
+e280f3372000f00003effc5e,47,Ten of Strength,FALSE,,Billie Eilish,Bad Guy,Bad Guy Bass 9B 135 bpm,Bass,Synth,9B,Major,9,135,tenofstrength.png
+e280f3372000f00003effc5d,48,Nine of Strength,FALSE,,Billie Eilish,Bad Guy,Bad Guy Drums 9B 135bpm,Drums,Drums (full kit),9B,Major,9,135,nineofstrength.png
+e280f3372000f00003effc5c,49,Six of Strength,FALSE,,Gorillaz,Feel Good Inc,Feel Good Vox 2B 139,Vox,Vox,2B,Major,2,139,sixofstrength.png
+e280f3372000f00003effc5b,50,Eight of Intelligence,FALSE,,Gorillaz,Feel Good Inc,Feel Good Guit 2B 139,Melody,Electric Guitar,2B,Major,2,139,eightofintelligence.png
+e280f3372000f00003effc5a,51,Two of Strength,FALSE,,Gorillaz,Feel Good Inc,Feel Good Base 2B 139,Bass,Bass,2B,Major,2,139,twoofstrength.png
+e280f3372000f00003effc59,52,Seven of Intelligence,FALSE,,Gorillaz,Feel Good Inc,Feel Good Drums 2B 139,Drums,Drums (standard kit),2B,Major,2,139,sevenofintelligence.png
+e280f3372000f00003effc58,53,Three of Intelligence,FALSE,,Iniko,Jericho,Jericho Vox  154 bpm,Vox,Vox,7A,Minor,7,154,threeofintelligence.png
+,54,,FALSE,e280f3372000f00003effc57,Odesza ,Say my name,,,,,,,,
+e280f3372000f00003effc56,55,Knight of Intelligence,FALSE,,Odesza ,Say my name,Odesza SMN bass 11A 115,Bass,Synth,11A,Minor,11,115,knightofintelligence.png
+e280f3372000f00003effc55,56,Three of Strength,FALSE,,Odesza ,Say my name,Odesza SMN drums 11A 115,Drums,Drums (standard kit),11A,Minor,11,115,threeofstrength.png
+e280f3372000f00003effc54,57,FIve of Intelligence,FALSE,,House of Pain,Jump Around,Jump vox 9A 107,Vox,Vox,9A,Minor,9,107,fiveofintelligence.png
+e280f3372000f00003effc53,58,Eight of Strength,FALSE,,House of Pain,Jump Around,Jump samples  9A 107,Melody,Samples,9A,Minor,9,107,eightofstrength.png
+e280f3372000f00003effc51,59,The World,FALSE,,House of Pain,Jump Around,Jump drums  9A 107,Drums,Drums (standard kit),9A,Minor,9,107,theworld.png
+e280f3372000f00003effc4f,60,Ace of Intelligence,FALSE,,Ariana Grande,7 Rings,7 Rings vox 12A 140,Vox,Vox,12A,Minor,12,140,aceofintelligence.png
+e280f3372000f00003effc3d,61,Six of Intelligence,FALSE,,BlackPink,How You Like That,How You Like That vox 2A 130,Vox,Vox,2A,Minor,2,130,sixofintelligence.png
+e20042150090641704c3cd91,62,silver hand left,FALSE,,Cristobal Tapia de Veer,White Lotus,White Lotus vox 3B 127,Vox,Vox,3B,Major,3,127,lefthand.png
+e2004214fde0641704c3cd66,63,silver hand right,FALSE,missing key,Angela Lee,Afro Beats,Afro House 125,Drums,Drums (standard kit),,TBD,,125,righthand.png
+e2004214a150641704c3c79d,64,Paige of charisma,FALSE,missing key,Angela Lee,Cinematic Trap,Cinematic Trap 130,Drums,Drums (standard kit),,TBD,,130,pageofcharisma.png
 e20042143cd0641704c3c155,65,The hermit,FALSE,,Golden Tbilisi ,Bulgarian,Bulgarian Vox 1A 130,Vox,Vox,1A,Minor,1,130,thehermit.png
 e2004214a110641704c3c799,66,Knight of charisma,FALSE,,Anup4m,Kuhaki,Kuhaki Koto 2A 130,Melody,Samples,2A,Minor,2,130,knightofcharisma.png
 e2004213db10641704c3bb39,67,Seven of charisma,FALSE,,Anup4m,Kuhaki,Kuhaki Bass 2A 130,Bass,Bass,2A,Minor,2,130,sevenofcharisma.png
-e20042137950641704c3b51d,68,pink flower 2,TRUE,,Anup4m,Kuhaki,Kuhaki Drums 2A 130,Drums,Drums (standard kit),2A,Minor,2,130,
-e20042137cb0641704c3b553,69,crocodile,TRUE,,Angela Lee,Suo,Suo drums 125,Drums,Drums (standard kit),,TBD,,125,
+e20042137950641704c3b51d,68,pink lotus 2,FALSE,,Anup4m,Kuhaki,Kuhaki Drums 2A 130,Drums,Drums (standard kit),2A,Minor,2,130,lotus1and2.png
+e20042137cb0641704c3b553,69,crocodile,FALSE,,Angela Lee,Suo,Suo drums 125,Drums,Drums (standard kit),,TBD,,125,crocodile.png
 e20042131af0641704c3af37,70,Strength,FALSE,,Angela Lee,Tabla,tabla trap 131,Drums,Drums (standard kit),,TBD,,131,strength.png
-e280f3372000f00003effc41,71,potion of superior healing,TRUE,,ROSHIMA,Flashback,Flashback Drums 1A 135,Drums,Drums (standard kit),1A,Minor,1,135,potion_of_superior_healing.png
-e280f3372000f00003effc40,72,poison hemlock,TRUE,,ROSHIMA,Flashback,Flashback Bass 1A 135,Bass,Bass,1A,Minor,1,135,poison_hemlock.png
-e280f3372000f00003effc3f,73,bone powder,TRUE,,ROSHIMA,Flashback,Flashback Synth 1A 135,Melody,Synth,1A,Minor,1,135,bone_powder.png
-e280f3372000f00003effc45,74,polyjuice potion,TRUE,,Coolio,Gangsta's Paradise,Gangsta's Paradise vox 5A 80,Vox,Vox,5A,Minor,5,80,polyjuice_potion.png
-e280f3372000f00003effc4c,75,prof winklestein's awesomeness powder,TRUE,,Coolio,Gangsta's Paradise,Gangsta's Paradise backup vox 5A 80,Melody,Vox,5A,Minor,5,80,prof_winklesteins_awesomeness_powder.png
-e280f3372000f00003effc4a,76,dragon tonic,TRUE,,Coolio,Gangsta's Paradise,Gangsta's Paradise Instrumental 5A 80,Melody,Samples,5A,Minor,5,80,dragon_tonic.png
+e280f3372000f00003effc41,71,potion of superior healing,FALSE,,ROSHIMA,Flashback,Flashback Drums 1A 135,Drums,Drums (standard kit),1A,Minor,1,135,potion_of_superior_healing.png
+e280f3372000f00003effc40,72,poison hemlock,FALSE,,ROSHIMA,Flashback,Flashback Bass 1A 135,Bass,Bass,1A,Minor,1,135,poison_hemlock.png
+e280f3372000f00003effc3f,73,bone powder,FALSE,,ROSHIMA,Flashback,Flashback Synth 1A 135,Melody,Synth,1A,Minor,1,135,bone_powder.png
+e280f3372000f00003effc45,74,polyjuice potion,FALSE,,Coolio,Gangsta's Paradise,Gangsta's Paradise vox 5A 80,Vox,Vox,5A,Minor,5,80,polyjuice_potion.png
+e280f3372000f00003effc4c,75,prof winklestein's awesomeness powder,FALSE,,Coolio,Gangsta's Paradise,Gangsta's Paradise backup vox 5A 80,Melody,Vox,5A,Minor,5,80,prof_winklesteins_awesomeness_powder.png
+e280f3372000f00003effc4a,76,dragon tonic,FALSE,,Coolio,Gangsta's Paradise,Gangsta's Paradise Instrumental 5A 80,Melody,Samples,5A,Minor,5,80,dragon_tonic.png
 e280f3372000f00003effc85,77,poison unfiltered witch's grade,FALSE,,Alice Deejay,Better Off Alone,Better Off Alone synth 1A 137,Melody,Synth,1A,Minor,1,137,poison_unfiltered.png
-e280f3372000f00003effc6f,78,live beyond fear h p lovecraft,TRUE,,Marilyn Manson,The Beautiful People,TBPeople Guitar 7A 144,Melody,Electric Guitar,7A,Minor,7,144,live_beyond_fear.png
-e280f3372000f00003effc70,79,poison original formula,TRUE,,Marilyn Manson,The Beautiful People,TBPeople Bass 7A 144,Bass,Bass,7A,Minor,7,144,poison_original_formula.png
-e280f3372000f00003effc84,80,hocus focus,TRUE,,Marilyn Manson,The Beautiful People,TBPeople Drums 7A 144,Drums,Drums (standard kit),7A,Minor,7,144,hocus_focus.png
+e280f3372000f00003effc6f,78,live beyond fear h p lovecraft,FALSE,,Marilyn Manson,The Beautiful People,TBPeople Guitar 7A 144,Melody,Electric Guitar,7A,Minor,7,144,live_beyond_fear.png
+e280f3372000f00003effc70,79,poison original formula,FALSE,,Marilyn Manson,The Beautiful People,TBPeople Bass 7A 144,Bass,Bass,7A,Minor,7,144,poison_original_formula.png
+e280f3372000f00003effc84,80,hocus focus,FALSE,,Marilyn Manson,The Beautiful People,TBPeople Drums 7A 144,Drums,Drums (standard kit),7A,Minor,7,144,hocus_focus.png
 e280f3372000f00003effc4e,81,preserved witch's hand,FALSE,,Eiffel 65,I'm Blue (da ba dee),I'm Blue piano 6A 128,Melody,Synth,6A,Minor,6,128,preserved_witch_hand.png
-e280f3372000f00003effc7d,82,soothing sleep,TRUE,,Eiffel 65,I'm Blue (da ba dee),I'm Blue vox 6A 128,Vox,Vox,6A,Minor,6,128,soothing_sleep.png
-,83,,FALSE,e280f3372000f00003effc4d,,,,,,,,,,
-e280f3372000f00003effc52,84,marbled small box,TRUE,no RFID,Marilyn Manson,The Beautiful People,TBPeople Vox 7A 144,Vox,Vox,7A,Minor,7,144,
-e280f3372000f00003effc9f,85,flying noir small box,TRUE,,,,Russian Vox 8A 125,Vox,Vox,8A,Minor,8,125,
-e280f3372000f00003effca2,86,Shario medium box,FALSE,,Olivia Rodrigo,Good 4 U,Good 4 U vox 11B 84,Vox,Vox,11B,Major,11,84,
-e280f3372000f00003effca4,87,medium book box,TRUE,,Olivia Rodrigo,Good 4 U,Good 4 U guitar 11B 84,Melody,Electric Guitar,11B,Major,11,84,
-e280f3372000f00003effc9c,88,Ten of wisdom,TRUE,,Olivia Rodrigo,Good 4 U,Good 4 U bass 11B 84,Bass,Bass,11B,Major,11,84,tenofwisdom.png
-e280f3372000f00003effc9d,89,Three of wisdom,TRUE,,Olivia Rodrigo,Good 4 U,Good 4 U drums 11B 84,Drums,Drums (standard kit),11B,Major,11,84,threeofwisdom.png
-e280f3372000f00003effca1,90,Four of wisdom,TRUE,deleted from template but needs replacement!,Coolio,Gangsta's Paradise,Gangsta's Paradise Drums 5A 80,Drums,Drums (standard kit),5A,Minor,5,80,fourofwisdom.png
-e20042137cf0641704c3b557,91,log,TRUE,,,,Unholy Vox 12A 130,Vox,Vox,12A,Minor,12,130,
-e2004213db50641704c3bb3d,92,potion bottle,TRUE,,,,Bulgarian Trap Bass 1A 130,Bass,Bass,1A,Minor,1,130,
+e280f3372000f00003effc7d,82,soothing sleep,FALSE,,Eiffel 65,I'm Blue (da ba dee),I'm Blue vox 6A 128,Vox,Vox,6A,Minor,6,128,soothing_sleep.png
+,83,,FALSE,needs new RIFD,,,,,,,,,,
+e280f3372000f00003effc52,84,marbled small box,FALSE,,Marilyn Manson,The Beautiful People,TBPeople Vox 7A 144,Vox,Vox,7A,Minor,7,144,smallmarblebox.png
+e280f3372000f00003effc9f,85,flying noir small box,FALSE,,,,Russian Vox 8A 125,Vox,Vox,8A,Minor,8,125,flyingnoirchocobox.png
+e280f3372000f00003effca2,86,Shario medium box,FALSE,,Olivia Rodrigo,Good 4 U,Good 4 U vox 11B 84,Vox,Vox,11B,Major,11,84,shario.png
+e280f3372000f00003effca4,87,medium book box,FALSE,,Olivia Rodrigo,Good 4 U,Good 4 U guitar 11B 84,Melody,Electric Guitar,11B,Major,11,84,bookbox.png
+e280f3372000f00003effc9c,88,Ten of wisdom,FALSE,,Olivia Rodrigo,Good 4 U,Good 4 U bass 11B 84,Bass,Bass,11B,Major,11,84,tenofwisdom.png
+e280f3372000f00003effc9d,89,Three of wisdom,FALSE,,Olivia Rodrigo,Good 4 U,Good 4 U drums 11B 84,Drums,Drums (standard kit),11B,Major,11,84,threeofwisdom.png
+e280f3372000f00003effca1,90,Four of wisdom,FALSE,a drum clip can be added here,Coolio,Gangsta's Paradise,,Drums,,,TBD,,,fourofwisdom.png
+e20042137cf0641704c3b557,91,log,FALSE,,,,Unholy Vox 12A 130,Vox,Vox,12A,Minor,12,130,log.png
+e2004213db50641704c3bb3d,92,glass potion bottle w ornate stopper,FALSE,,,,Bulgarian Trap Bass 1A 130,Bass,Bass,1A,Minor,1,130,glassbottleornatestopper.png
 e2004213df20641704c3bb7a,93,The hierophant,FALSE,needs new rifd,,,IQAF_122_Dmin_Bass_Loop_05,Bass,Bass,,TBD,,122,thehierophant.png
-e20042143c90641704c3c151,94,candle with stickers on it,TRUE,,,,Flashback Bass 1A 135,Bass,Bass,1A,Minor,1,135,
-,95,,FALSE,e20042131af0641704c3af37,,,,,,,,,,
-e20042131ab0641704c3af33,96,dinosaur,TRUE,,Clozee,Secret Place,CZ SP Vox 92,Vox,Vox,4A,Minor,4,92,
-e20042131800641704c3af08,97,pink flower,TRUE,,Clozee,Secret Place,CZ SP Flute strings 92,Melody,Woodwind,4A,Minor,4,92,
-e2004212b8f0641704c3a917,98,amortentia bottle,TRUE,,Clozee,Secret Place,CZ SP Base synth 92,Bass,Synth,4A,Minor,4,92,
-e200421317c0641704c3af04,99,buffalo bills skin lotion,TRUE,,Clozee,Secret Place,CZ SP Perc 92,Drums,Drums (standard kit),4A,Minor,4,92,
-e2004212b8b0641704c3a913,100,liberty club sarsaparilla,TRUE,,Shivarasa,Tala,Tala Vox 8A 140,Vox,Vox,,TBD,,140,
-e2004211f4f0641704c39cd7,101,small round box blue/gold,TRUE,,Shivarasa,Tala,Tala Qanun 8A 140,Melody,Strings,8A,Minor,8,140,
-e200421256b0641704c3a2f3,102,Mortis Sanguis Glass Jar,TRUE,,Shivarasa,Tala,Tala Drums 8A 140,Drums,Drums (standard kit),8A,Minor,8,140,
-e2004212b5b0641704c3a8e3,103,Felix Felicis Purple Jar,TRUE,(renamed to 11A),,,Anti-General koto 11A 140,Melody,Strings,11A,Minor,11,140,
-e200421192b0641704c396b3,104,Polyjuice potion,TRUE,(renamed to 11A),,,Anti-General drums 11A 140,Drums,Drums (standard kit),11A,Minor,11,140,
-e280f3372000f00003effc3c,105,Five of wisdom,TRUE,,Rammstein,Du Hast,Du Hast vox 8A 125 ,Vox,Vox,8A,Minor,8,125,fiveofwisdom.png
-e280f3372000f00003effc3e,106,Six of wisdom,TRUE,,Rammstein,Du Hast,Du Hast guitar 8A 125,Melody,Electric Guitar,8A,Minor,8,125,sixofwisdom.png
-e280f3372000f00003effc49,107,Queen of intelligence,TRUE,,Rammstein,Du Hast,Du Hast Base 8A 125 OG,Bass,Bass,8A,Minor,8,125,queenofintelligence.png
-e280f3372000f00003effc48,108,King of intelligence,TRUE,,Rammstein,Du Hast,Du Hast Drums 125 OG,Drums,Drums (standard kit),8A,Minor,8,125,kingofintelligence.png
-e280f3372000f00003effc47,109,Ace of wisdom,TRUE,need to cut up phrases,,,Bulgarian Trap Drums 130,Drums,Drums (standard kit),1A,Minor,1,130,aceofwisdom.png
-e280f3372000f00003effc46,110,Two of wisdom,TRUE,,,,Suo bass 3B 125,Drums,Drums (standard kit),3B,Major,3,125,twoofwisdom.png
+e20042143c90641704c3c151,94,candle with stickers on it,FALSE,,,,Flashback Bass 1A 135,Bass,Bass,1A,Minor,1,135,candlewstickers.png
+,95,,FALSE,needs new RFID,,,,,,,,,,
+e20042131ab0641704c3af33,96,dinosaur,FALSE,,Clozee,Secret Place,CZ SP Vox 92,Vox,Vox,4A,Minor,4,92,doubledinosaurplushie.png
+e20042131800641704c3af08,97,pink lotus 1,FALSE,,Clozee,Secret Place,CZ SP Flute strings 92,Melody,Woodwind,4A,Minor,4,92,lotus1and2.png
+e2004212b8f0641704c3a917,98,amortentia bottle,FALSE,,Clozee,Secret Place,CZ SP Base synth 92,Bass,Synth,4A,Minor,4,92,amortentia.png
+e200421317c0641704c3af04,99,buffalo bills skin lotion,FALSE,,Clozee,Secret Place,CZ SP Perc 92,Drums,Drums (standard kit),4A,Minor,4,92,buffallobillsskinlotion.png
+e2004212b8b0641704c3a913,100,liberty club sarsaparilla,FALSE,,Shivarasa,Tala,Tala Vox 8A 140,Vox,Vox,,TBD,,140,sarsaparilla.png
+e2004211f4f0641704c39cd7,101,small round box blue/gold,FALSE,,Shivarasa,Tala,Tala Qanun 8A 140,Melody,Strings,8A,Minor,8,140,bluegoldroundbox.png
+e200421256b0641704c3a2f3,102,Mortis Sanguis Glass Jar,FALSE,,Shivarasa,Tala,Tala Drums 8A 140,Drums,Drums (standard kit),8A,Minor,8,140,FelixFelicis.png
+e2004212b5b0641704c3a8e3,103,Felix Felicis Purple Jar,FALSE,,,,Anti-General koto 11A 140,Melody,Strings,11A,Minor,11,140,MortisSanguis.png
+e200421192b0641704c396b3,104,3 eyed cat sticker purple jar,FALSE,,,,Anti-General drums 11A 140,Drums,Drums (standard kit),11A,Minor,11,140,crystalcat.png
+e280f3372000f00003effc3c,105,Five of wisdom,FALSE,,Rammstein,Du Hast,Du Hast vox 8A 125 ,Vox,Vox,8A,Minor,8,125,fiveofwisdom.png
+e280f3372000f00003effc3e,106,Six of wisdom,FALSE,,Rammstein,Du Hast,Du Hast guitar 8A 125,Melody,Electric Guitar,8A,Minor,8,125,sixofwisdom.png
+e280f3372000f00003effc49,107,Queen of intelligence,FALSE,,Rammstein,Du Hast,Du Hast Base 8A 125 OG,Bass,Bass,8A,Minor,8,125,queenofintelligence.png
+e280f3372000f00003effc48,108,King of intelligence,FALSE,,Rammstein,Du Hast,Du Hast Drums 125 OG,Drums,Drums (standard kit),8A,Minor,8,125,kingofintelligence.png
+e280f3372000f00003effc47,109,Ace of wisdom,FALSE,,,,Bulgarian Trap Drums 130,Drums,Drums (standard kit),1A,Minor,1,130,aceofwisdom.png
+e280f3372000f00003effc46,110,Two of wisdom,FALSE,,,,Suo bass 3B 125,Drums,Drums (standard kit),3B,Major,3,125,twoofwisdom.png
 e280f3372000f00003effc43,111,Page of intelligence,FALSE,,EW Doinkulator,Doink U,"""Doink U"" Vox 122",Vox,Vox,,TBD,,122,pageofintelligence.png
 e280f3372000f00003effc44,112,Nine of intelligence,FALSE,,Eminem,Without me Vox 9B 112,Eminem - Without me Vox 9B 112,Vox,Vox,9B,Major,9,112,nineofintelligence.png
 e280f3372000f00003effc42,113,Ten of intelligence,FALSE,,Gnarls Barkley,Crazy,Crazy vox 4B 112,Vox,Vox,4B,Major,4,112,tenofintelligence.png
@@ -116,28 +116,28 @@ e20042112e70641704c3906f,114,Six of charisma,FALSE,,Gnarls Barkley,Crazy,Crazy m
 e2004210cc30641704c38a4b,115,Five of charisma,FALSE,,Gnarls Barkley,Crazy,Crazy bass 4B 112,Bass,Bass,4B,Major,4,112,fiveofcharisma.png
 e200421253b0641704c3a2c3,116,Four of charisma,FALSE,,Gnarls Barkley,Crazy,Crazy drums 4B 112,Drums,Drums (standard kit),4B,Major,4,112,fourofcharisma.png
 e20042118ff0641704c39687,117,Ace of charisma,FALSE,,,,Double Trouble vox 7A 92,Vox,Vox,7A,Minor,7,92,aceofcharisma.png
-e2004210cef0641704c38a77,118,Page of wisdom,FALSE,,,,Duel of the Fates vox 9A 136,Vox,Vox,9A,Minor,9,136,pageofwisdom.png
-e2004211f4b0641704c39cd3,119,Two of charisma,FALSE,unassigned,,,,,,,,,,twoofcharisma.png
+e2004210cef0641704c38a77,118,Page of wisdom,FALSE,,,,Duel of the Fates vox 9A 75,Vox,Vox,9A,Minor,9,136,pageofwisdom.png
+e2004211f4b0641704c39cd3,119,Two of charisma,FALSE,,,,,,,,,,,twoofcharisma.png
 e20042106cb0641704c38453,120,The empress,FALSE,,,,What's Your Fantasy 11B 140,Vox,Vox,11B,Major,11,140,theempress.png
 e200421130f0641704c39097,121,The high priestess,FALSE,,,,Drageonna house drums 115,Drums,Drums (standard kit),7A,Minor,7,115,thehighpriestess.png
 e20042112e30641704c3906b,122,The magician,FALSE,,,,House stab synth 7A 115,Melody,Synth,7A,Minor,7,115,themagician.png
-e200421192f0641704c396b7,123,Eight of charisma,FALSE,jonathan: bad,,,Mario Drums 8B 105,Drums,Synth,8B,Major,8,105,eightofcharisma.png
-e200421130b0641704c39093,124,The fool,FALSE,,,,Mario lead 8B 105,Vox,Synth,8B,Major,8,105,thefool.png
-e20042106cf0641704c38457,125,The lovers,FALSE,,,,Mario Bass 8B 105,Bass,Bass,8B,Major,8,105,thelovers.png
-e2004211f1f0641704c39ca7,126,The chariot,FALSE,,,,Mario SFX 8B 105,Melody,Samples,8B,Major,8,105,thechariot.png
-e200421069f0641704c38427,127,Queen of charisma,FALSE,unnasigned,,,,,,,TBD,,,queenofcharisma.png
-e20042118fb0641704c39683,128,Ten of charisma,FALSE,unnasigned,,,,,,,TBD,,,tenofcharisma.png
-e2004210ceb0641704c38a73,129,Nine of charisma,FALSE,unnasigned,,,,,,,TBD,,,nineofcharisma.png
-e2004211f1b0641704c39ca3,130,King of charisma,FALSE,unnasigned,,,,,,,TBD,,,kingofcharisma.png
-e200421440e0641704c3c196,131,King of wisdom,FALSE,unnasigned,,,,,,,TBD,,,kingofwisdom.png
-e20042149e20641704c3c76a,132,Quen of wisdom,FALSE,jonathan: bad,,,Odesza SMN mel 11A 115,Melody,Synth,11A,Minor,11,115,queenofwisdom.png
-e200421440a0641704c3c192,133,Knight of wisdom,FALSE,jonathan: bad,,,Cum Sancto Spiritu  vox 7A 115,Vox,Vox,7A,Minor,7,90,knightofwisdom.png
+e200421192f0641704c396b7,123,Eight of charisma,FALSE,,,,,Drums,Synth,7A,Minor,7,115,eightofcharisma.png
+e200421130b0641704c39093,124,The fool,FALSE,,,,,Vox,Synth,7A,Minor,7,115,thefool.png
+e20042106cf0641704c38457,125,The lovers,FALSE,,,,,Bass,Synth,7A,Minor,7,115,thelovers.png
+e2004211f1f0641704c39ca7,126,The chariot,FALSE,,,,,Melody,Synth,7A,Minor,7,115,thechariot.png
+e200421069f0641704c38427,127,Queen of charisma,FALSE,,,,Big Pimpin 9A 146,Melody,Samples,9A,Minor,9,146,queenofcharisma.png
+e20042118fb0641704c39683,128,Ten of charisma,FALSE,,,,GoldenEye 9A 75,Melody,Strings,9A,Minor,9,75,tenofcharisma.png
+e2004210ceb0641704c38a73,129,Nine of charisma,FALSE,,,,Show Me Love 7B 130,Melody,Synth,7B,Major,7,130,nineofcharisma.png
+e2004211f1b0641704c39ca3,130,King of charisma,FALSE,,,,Show me love strings 7B 130,Melody,Strings,7B,Major,7,130,kingofcharisma.png
+e200421440e0641704c3c196,131,King of wisdom,FALSE,,,,Show me love vox 7B 130,Vox,Vox,7B,Major,7,130,kingofwisdom.png
+e20042149e20641704c3c76a,132,Quen of wisdom,FALSE,,,,Odesza SMN mel 11A 115,Melody,Synth,11A,Minor,11,115,queenofwisdom.png
+e200421440a0641704c3c192,133,Knight of wisdom,FALSE,,,,Cum Sancto Spiritu  vox 7A 115,Vox,Vox,7A,Minor,7,90,knightofwisdom.png
 e20042149e60641704c3c76e,134,Three of charisma,FALSE,,,,XTW_80_Peed_Full_Drums,Drums,Drums (standard kit),,TBD,,80,threeofcharisma.png
-e200421069b0641704c38423,135,The emperor,FALSE,unnasigned,,,,,,,,,,theemperor.png
-,136,,FALSE,,,,Rufus du Sol 7B 124,Drums,Drums (standard kit),7B,Major,7,124,
-,137,,FALSE,,,,,,,,,,,
-,138,,FALSE,,,,,,,,,,,
-,139,,FALSE,,,,,,,,,,,
+e200421069b0641704c38423,135,The emperor,FALSE,,,,Rufus du Sol 7B 124,Drums,Drums (standard kit),7B,Major,7,124,theemperor.png
+,136,,FALSE,"NEEDS NEW RIFD, left the key out intentionally so it doesn't get recommended as a recipe",,,Mario Drums 8B 105,Drums,Synth,8B,Major,8,105,8bitgoomba.png
+,137,,FALSE,"NEEDS NEW RIFD, left the key out intentionally so it doesn't get recommended as a recipe",,,Mario lead 8B 105,Vox,Synth,8B,Major,8,105,8bitmariojump2.png
+,138,,FALSE,"NEEDS NEW RIFD, left the key out intentionally so it doesn't get recommended as a recipe",,,Mario Bass 8B 105,Bass,Bass,8B,Major,8,105,luigijump8bit.png
+,139,,FALSE,"NEEDS NEW RIFD, left the key out intentionally so it doesn't get recommended as a recipe",,,Mario SFX 8B 105,Melody,Samples,8B,Major,8,105, 8bitstar.png
 ,140,,FALSE,,,,,,,,,,,
 ,141,,FALSE,,,,,,,,,,,
 ,142,,FALSE,,,,,,,,,,,
