@@ -15,7 +15,8 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "postinstall": "cd backend && yarn install",
-    "start-backend": "cd backend && yarn start"
+    "start-backend": "cd backend && yarn start",
+    "start-frontend": "vite"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
