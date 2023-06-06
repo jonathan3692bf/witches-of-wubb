@@ -3,6 +3,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        fondamento: ['Fondamento', 'sans-serif'],
+      },
       backgroundImage: theme => ({
         'recipe-bg': "radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%), url('/images/script_bg.jpg')"
       }),

@@ -1,34 +1,27 @@
-//import { useContext } from 'react';
-//import { AbletonContext } from '../contexts/ableton-provider';
-// import { LoggerContext } from '../contexts/logger-provider';
-
 import useGrimoire from '~/hooks/use-grimoire';
 import { getBackgroundColorFromType } from '~/lib/utils';
 
 export default function RecipeBox() {
-  //const { queuedClips, playingClips, stoppingClips } = useContext(AbletonContext);
-  const { spellRecipe, generateNewSpell } = useGrimoire();
+  // const { queuedClips, playingClips, stoppingClips } = useContext(AbletonContext);
   // const { logger } = useContext(LoggerContext);
-  console.log('spell receipe', spellRecipe);
+  // console.log('spell receipe', spellRecipe);
+  const { spellRecipe, generateNewSpell, generateNewSpellName } = useGrimoire();
 
-  // Object.entries(spellRecipe).map(([type, recipe]) => {
-
-  // })
   return (
     <div id='inner_recipe_box' className='max-w-full mt-[140px]'>
       <div id='recipe-bg' className='h-[23vh] w-full max-h-full mx-auto bg-recipe-bg'>
         <div id='recipe-header' className='h-[80px] grid grid-cols-3'>
           <div
             id='title'
-            className='flex items-center justify-center gap-6 col-start-2 text-xl -top-[20px] align-top'
+            className='flex items-center stroke-black justify-center gap-6 col-start-2 text-xl -top-[20px] align-top font-fondamento'
           >
-            Suggested Recipe
+            Suggested Recipe: {generateNewSpellName()}
           </div>
           <div id='new-spell' className='float-right'>
             <button
               id='new-spell-btn'
               style={{ backgroundImage: `url(/images/new-spell.gif)` }}
-              className='bg-cover h-[100px] w-[100px] text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
+              className='bg-cover h-[100px] w-[100px] stroke-black font-fondamento text-white py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50 float-right mr-8 mt-3'
               onClick={generateNewSpell}
             ></button>
           </div>
@@ -54,7 +47,7 @@ export default function RecipeBox() {
                 ></img>
                 <div
                   id={`ingredient-${recipe.ingredientName}-label`}
-                  className='mt-3 relative text-xl scale-150'
+                  className='mt-3 relative text-xl scale-150 stroke-black font-fondamento'
                 >
                   {`${recipe.ingredientName}`}
                 </div>

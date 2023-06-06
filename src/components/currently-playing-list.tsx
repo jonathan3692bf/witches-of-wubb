@@ -35,12 +35,12 @@ export default function CurrentlyPlayingList({
             <div id={`pillar-${pillar}`} className='w-[70%] text-center' key={pillar}>
               <div className='object-scale-down grid grid-cols-4'>
                 {index % 2 === 0 ? (
-                  <div id='bpm' className='col-start-2 col-span-3 h-[50px]'>
+                  <div id='bpm' className='col-start-2 col-span-3 h-[50px] font-fondamento'>
                     BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
                   </div>
                 ) : null}
                 {index % 2 === 1 ? (
-                  <div id='bpm' className='col-start-1 col-span-3 h-[50px]'>
+                  <div id='bpm' className='col-start-1 col-span-3 h-[50px] font-fondamento'>
                     BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
                   </div>
                 ) : null}
@@ -93,7 +93,7 @@ export default function CurrentlyPlayingList({
                 <div className='grid grid-cols-4'>
                   <div
                     id='clip-name'
-                    className='mt-[60px] justify-center col-start-2 col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
+                    className='mt-[60px] stroke-black font-fondamento justify-center col-start-2 col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
                   >
                     {clipName}
                   </div>
@@ -103,7 +103,7 @@ export default function CurrentlyPlayingList({
                 <div className='grid grid-cols-4'>
                   <div
                     id='clip-name'
-                    className='mt-[60px] justify-center col-start-1  col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
+                    className='mt-[60px] stroke-black font-fondamento justify-center col-start-1  col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
                   >
                     {clipName}
                   </div>

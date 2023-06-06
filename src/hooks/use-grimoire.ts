@@ -17,6 +17,58 @@ export default function useGrimoire() {
       return clip;
     });
 
+  function generateNewSpellName() {
+    const listOfSpellsNames = [
+      'Dancing Unicorn Vibez',
+      'The Frog Princex',
+      'Happily Never After',
+      'The Rite of Spring Fling',
+      'Bling Shot',
+      'Cup in Smoke',
+      'Unconvictional Love',
+      'Fleeting Sex Appeal',
+      'Cosmic Apotheosis',
+      'Victory Sound',
+      'Cheers for Fears',
+      'Inner Demon Lure',
+      'Self a Steam',
+      'Mind Fog',
+      'Woo Goo',
+      'Immorality',
+      'Cockroaching',
+      'Seduction Production',
+      'Even Higher Now',
+      'Curse Reverse',
+      'Bad Witch Boogie',
+      'Aurora Aura',
+      'Essence of Hell',
+      'Twerking Toadstool',
+      'Wand from the Pond',
+      'Telepathic Erection',
+      'Pole Gazing',
+      'Rebirthing Rumba',
+      'Black Hole Boom Boom',
+      'Astral Ejecting',
+      'Celestial Soup',
+      'Starlight Shuffle',
+      'Swirling Dervish',
+      "Big Simpin'",
+      'Songs of the Subs',
+      'Badonka-Dom',
+      'Pagan Popper',
+      'Bone Drone',
+      'Flower Shower',
+    ];
+
+    let spellName = '';
+
+    if (actuallyPlayingClips.length === 1) {
+      spellName = listOfSpellsNames[Math.floor(Math.random() * listOfSpellsNames.length)];
+    }
+
+    return spellName;
+  }
+
   function generateNewSpell() {
     const randomClip =
       actuallyPlayingClips[Math.floor(Math.random() * actuallyPlayingClips.length)];
@@ -28,6 +80,7 @@ export default function useGrimoire() {
         newSpell[type] = reccs[Math.floor(Math.random() * reccs.length)];
       }
     }
+
     setSpellRecipe(newSpell);
   }
 
@@ -40,5 +93,5 @@ export default function useGrimoire() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actuallyPlayingClips.length]);
 
-  return { spellRecipe, generateNewSpell };
+  return { spellRecipe, generateNewSpell, generateNewSpellName };
 }

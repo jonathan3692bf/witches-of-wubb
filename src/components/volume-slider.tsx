@@ -20,7 +20,10 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
   return (
     <>
       <div id={`${pillar}-volume-range`} className='w-full max-h-full text-center flex flex-col'>
-        <label htmlFor={`${pillar}-volume-range`} className='block mb-2 text-sm font-medium '>
+        <label
+          htmlFor={`${pillar}-volume-range`}
+          className='block mb-2 text-sm font-medium stroke-black font-fondamento'
+        >
           Volume
         </label>
         <div className='flex flex-row text-lg max-h-full gap-4 justify-center'>
@@ -45,7 +48,7 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
         </div>
         <button
           onClick={resetVolume}
-          className='bg-white hover:bg-gray-100 text-gray-800 font-semibold px-1 w-min border border-gray-400 rounded shadow mx-auto mt-4'
+          className='bg-white font-fondamento hover:bg-gray-100 text-gray-800 font-semibold px-1 w-min border border-gray-400 rounded shadow mx-auto mt-4'
         >
           Reset
         </button>
