@@ -54,7 +54,7 @@ module.exports = {
             '@apply outline-none': {},
           },
           '&::-webkit-slider-thumb': {
-            '@apply appearance-none h-32 w-32 bg-center bg-no-repeat border-none scale-100': {},
+            '@apply appearance-none h-32 w-9 bg-center bg-no-repeat border-none scale-100': {},
             'background-image': "url('/images/arcane_tempo_slider_120.png')",
           },
 

@@ -14,7 +14,7 @@ export default function TempoSlider() {
   }
 
   return (
-    <div className='w-full text-center flex flex-col'>
+    <div className='w-full text-center flex flex-col items-center'>
       <label
         htmlFor='tempo-slider'
         className='block mb-12 text-xl font-medium stroke-black font-fondamento'
@@ -31,7 +31,7 @@ export default function TempoSlider() {
           max={MAX_VALUE}
           value={tempo}
           onChange={handleChange}
-          className='w-[50vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-tempo-slider'
+          className='w-[33vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-tempo-slider'
         />
         <span className=' text-gray-500 dark:text-gray-400'>{MAX_VALUE}</span>
       </div>

@@ -10,7 +10,7 @@ export default function CurrentlyPlayingList() {
   // const { logger } = useContext(LoggerContext);
 
   return (
-    <div id='inner_playing' className='mb-[90px] w-screen relative'>
+    <div id='inner_playing' className='w-screen relative'>
       <div id='pillars' className='mt-5 w-screen grid grid-cols-2 gap-20 justify-items-center'>
         {[1, 2, 3, 4]?.map((pillar, index) => {
           const playing = playingClips[index];

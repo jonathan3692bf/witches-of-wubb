@@ -36,7 +36,7 @@ export default function App() {
       <button onClick={() => setIsModalOpen(true)} className='absolute start-0 p-4'>
         &nbsp;&nbsp;&nbsp;
       </button>
-      <div id='container_tempo' className='absolute top-[800px] left-[200px] h-[16vh]'>
+      <div id='container_tempo' className='relative -top-[50px]'>
         <TempoSlider />
       </div>
       <div id='container_recipe_box' className=''>

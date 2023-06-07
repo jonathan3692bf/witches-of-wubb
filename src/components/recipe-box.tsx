@@ -8,7 +8,7 @@ export default function RecipeBox() {
   const { spellRecipe, generateNewSpell, spellName } = useGrimoire();
 
   return (
-    <div id='inner_recipe_box' className='max-w-full mt-[140px]'>
+    <div id='inner_recipe_box' className='max-w-full'>
       <div id='recipe-bg' className='h-[23vh] w-full max-h-full mx-auto bg-recipe-bg'>
         <div id='recipe-header' className='flex w-screen relative align-center justify-center'>
           <div id='title' className='font-fondamento stroke-black flex gap-2 mt-5 mb-2  text-2xl'>
