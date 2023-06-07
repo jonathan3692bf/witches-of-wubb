@@ -8,7 +8,7 @@ const RESET_VALUE = 0.6;
 export default function VolumeSlider({ pillar }: { pillar: number }) {
   // const { logger } = useContext(LoggerContext);
   const { trackVolume, changeTrackVolume } = useContext(AbletonContext);
-  const value = trackVolume[pillar] ? Math.max(trackVolume[pillar], 0.7) : 0;
+  const value = trackVolume[pillar] ? Math.min(trackVolume[pillar], 0.7) : 0;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newVolume = Number(e.target.value);
