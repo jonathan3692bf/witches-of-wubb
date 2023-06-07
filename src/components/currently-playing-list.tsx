@@ -30,16 +30,14 @@ export default function CurrentlyPlayingList() {
           return (
             <div id={`pillar-${pillar}`} className='w-[70%] text-center' key={pillar}>
               <div className='object-scale-down grid grid-cols-4'>
-                {index % 2 === 0 ? (
-                  <div id='bpm' className='col-start-2 col-span-3 h-[50px] font-fondamento'>
-                    BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
-                  </div>
-                ) : null}
-                {index % 2 === 1 ? (
-                  <div id='bpm' className='col-start-1 col-span-3 h-[50px] font-fondamento'>
-                    BPM{clipTempo[index] ? ` - (${Math.ceil(clipTempo[index] as number)})` : ``}
-                  </div>
-                ) : null}
+                <div
+                  id='bpm'
+                  className={`col-start-${
+                    index % 2 === 0 ? 2 : 1
+                  } col-span-3 h-[50px] font-fondamento`}
+                >
+                  {clipTempo[index] ? `${Math.ceil(clipTempo[index] as number)} ` : ``}BPM
+                </div>
                 {index % 2 === 0 ? (
                   <div className='object-scale-down max-h-full max-w-full mr-20'>
                     <VolumeSlider pillar={index} />
