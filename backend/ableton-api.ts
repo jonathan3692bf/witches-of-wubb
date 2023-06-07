@@ -239,7 +239,7 @@ export const GetTracksAndClips = async () => {
       if (clipSlotIndex >= 0) {
         const clip = allAbletonClips[pillar][clipSlotIndex];
         const clipName = clip?.raw.name;
-        if (clipName && clipName !== ATTRACTOR_STATE_CLIP_NAME) {
+        if (clipName) {
           const warpMarkers = await clip.get('warp_markers');
           const bpm = CalculateBPMFromWarpMarkers(warpMarkers);
           const clipMetadata = ClipNameToInfoMap[clipName.replace(/[* ]/g, '')];

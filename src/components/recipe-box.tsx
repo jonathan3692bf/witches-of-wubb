@@ -30,7 +30,7 @@ export default function RecipeBox() {
               <div className='relative' key={recipe.rfid}>
                 <div
                   id={`ingredient-${recipe.ingredientName}-label`}
-                  className='relative text-xl stroke-black font-fondamento min-h-[1rem]'
+                  className='relative text-xl stroke-black font-fondamento min-h-[1rem] capitalize'
                 >
                   {recipe.ingredientName}
                 </div>
