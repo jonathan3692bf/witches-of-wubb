@@ -15,11 +15,11 @@ export default function RecipeBox() {
             <div>Suggested Recipe:</div>
             <div>{spellName}</div>
           </div>
-          <div id='new-spell' className='absolute right-0'>
+          <div id='new-spell' className='absolute right-0 z-10'>
             <button
               id='new-spell-btn'
               style={{ backgroundImage: `url(/images/new-spell.gif)` }}
-              className='bg-cover h-[100px] w-[100px] py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50'
+              className='bg-cover h-[120px] w-[120px] py-2 px-4 rounded transition duration-200 ease-in-out hover:bg-opacity-50'
               onClick={generateNewSpell}
             />
           </div>
@@ -29,7 +29,7 @@ export default function RecipeBox() {
             return recipe ? (
               <div
                 id={`ingredient-${recipe.rfid}-${type}`}
-                className='relative -top-[80px] scale-50'
+                className='relative -top-[93px] scale-50'
                 key={recipe.rfid}
               >
                 <div
@@ -45,7 +45,7 @@ export default function RecipeBox() {
                 ></img>
                 <div
                   id={`ingredient-${recipe.ingredientName}-label`}
-                  className='mt-3 relative text-xl scale-150 stroke-black font-fondamento'
+                  className='mt-3 relative text-xl scale-[2] stroke-black font-fondamento'
                 >
                   {recipe.ingredientName}
                 </div>
