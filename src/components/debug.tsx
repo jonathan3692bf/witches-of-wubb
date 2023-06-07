@@ -54,6 +54,13 @@ function ClipButton({
   );
 }
 
+const clips = Object.entries(RFIDToClipMap)
+  .map(([rfid, data]) => ({ ...data, rfid }))
+  .sort((a, b) => {
+    if (a && b) return a?.clipName?.localeCompare(b?.clipName);
+    return 0;
+  });
+
 export default function DebugModal({
   isModalOpen,
   setIsModalOpen,
@@ -177,7 +184,7 @@ export default function DebugModal({
                           </div>
                           <div className='grid gap-4'>
                             <hr />
-                            {Object.entries(RFIDToClipMap).map(([rfid, { clipName }]) => {
+                            {clips.map(({ rfid, clipName }) => {
                               const playing = playingClips[index]?.clipName === clipName;
                               const stopping = stoppingClips[index]?.clipName === clipName;
                               const queued = queuedClips[index]?.clipName === clipName;

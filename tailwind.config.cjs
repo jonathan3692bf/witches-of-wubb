@@ -60,12 +60,12 @@ module.exports = {
 
         },
         'input[type="range"].custom-volume-slider': { // Add new CSS class here
-          '@apply appearance-none': {},
+          '@apply appearance-none -rotate-90 rounded-lg translate-y-20': {},
           '&:focus': {
             '@apply outline-none': {},
           },
           '&::-webkit-slider-thumb': {
-            '@apply appearance-none h-64 w-64 bg-center bg-no-repeat border-none': {},
+            '@apply appearance-none h-16 w-4 bg-center bg-no-repeat border-none': {},
             'background-image': "url('/images/arcane_volume_slider_120.png')", // Use new image URL here
           },
         },

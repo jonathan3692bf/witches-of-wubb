@@ -31,7 +31,7 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
         >
           Volume
         </label>
-        <div className='flex flex-row text-lg max-h-full gap-4 justify-center'>
+        <div className='flex flex-row text-lg max-h-full gap-4 justify-center h-[170px]'>
           <input
             id={`${pillar}-volume-range`}
             type='range'
@@ -40,8 +40,8 @@ export default function VolumeSlider({ pillar }: { pillar: number }) {
             step={0.01}
             value={value}
             onChange={handleChange}
-            orient='vertical'
-            className='w-[20px] h-[170px] rounded-lg appearance-none cursor-pointer bg-gray-200 dark:bg-gray-700 accent-red-800 custom-volume-slider'
+            // orient='vertical'
+            className='h-2 w-[170px] cursor-pointer accent-red-800 custom-volume-slider'
           />
         </div>
         <button

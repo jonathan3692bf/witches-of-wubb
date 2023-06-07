@@ -33,12 +33,12 @@ export default function App() {
   return (
     <div id='container_playing' className='overflow-hidden max-h-screen'>
       <CurrentlyPlayingList />
-      <button onClick={() => setIsModalOpen(true)} className='absolute start-0 p-4'>
-        &nbsp;&nbsp;&nbsp;
-      </button>
       <div id='container_tempo' className='relative -top-[50px]'>
         <TempoSlider />
       </div>
+      <button onClick={() => setIsModalOpen(true)} className='absolute start-0 p-4 z-10'>
+        &nbsp;&nbsp;&nbsp;
+      </button>
       <div id='container_recipe_box' className=''>
         <RecipeBox />
       </div>
