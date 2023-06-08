@@ -259,7 +259,7 @@ export const GetTracksAndClips = async () => {
             EmitEventWithoutResetingTimout('clip_playing', browserInfo);
           } else {
             EmitEvent('clip_started', browserInfo);
-            SetTrackVolume(pillar, 0.85);
+            SetTrackVolume(pillar, 0.6);
           }
           if (playingClips.every((item) => !item)) {
             // we're coming from a silent state, so let's set the tempo to this new clip's bpm
