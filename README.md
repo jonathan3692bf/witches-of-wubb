@@ -12,6 +12,18 @@ You'll need to make sure that `ableton-js` is installed. You can find the instal
 yarn install
 ```
 
+### On Windows
+```
+npm install --global yarn
+npm install -g nodemon
+```
+
+run powershell as admin 
+```
+Set-ExecutionPolicy RemoteSigned
+```
+
+
 ### Run project
 
 This project consists of a backend and frontend that you'll need to start independently. Both feature hot-reloading when files have changed, so you don't need to do anything special during development.
