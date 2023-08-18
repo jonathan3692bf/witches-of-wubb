@@ -195,6 +195,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
       `Clip ${clipName} is neither playing or queue. Stopping pillar ${pillar + 1} just in case.`,
     );
     await tracks[pillar].sendCommand('stop_all_clips');
+    EmitEventWithoutResetingTimout('clip_stopped', { pillar });
   }
 }
 
