@@ -4,9 +4,13 @@ import { RFIDToClipMap } from '../utils/get-clip-from-rfid';
 import logger from '../utils/logger';
 import EmitEvent from './outgoing-events';
 import {
+  GetKeyLockState,
+  GetMasterKey,
   GetTempo,
   GetTrackVolumes,
   QueueClip,
+  SetKeyLockState,
+  SetMasterKey,
   SetTempo,
   SetTrackVolume,
   StopOrRemoveClipFromQueue,
@@ -159,6 +163,20 @@ export function AddSocketEventsHandlers(socket: Socket) {
   });
   socket.on('set_track_volume', async ({ pillar, volume }: SetTrackVolumeInputType) => {
     await SetTrackVolume(pillar, volume);
+  });
+  socket.on('get_keylock_state', (_, callback) => {
+    callback(GetKeyLockState());
+  });
+  socket.on('set_keylock_state', (state: boolean, callback) => {
+    SetKeyLockState(state);
+    callback(GetKeyLockState());
+  });
+  socket.on('get_master-key', (_, callback) => {
+    callback(GetMasterKey());
+  });
+  socket.on('set_master-key', (newKey: string, callback) => {
+    SetMasterKey(newKey);
+    callback(GetMasterKey());
   });
   return socket;
 }

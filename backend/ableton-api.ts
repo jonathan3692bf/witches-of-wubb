@@ -26,6 +26,9 @@ export let tracks: Track[];
 export let trackVolumes: Array<DeviceParameter>;
 export let phraseLeader: ClipInfo;
 export let cleanUpPhraseLeaderEventListener: any;
+
+export let keyLockEnabled = true;
+export let masterKey = '1A';
 export const stoppingClips: ClipList = [];
 export const playingClips: ClipList = [];
 export const triggeredClips: ClipList = [];
@@ -34,6 +37,7 @@ export const queuedClips: ClipList = [];
 export const ableton = new Ableton({ logger: logger });
 
 export const TRIGGER_ORDER = [ClipTypes.Drums, ClipTypes.Melody, ClipTypes.Bass, ClipTypes.Vox];
+export const KEY_LEADER_ORDER = [ClipTypes.Vox, ClipTypes.Melody, ClipTypes.Bass, ClipTypes.Drums];
 
 export async function StartAbleton() {
   logger.info('Starting AbletonJS');
@@ -351,4 +355,20 @@ export function CalculateBPMFromWarpMarkers(warp_markers: WarpMarker[]) {
   const { beat_time: endBT, sample_time: endST } = warp_markers.slice(-1)[0];
   const bpm = (endBT - startBT) / ((endST - startST) / 60);
   return bpm;
+}
+
+export function GetKeyLockState() {
+  return keyLockEnabled;
+}
+
+export function SetKeyLockState(state: boolean) {
+  keyLockEnabled = state;
+}
+
+export function GetMasterKey() {
+  return masterKey;
+}
+
+export function SetMasterKey(newKey: string) {
+  masterKey = newKey;
 }
