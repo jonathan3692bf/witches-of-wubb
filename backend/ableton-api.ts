@@ -314,6 +314,16 @@ export const GetTracksAndClips = async () => {
             throw new Error(`Couldn't find clip metadata for "${clipName}"`);
           }
 
+          if (playingClips[pillar]?.clipName && clipName !== playingClips[pillar]?.clipName) {
+            // In the case where a whole new song gets queued and triggered without the previous
+            // song being stopped, we need to make sure that we transpose the previous song back to 0
+            const previousClipsInLoop = FindAllClipsInLoop(playingClips[pillar]?.clipName, pillar);
+            previousClipsInLoop.forEach(
+              (clip) =>
+                clip && transposeClipToNewKey({ ...(playingClips[pillar] as ClipInfo), clip }, ''),
+            );
+          }
+
           const warpMarkers = await clip.get('warp_markers');
           const bpm = CalculateBPMFromWarpMarkers(warpMarkers);
           const browserInfo = { ...clipInfo, bpm };
