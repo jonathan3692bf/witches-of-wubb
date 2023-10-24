@@ -2,7 +2,7 @@
 
 ## Setup
 
-You should have `node` (version 18+) installed as well as `yarn` installed. See [yarnpkg.com](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) for insall options.
+You should have `node` (version 21+) installed as well as `yarn` installed. See [yarnpkg.com](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) for insall options.
 
 You'll need to make sure that `ableton-js` is installed. You can find the installation steps here: [leolabs/ableton-js](https://github.com/leolabs/ableton-js#prerequisites).
 
@@ -13,16 +13,17 @@ yarn install
 ```
 
 ### On Windows
+
 ```
 npm install --global yarn
 npm install -g nodemon
 ```
 
-run powershell as admin 
+run powershell as admin
+
 ```
 Set-ExecutionPolicy RemoteSigned
 ```
-
 
 ### Run project
 
