@@ -144,9 +144,7 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
 
   function changeMasterKey(key: string) {
     logger.debug('set_master-key:', key);
-    socket?.emit('set_master-key', key, (newKey: string) => {
-      setMasterKey(newKey);
-    });
+    socket?.emit('set_master-key', key);
   }
 
   function changeKeylock(newState: boolean) {

@@ -174,9 +174,8 @@ export function AddSocketEventsHandlers(socket: Socket) {
   socket.on('get_master-key', (_, callback) => {
     callback(GetMasterKey());
   });
-  socket.on('set_master-key', (newKey: string, callback) => {
+  socket.on('set_master-key', (newKey: string) => {
     SetMasterKey(newKey);
-    callback(GetMasterKey());
   });
   return socket;
 }

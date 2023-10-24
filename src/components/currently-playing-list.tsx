@@ -19,6 +19,7 @@ export default function CurrentlyPlayingList() {
   // const { logger } = useContext(LoggerContext);
 
   function rotateKeyBackwards() {
+    if (!masterKey) return;
     const pitch = masterKey.match(/[A-Z]/g)?.[0] ?? '';
     const key = Number(masterKey.match(/\d+/g)?.[0] ?? 1);
     if (pitch.toLowerCase() === 'b') {
@@ -33,6 +34,7 @@ export default function CurrentlyPlayingList() {
   }
 
   function rotateKeyForwards() {
+    if (!masterKey) return;
     const pitch = masterKey.match(/[A-Z]/g)?.[0] ?? '';
     const key = Number(masterKey.match(/\d+/g)?.[0] ?? 1);
     if (pitch.toLowerCase() === 'a') {
@@ -59,13 +61,17 @@ export default function CurrentlyPlayingList() {
         />
         <label htmlFor='keylock'>Auto adjust tracks to key</label>
 
-        <button className='p-3' onClick={rotateKeyBackwards}>
-          &lt;
-        </button>
-        <h2>{masterKey}</h2>
-        <button className='p-3' onClick={rotateKeyForwards}>
-          &gt;
-        </button>
+        {masterKey && (
+          <button className='p-3' disabled={!masterKey} onClick={rotateKeyBackwards}>
+            &lt;
+          </button>
+        )}
+        <h2>{masterKey || 'N/A'}</h2>
+        {masterKey && (
+          <button className='p-3' disabled={!masterKey} onClick={rotateKeyForwards}>
+            &gt;
+          </button>
+        )}
       </div>
       <div id='pillars' className='mt-5 w-screen grid grid-cols-2 gap-20 justify-items-center'>
         {[1, 2, 3, 4]?.map((pillar, index) => {

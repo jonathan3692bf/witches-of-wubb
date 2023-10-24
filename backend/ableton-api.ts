@@ -12,6 +12,7 @@ import { ClipBoard, ClipInfo, ClipList, ClipMetadataType, ClipTypes, WarpMarker 
 import EmitEvent, { EmitEventWithoutResetingTimout } from './events/outgoing-events';
 import { AddSocketEventsHandlers, OSCEventHandlers } from './events/incoming-events';
 import { ClipNameToInfoMap } from './utils/get-clip-from-rfid';
+import { transpositions } from './key-transpositions';
 
 let oscServer: nodeOSC.Server;
 export const sockets: socketio.Socket[] = [];
@@ -28,10 +29,9 @@ export let phraseLeader: ClipInfo;
 export let cleanUpPhraseLeaderEventListener: any;
 
 export let keyLockEnabled = true;
-export let masterKey = '1A';
+export let masterKey = '';
 export const stoppingClips: ClipList = [];
 export const playingClips: ClipList = [];
-export const triggeredClips: ClipList = [];
 export const queuedClips: ClipList = [];
 
 export const ableton = new Ableton({ logger: logger });
@@ -50,6 +50,7 @@ export async function handleTimeout() {
   for (let i = 0; i < 4; i++) {
     await tracks[i].sendCommand('stop_all_clips');
   }
+  masterKey = '';
 }
 
 export function startTimeoutTimer() {
@@ -86,9 +87,9 @@ export function ConnectOSCServer(server: nodeOSC.Server) {
   oscServer.on('message', OSCEventHandlers);
 }
 
-const MemoizedClipLocation = memoize(
+const MemoizedClipIndex = memoize(
   (clipName, pillar) =>
-    allAbletonClips[pillar].find((clip) => {
+    allAbletonClips[pillar].findIndex((clip) => {
       return clip?.raw.name.trim() === clipName.trim();
     }),
   (clipName, pillar) => `${clipName}-${pillar}`,
@@ -107,25 +108,72 @@ export function AddWebSocket(s: socketio.Socket) {
   AddSocketEventsHandlers(s);
 }
 
+const FindAllClipsInLoop = memoize(
+  (clipName, pillar) => {
+    logger.info(`Trying to find all clips in loop on pillar ${pillar + 1} > ${clipName}`);
+    const firstClipIndex = MemoizedClipIndex(clipName, pillar);
+    if (firstClipIndex < 0) return [];
+
+    const lastClipIndex = allAbletonClips[pillar]
+      .slice(firstClipIndex, firstClipIndex + 20)
+      .findLastIndex((clip) => {
+        return clip?.raw.name.trim() === clipName.trim();
+      });
+    logger.debug(
+      `Loop for ${clipName} found on ${pillar + 1} > [${firstClipIndex}, ${
+        firstClipIndex + lastClipIndex + 1
+      }]`,
+    );
+    return allAbletonClips[pillar].slice(firstClipIndex, firstClipIndex + lastClipIndex + 1);
+  },
+  (clipName, pillar) => `${clipName}-${pillar}`,
+);
+
+// function FindAllClipsInLoop(clipName: string, pillar: number) {
+//   logger.info(`Trying to find all clips in loop on pillar ${pillar + 1} > ${clipName}`);
+//   const firstClipIndex = MemoizedClipIndex(clipName, pillar);
+//   console.log('clips', firstClipIndex);
+//   if (firstClipIndex < 0) return [];
+
+//   const lastClipIndex = allAbletonClips[pillar]
+//     .slice(firstClipIndex, firstClipIndex + 20)
+//     .findLastIndex((clip) => {
+//       return clip?.raw.name.trim() === clipName.trim();
+//     });
+//   logger.debug(`Loop: ${pillar + 1} > [${firstClipIndex}, ${firstClipIndex + lastClipIndex + 1}]`);
+//   return allAbletonClips[pillar].slice(firstClipIndex, firstClipIndex + lastClipIndex + 1);
+// }
+
 export function QueueClip(clipMetadata: ClipMetadataType, pillar: number) {
-  const { clipName } = clipMetadata;
+  const { clipName, key } = clipMetadata;
   logger.info(`Begin queing clip ${clipName}`);
   if (queuedClips[pillar]?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '')) {
     logger.info(`Clip ${clipName} is already queued`);
     return;
   }
-  const clip = MemoizedClipLocation(clipName, pillar);
-
-  if (clip) {
+  const clips = FindAllClipsInLoop(clipName, pillar);
+  console.log('clips', clips);
+  if (clips.length) {
     // if no items are playing, skip the queue
     const silence = playingClips.every((clip) => !clip);
+
+    if (playingClips.every((item) => !item) || masterKey === '') {
+      // we're coming from a silent state, or an undefined key state, so let's try to set master key
+      clipMetadata.key && SetMasterKey(key ?? '');
+    }
+
+    // TODO: transpose all clips in a block (even when toggling the key lock)
+    keyLockEnabled &&
+      clips.forEach(
+        (clip) => clip && transposeClipToNewKey({ ...clipMetadata, clip, pillar }, masterKey),
+      );
     if (silence) {
       logger.info(`Triggering clip "${clipName}" on pillar ${pillar + 1}`);
-      clip?.fire();
-    } else {
+      clips[0]?.fire();
+    } else if (clips[0]) {
       logger.info(`Queuing clip "${clipName}" on pillar ${pillar + 1}`);
       queuedClips[pillar] = {
-        clip,
+        clip: clips[0],
         pillar,
         ...clipMetadata,
       };
@@ -158,6 +206,7 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   logger.trace(`Try to stop or unqueue clip ${clipName}`);
   const playingClip = playingClips[pillar];
   const queuedClip = queuedClips[pillar];
+
   const isClipPlaying =
     playingClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
   if (isClipPlaying) {
@@ -187,6 +236,13 @@ export async function StopOrRemoveClipFromQueue(clipName: string, pillar: number
   const isClipQueued = queuedClip?.clipName.replace(/[* ]/g, '') === clipName.replace(/[* ]/g, '');
   if (isClipQueued) {
     logger.info(`Removing clip from queue "${clipName}" on pillar ${pillar + 1}`);
+    if (keyLockEnabled) {
+      const queuedClipsInLoop = FindAllClipsInLoop(clipName, pillar);
+
+      queuedClipsInLoop.forEach(
+        (clip) => clip !== null && transposeClipToNewKey({ ...queuedClip, clip }, ''),
+      );
+    }
     queuedClips[pillar] = null;
     EmitEvent('clip_unqueued', {
       ...queuedClip,
@@ -241,12 +297,11 @@ export const GetTracksAndClips = async () => {
     const clipSlots = await track.get('clip_slots');
 
     track.addListener('playing_slot_index', async (clipSlotIndex: number) => {
+      logger.info('Playing slot index changed: ' + clipSlotIndex);
       if (clipSlotIndex >= 0) {
         const clip = allAbletonClips[pillar][clipSlotIndex];
         const clipName = clip?.raw.name;
         if (clipName) {
-          const warpMarkers = await clip.get('warp_markers');
-          const bpm = CalculateBPMFromWarpMarkers(warpMarkers);
           const clipMetadata = ClipNameToInfoMap[clipName.replace(/[* ]/g, '')];
           const clipInfo = {
             ...clipMetadata,
@@ -259,6 +314,8 @@ export const GetTracksAndClips = async () => {
             throw new Error(`Couldn't find clip metadata for "${clipName}"`);
           }
 
+          const warpMarkers = await clip.get('warp_markers');
+          const bpm = CalculateBPMFromWarpMarkers(warpMarkers);
           const browserInfo = { ...clipInfo, bpm };
           if (playingClips[pillar]?.clipName === clipName) {
             EmitEventWithoutResetingTimout('clip_playing', browserInfo);
@@ -269,7 +326,9 @@ export const GetTracksAndClips = async () => {
           if (playingClips.every((item) => !item)) {
             // we're coming from a silent state, so let's set the tempo to this new clip's bpm
             SetTempo(bpm);
+            clipMetadata.key && SetMasterKey(clipMetadata.key);
           }
+
           playingClips[pillar] = { ...clipInfo, clip };
 
           const newPhraseLeader = FindNextPhraseLeader(playingClips);
@@ -285,6 +344,18 @@ export const GetTracksAndClips = async () => {
           pillar,
           clip: undefined,
         });
+
+        if (clipInfo?.clipName && keyLockEnabled) {
+          // const stoppingClipsInLoop = FindAllClipsInLoop(clipInfo?.clipName, pillar);
+          // stoppingClipsInLoop.forEach(
+          //   (clip) => clip && transposeClipToNewKey({ ...clipInfo, clip }, ''),
+          // );
+          const playingClipsInLoop = FindAllClipsInLoop(clipInfo?.clipName, pillar);
+          playingClipsInLoop.forEach(
+            (clip) => clip && transposeClipToNewKey({ ...clipInfo, clip }, ''),
+          );
+        }
+
         stoppingClips[pillar] = null;
         playingClips[pillar] = null;
       }
@@ -363,6 +434,20 @@ export function GetKeyLockState() {
 
 export function SetKeyLockState(state: boolean) {
   keyLockEnabled = state;
+
+  logger.info(`Key lock: ${state}`);
+  playingClips.forEach((song, pillar) => {
+    song &&
+      FindAllClipsInLoop(song.clipName, pillar).forEach((clip) => {
+        clip && transposeClipToNewKey({ ...song, clip }, keyLockEnabled ? masterKey : '');
+      });
+  });
+  queuedClips.forEach((song, pillar) => {
+    song &&
+      FindAllClipsInLoop(song.clipName, pillar).forEach((clip) => {
+        clip && transposeClipToNewKey({ ...song, clip }, keyLockEnabled ? masterKey : '');
+      });
+  });
 }
 
 export function GetMasterKey() {
@@ -371,4 +456,45 @@ export function GetMasterKey() {
 
 export function SetMasterKey(newKey: string) {
   masterKey = newKey;
+  EmitEvent('master-key_changed', { key: newKey });
+  if (keyLockEnabled) {
+    playingClips.forEach((song, pillar) => {
+      song &&
+        FindAllClipsInLoop(song.clipName, pillar).forEach((clip) => {
+          clip && transposeClipToNewKey({ ...song, clip }, newKey);
+        });
+    });
+    queuedClips.forEach((song, pillar) => {
+      song &&
+        FindAllClipsInLoop(song.clipName, pillar).forEach((clip) => {
+          clip && transposeClipToNewKey({ ...song, clip }, newKey);
+        });
+    });
+  }
+}
+
+export function transposeClipToNewKey(item: ClipInfo, newKey: string) {
+  const { key, clip, clipName } = item;
+  if (!newKey || key === newKey) {
+    logger.info(`Resetting clip "${clipName}" to original key`);
+    clip.set('pitch_coarse', 0);
+  } else if (key) {
+    const trackKeyPitch = key.match(/[A-Z]/g)?.[0];
+    const newKeyPitch = newKey.match(/[A-Z]/g)?.[0];
+    const newKeyNumber = Number(newKey.match(/\d+/g)?.[0] ?? 1);
+    const backupKey = `${newKeyNumber}${trackKeyPitch}`;
+    const transposeAmount =
+      (newKeyPitch === trackKeyPitch
+        ? transpositions[key][newKey]
+        : transpositions[key][backupKey]) ?? 0;
+
+    logger.info(
+      `Transposing clip "${clipName}" from ${key} to ${
+        newKeyPitch === trackKeyPitch ? newKey : backupKey
+      } > ${transposeAmount ?? 0}`,
+    );
+    clip.set('pitch_coarse', transposeAmount);
+  } else {
+    logger.warn(`Cannot transpose clip "${item.clipName}": it does not have a key`);
+  }
 }
