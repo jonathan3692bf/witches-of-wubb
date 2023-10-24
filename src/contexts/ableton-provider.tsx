@@ -13,6 +13,10 @@ export const AbletonContext = createContext({
   playingClips: [],
   stoppingClips: [],
   clipTempo: [],
+  masterKey: '',
+  changeMasterKey: (_) => null,
+  keylock: true,
+  changeKeylock: (_) => null,
 } as {
   getTracksAndClips: () => void;
   changeTempo: (x: number) => void;
@@ -23,6 +27,10 @@ export const AbletonContext = createContext({
   playingClips: BrowserClipInfoList;
   stoppingClips: BrowserClipInfoList;
   clipTempo: (number | null)[];
+  masterKey: string;
+  changeMasterKey: (key: string) => void;
+  keylock: boolean;
+  changeKeylock: (keylock: boolean) => void;
 });
 
 function UpdateIndex(index: number, newValue: any, initialArray: any[]) {
@@ -35,6 +43,8 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
   const socket = useContext(SocketioContext);
   const { logger } = useContext(LoggerContext);
   const [tempo, setTempo] = useState(120);
+  const [masterKey, setMasterKey] = useState<string>('');
+  const [keylock, setKeylock] = useState<boolean>(true);
   const [trackVolume, setTrackVolume] = useState<number[]>([]);
   const [queuedClips, setQueuedClips] = useState<BrowserClipInfoList>([]);
   const [playingClips, setPlayingClips] = useState<BrowserClipInfoList>([]);
@@ -83,6 +93,9 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
       socket.on('volume_changed', (data: SetTrackVolumeInputType) => {
         setTrackVolume(UpdateIndex.bind(null, data.pillar, data.volume));
       });
+      socket.on('master-key_changed', ({ key }: { key: string }) => {
+        setMasterKey(key);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
@@ -104,6 +117,12 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
       logger.debug('get_tempo returned:', tempo);
       setTempo(tempo);
     });
+    socket.emit('get_master-key', null, (key: string) => {
+      setMasterKey(key);
+    });
+    socket?.emit('get_keylock_state', null, (state: boolean) => {
+      setKeylock(state);
+    });
   }
 
   function changeTempo(tempo: number) {
@@ -123,6 +142,17 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
     setStoppingClips(UpdateIndex.bind(null, data.pillar, null));
   }
 
+  function changeMasterKey(key: string) {
+    logger.debug('set_master-key:', key);
+    socket?.emit('set_master-key', key);
+  }
+
+  function changeKeylock(newState: boolean) {
+    socket?.emit('set_keylock_state', newState, (newState: boolean) => {
+      setKeylock(newState);
+    });
+  }
+
   return (
     <AbletonContext.Provider
       value={{
@@ -135,6 +165,10 @@ export default function AbletonProvider({ children }: { children: ReactNode }) {
         playingClips,
         stoppingClips,
         clipTempo,
+        masterKey,
+        changeMasterKey,
+        keylock,
+        changeKeylock,
       }}
     >
       {children}

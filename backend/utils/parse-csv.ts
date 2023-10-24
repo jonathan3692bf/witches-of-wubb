@@ -13,6 +13,7 @@ export default function ParseCSV(
   const artist = String(row['Artist']);
   const songTitle = String(row['Song Title']);
   const ingredientName = String(row['Ingredient Name / Description']);
+  const key = String(row['Key']);
   // console.log(recommendedClips);
 
   if (clipName?.trim() && rfid?.trim()) {
@@ -23,6 +24,7 @@ export default function ParseCSV(
       artist,
       songTitle,
       ingredientName,
+      key,
     };
     ClipNameToInfoMap[clipName?.replace(/[ ]/g, '')] = {
       rfid,
@@ -31,6 +33,7 @@ export default function ParseCSV(
       artist,
       songTitle,
       ingredientName,
+      key,
     };
   }
 }

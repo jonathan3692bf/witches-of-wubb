@@ -22,6 +22,7 @@ export type ClipMetadataType = {
   artist?: string;
   songTitle?: string;
   bpm?: number;
+  key?: string;
   ingredientName?: string;
   recommendedClips?: {
     [key: string]: Omit<ClipMetadataType, 'recommendedClips'>[]; // name of the clips as surfaced from the CSV
