@@ -14,16 +14,17 @@ export default function TempoSlider() {
   }
 
   return (
-    <div className='w-full text-center flex flex-col items-center'>
+    <div className='w-1/2 text-center flex items-center gap-4 h-[140px]'>
       <label
         htmlFor='tempo-slider'
-        className='block mb-12 text-xl font-medium stroke-black font-fondamento'
+        className='relative block text-2xl font-medium stroke-black font-fondamento left-[40px]'
       >
-        Adjust Tempo <br></br>
-        {Math.ceil(tempo)}
+        Tempo <strong>{Math.ceil(tempo)}</strong>
       </label>
-      <div className='flex items-center gap-8 text-lg mx-auto'>
-        <span className=' text-gray-500 dark:text-gray-400'>{MIN_VALUE}</span>
+      <div className='flex items-center gap-8 text-lg mx-auto h-[100px]'>
+        <span className='relative text-gray-500 dark:text-gray-400 self-end left-[50px]'>
+          {MIN_VALUE}
+        </span>
         <input
           id='tempo-slider'
           type='range'
@@ -31,9 +32,11 @@ export default function TempoSlider() {
           max={MAX_VALUE}
           value={tempo}
           onChange={handleChange}
-          className='w-[33vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-tempo-slider'
+          className='w-[31vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-tempo-slider'
         />
-        <span className=' text-gray-500 dark:text-gray-400'>{MAX_VALUE}</span>
+        <span className='relative text-gray-500 dark:text-gray-400 self-end right-[50px] z-[-1]'>
+          {MAX_VALUE}
+        </span>
       </div>
     </div>
   );

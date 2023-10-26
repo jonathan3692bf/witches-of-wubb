@@ -3,6 +3,7 @@ import DebugModal from './components/debug';
 import TempoSlider from './components/tempo-slider';
 import RecipeBox from './components/recipe-box';
 import { useState, useEffect } from 'react';
+import { KeyAdjuster } from './components/key-adjuster';
 
 // const Circle: React.FC = () => (
 //   <div className='w-full h-full rounded-full mix-blend-screen bg-gradient-to-c from-blue-400 to-blue-400 animate-fadein duration-200'></div>
@@ -33,7 +34,8 @@ export default function App() {
   return (
     <div id='container_playing' className='overflow-hidden max-h-screen'>
       <CurrentlyPlayingList />
-      <div id='container_tempo' className='relative -top-[50px]'>
+      <div id='container_tempo' className='relative flex justify-center'>
+        <KeyAdjuster />
         <TempoSlider />
       </div>
       <button onClick={() => setIsModalOpen(true)} className='absolute start-0 p-4 z-10'>
