@@ -11,7 +11,7 @@ export default function CurrentlyPlayingList() {
 
   return (
     <div id='inner_playing' className='w-screen relative'>
-      <div id='pillars' className='mt-5 w-screen grid grid-cols-2 gap-20 justify-items-center'>
+      <div id='pillars' className='w-screen grid grid-cols-2 gap-8 justify-items-center'>
         {[1, 2, 3, 4]?.map((pillar, index) => {
           const playing = playingClips[index];
           const queued = queuedClips[index];
@@ -28,13 +28,11 @@ export default function CurrentlyPlayingList() {
           const colorBlurClass = getBackgroundColorFromType(info?.type);
 
           return (
-            <div id={`pillar-${pillar}`} className='w-[70%] text-center' key={pillar}>
+            <div id={`pillar-${pillar}`} className='w-[55%] text-center' key={pillar}>
               <div className='object-scale-down grid grid-cols-4'>
                 <div
                   id='bpm'
-                  className={`col-start-${
-                    index % 2 === 0 ? 2 : 1
-                  } col-span-3 h-[50px] font-fondamento`}
+                  className={`col-start-${index % 2 === 0 ? 2 : 1} col-span-3 font-fondamento`}
                 >
                   {clipTempo[index] ? `${Math.ceil(clipTempo[index] as number)} ` : ``}BPM
                 </div>
@@ -46,7 +44,7 @@ export default function CurrentlyPlayingList() {
                 <div className='relative col-span-3 flex justify-items-center'>
                   <div
                     id='color-blur'
-                    className={`scale-[120%] absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
+                    className={`scale-[90%] absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
                   ></div>
                   <div id='frame_full' className=' border m-auto border-black relative'>
                     <div
@@ -87,7 +85,7 @@ export default function CurrentlyPlayingList() {
                 <div className='grid grid-cols-4'>
                   <div
                     id='clip-name'
-                    className='mt-[60px] stroke-black font-fondamento justify-center col-start-2 col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
+                    className='mt-[10px] min-h-[30px] stroke-black font-fondamento justify-center col-start-2 col-span-3 max-h-full max-w-full text-center text-lg'
                   >
                     {clipName}
                   </div>
@@ -97,7 +95,7 @@ export default function CurrentlyPlayingList() {
                 <div className='grid grid-cols-4'>
                   <div
                     id='clip-name'
-                    className='mt-[60px] stroke-black font-fondamento justify-center col-start-1  col-span-3 h-[18px] max-h-full max-w-full text-center text-xs rounded-md border border-1'
+                    className='mt-[10px] min-h-[30px] stroke-black font-fondamento justify-center col-start-1 col-span-3 max-h-full max-w-full text-center text-lg'
                   >
                     {clipName}
                   </div>

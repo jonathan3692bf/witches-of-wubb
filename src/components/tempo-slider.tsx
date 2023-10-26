@@ -14,15 +14,15 @@ export default function TempoSlider() {
   }
 
   return (
-    <div className='w-1/2 text-center flex items-center gap-4 h-[140px]'>
+    <div className='text-center flex flex-col items-center gap-4 min-h-[180px] relative'>
       <label
         htmlFor='tempo-slider'
-        className='relative block text-2xl font-medium stroke-black font-fondamento left-[40px]'
+        className='absolute2 block text-3xl font-medium stroke-black font-fondamento mb-3'
       >
-        Tempo <strong>{Math.ceil(tempo)}</strong>
+        <strong>{Math.ceil(tempo)}</strong> BPM
       </label>
-      <div className='flex items-center gap-8 text-lg mx-auto h-[100px]'>
-        <span className='relative text-gray-500 dark:text-gray-400 self-end left-[50px]'>
+      <div className='flex items-center text-lg h-[100px]'>
+        <span className='relative text-gray-500 dark:text-gray-400 self-end left-[20px]'>
           {MIN_VALUE}
         </span>
         <input
@@ -34,7 +34,7 @@ export default function TempoSlider() {
           onChange={handleChange}
           className='w-[31vw] h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 custom-tempo-slider'
         />
-        <span className='relative text-gray-500 dark:text-gray-400 self-end right-[50px] z-[-1]'>
+        <span className='relative text-gray-500 dark:text-gray-400 self-end right-[20px] z-[-1]'>
           {MAX_VALUE}
         </span>
       </div>

@@ -36,7 +36,7 @@ export function KeyAdjuster() {
   }
 
   return (
-    <div className='w-1/2 my-5 flex gap-4 items-center justify-center font-medium stroke-black font-fondamento text-2xl'>
+    <div className='w-100 my-5 flex gap-4 items-center justify-center font-medium stroke-black font-fondamento text-3xl'>
       <input
         id='keylock'
         name='keylock'
