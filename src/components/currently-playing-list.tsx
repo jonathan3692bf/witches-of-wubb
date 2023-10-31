@@ -44,7 +44,7 @@ export default function CurrentlyPlayingList() {
                 <div className='relative col-span-3 flex justify-items-center'>
                   <div
                     id='color-blur'
-                    className={`scale-[90%] absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
+                    className={`scale-[110%] absolute -inset-0 rounded-lg blur-xl ${colorBlurClass}`}
                   ></div>
                   <div id='frame_full' className=' border m-auto border-black relative'>
                     <div

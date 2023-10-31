@@ -40,10 +40,10 @@ export default function App() {
       <div id='container_tempo' className='flex justify-center'>
         <TempoSlider />
       </div>
-      <button onClick={() => setIsModalOpen(true)} className='absolute start-0 p-4 z-10'>
-        &nbsp;&nbsp;&nbsp;
-      </button>
       <div id='container_recipe_box' className='fixed bottom-0'>
+        <button onClick={() => setIsModalOpen(true)} className='absolute start-0 p-4 z-10'>
+          &nbsp;&nbsp;&nbsp;
+        </button>
         <RecipeBox />
       </div>
       <DebugModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
